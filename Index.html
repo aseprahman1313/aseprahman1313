@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>DASHBOARD EVENT SCATTER</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: url('https://i.imgur.com/uFusVJq.jpeg') no-repeat center center/cover;
+      filter: brightness(1.1);
+    }
+    .container {
+      max-width: 1800px;
+      margin: auto;
+      padding: 40px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgb(57 249 255);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #00e1ff;
+    }
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    .klaim-1 {
+     background-color: #000000; /* Biru Muda (1x klaim) */
+    }
+    .klaim-2 {
+     background-color: #ff9800; /* Oranye (2x klaim) */
+    }
+    .klaim-3 {
+     background-color: #f44336; /* Merah (3x klaim) */
+    }
+
+    form input, form select, form button {
+      flex: 1 1 330px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
+    label {
+      font-weight: 600;
+      flex: 1 1 100%;
+      color: #00eaff;
+    }
+    .btn {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .edit { background-color: #fbff02; }
+    .hapus { background-color: #dc3545; color: white; }
+    .tambah { background-color: #28a745; color: white; }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+    th, td {
+      border: 2px solid rgba(255, 255, 255, 0.99);
+      padding: 12px;
+      text-align: center;
+      color: #ffffff;
+    }
+    th {
+      background-color: rgb(0 0 0 / 0%);
+      color: #ffffff;
+    }
+    td a {
+      text-decoration: none;
+      color: #000000;
+    }
+    td a:hover {
+      text-decoration: underline;
+    }
+   #notif {
+    position: fixed;
+    top: 285px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgb(255 246 27);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 9999;
+}
+    #notif.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>DASHBOARD EVENT SCATTER</h2>
+    <form id="formBonus" onsubmit="tambahData(event)">
+      <label><input type="checkbox" id="doneManual"> ✅ SILAHKAN CENTANG JIKA DONE MANUAL</label>
+      <input type="text" id="userId" placeholder="User ID (huruf kecil)" required oninput="this.value = this.value.toLowerCase()">
+      <select id="nominalBet" required>
+        <option value="">-- Pilih Nominal Bet --</option>
+        <option value="1600">1600 - 1800</option>
+        <option value="2000">2000 - 8000</option>
+        <option value="10000">10000 - 18000</option>
+        <option value="20000">20000 - 1000000</option>
+      </select>
+      <select id="totalScatter" required> 
+        <option value="">-- Pilih Total Scatter --</option>
+        <option value="3">3</option>
+      </select>
+      <input type="number" id="jumlahKlaim" placeholder="Jumlah Klaim Saat Ini" min="0" max="3" readonly required>
+      <input type="date" id="tanggal" required>
+      <select id="staff" required>
+  <option value="">-- Pilih Nama Staff Crosscheck --</option>
+  <option>VERI SUSANTO</option>
+  <option>DIMAS SYAHPUTRA</option>
+  <option>FERIANTO SALIM</option>
+  <option>ANTHONY</option>
+  <option>FERDINAND MARCUS MANURUNG</option>
+  <option>GHEA GEMANANDA SANTOSO PUTRI</option>
+  <option>DAVIN WIJAYA</option>
+  <option>ERIC ROYNARDO SIANTURI</option>
+  <option>MICHAEL</option>
+  <option>FERY ISNAN PANE</option>
+  <option>OKY WIDANDI</option>
+  <option>SELI SAHFITRI</option>
+  <option>TYPE SULTAN LUBIS</option>
+  <option>ASEP HARDIAN ZAHMAN</option>
+  <option>MUHAMMAD AL FARAZI LAHAMI</option>
+  <option>DANU UMBARA</option>
+  <option>SURES</option>
+  <option>NAHDIYAH HIDAYANI TANJUNG</option>
+  <option>MUHAMMAD FIQRI TANJUNG</option>
+  <option>BINSAR RIZKY SYABAN</option>
+  <option>MUHAMMAD FADLY JULIANSYAH</option>
+  <option>FEZY ROSELLY</option>
+  <option>JOSUA SIMANJUNTAK</option>
+  <option>APRINDA HAMID MULYADI</option>
+  <option>MUHAMMAD AKBAR</option>
+  <option>RICO HARTANTO</option>
+  <option>ARFATIL HUDHA</option>
+  <option>KARUNA CHANDRA WIGUNA</option>
+  <option>MUHAMMAD IKHSAN SARAGIH</option>
+  <option>RUDI IRAWAN</option>
+  <option>LANY SEPTIANY</option>
+  <option>KELVIN</option>
+  <option>RAKES PRAN</option>
+  <option>FERDIANSYAH HIDAYAD</option>
+  <option>TIARA DWI SEPTIANI</option>
+  <option>RATNA SARI</option>
+  <option>DAL TRIONO</option>
+  <option>CHARLES BILLY SIRAIT</option>
+  <option>RAJUNA SEMBIRING</option>
+  <option>ANEND JOICE MANUNTUN</option>
+  <option>LUIGI</option>
+  <option>MUHAMMAD RIZKY HASIBUAN</option>
+  <option>MHD FAUZI LUBIS</option>
+  <option>LITA SRI APRIYANTI</option>
+  <option>ANDREAS SIREGAR</option>
+  <option>ARI ANDIKA</option>
+  <option>BUHARI PRATAMA</option>
+  <option>NELLY PAKPAHAN</option>
+  <option>FIRMAN FRANCISKUS PURBA</option>
+  <option>AGUSTINA NADEAK</option>
+  <option>CINDI AULIA PUSPITA</option>
+  <option>ABDUR RASYID</option>
+  <option>SHERLY VALENSIA</option>
+  <option>ALDI IFANTRA</option>
+  <option>BOBY IKHWANA</option>
+  <option>TAUFAN HARDIANTO</option>
+  <option>BIONDI</option>
+  <option>SONIA</option>
+  <option>NOVI</option>
+  <option>ARWANA BAGUS SUHARTA SINAGA</option>
+  <option>CINDRA BUANA NASUTION</option>
+  <option>KEVIN MANURUNG</option>
+  <option>FADILLA HULZANA</option>
+  <option>WELLIANTO</option>
+  <option>MUHAMAD ADRIANSYAH</option>
+  <option>LUCKY ANDREAN KASPARI</option>
+  <option>MENDRA VISEN</option>
+  <option>SATIYARAS</option>
+  <option>PIJA KANU</option>
+  <option>MUHAMMAD RIZKY SANJAYA</option>
+  <option>FELICIA PANGESTU</option>
+  <option>NOPRIADY</option>
+  <option>STEVEN</option>
+</select>
+      <input type="url" id="lampiranScatter" placeholder="Link Lampiran Dapat Scatter" required>
+      <input type="url" id="lampiranMenang" placeholder="Link Lampiran Kemenangan Akhir" required>
+      <input type="url" id="lampiranSeamless" placeholder="Link Lampiran Seamless" required>
+      <input type="url" id="lampiranHistory" placeholder="Link History Kemenangan" required>
+      <input type="text" id="roundId" placeholder="ROUND ID" required>
+      <button type="submit" class="btn tambah">ACCEPT</button>
+      <button type="button" id="btnCancelEdit" style="display:none;" onclick="batalEdit()">BATAL</button>
+    </form>
+
+    <div style="margin-top: 20px;">
+      <label for="filterTanggal">Lihat Data Sampai Tanggal: </label>
+      <input type="date" id="filterTanggal">
+      <button onclick="applyFilter()">Apply</button>
+      <button onclick="mundurSehari()">⬅ Mundur Sehari</button>
+    </div>
+
+    <div id="notif"></div>
+
+    <table id="tabelBonus">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>✅</th>
+          <th>User ID</th>
+          <th>Bonus</th>
+          <th>Total Klaim</th>
+          <th>Scatter</th>
+          <th>Tanggal</th>
+          <th>Staff</th>
+          <th>SS Scatter</th>
+          <th>SS Kemenangan Akhir</th>
+          <th>SS Seamless</th>
+          <th>SS History Kemenangan</th>
+          <th>Round ID</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+
+      <!-- Hidden Color Config -->
+      <div style="display:none;">
+        <input type="color" id="warna1" value="#00bcd4">
+        <input type="color" id="warna2" value="#ff9800">
+        <input type="color" id="warna3" value="#f44336">
+    </table>
+  </div>
+
+<script>
+  const dataBonus = [];
+  const riwayatKlaim = {};
+  let indexEdit = null;
+  let tanggalFilter = new Date(); // satu deklarasi saja
+
+  // Simpan & ambil data ke LocalStorage
+  function simpanKeLocalStorage() {
+    localStorage.setItem('dataBonus', JSON.stringify(dataBonus));
+    localStorage.setItem('riwayatKlaim', JSON.stringify(riwayatKlaim));
+  }
+
+  function ambilDariLocalStorage() {
+    const dataBonusLS = localStorage.getItem('dataBonus');
+    const riwayatKlaimLS = localStorage.getItem('riwayatKlaim');
+    if (dataBonusLS) dataBonus.push(...JSON.parse(dataBonusLS));
+    if (riwayatKlaimLS) Object.assign(riwayatKlaim, JSON.parse(riwayatKlaimLS));
+  }
+
+  // Fungsi tampilkan tabel dengan filter tanggal
+  function tampilkanTabel() {
+    const tbody = document.querySelector('#tabelBonus tbody');
+    tbody.innerHTML = "";
+
+    let dataTersaring = dataBonus;
+
+    if (tanggalFilter) {
+      const batasBawah = new Date(tanggalFilter);
+      batasBawah.setDate(batasBawah.getDate() - 30);
+      const batasAtas = new Date(tanggalFilter);
+
+      dataTersaring = dataBonus.filter(item => {
+        const tgl = new Date(item.tanggal);
+        return tgl >= batasBawah && tgl <= batasAtas;
+      });
+    }
+
+    dataTersaring.forEach((item, index) => {
+      const tr = document.createElement('tr');
+
+      // Ambil warna dari input warna
+      const warna1 = document.getElementById('warna1')?.value || '#00bcd4';
+      const warna2 = document.getElementById('warna2')?.value || '#ff9800';
+      const warna3 = document.getElementById('warna3')?.value || '#f44336';
+
+      let warnaKlaim = '';
+      if (item.klaim === 1) warnaKlaim = warna1;
+      else if (item.klaim === 2) warnaKlaim = warna2;
+      else if (item.klaim === 3) warnaKlaim = warna3;
+
+      tr.style.backgroundColor = warnaKlaim;
+
+      tr.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${item.done ? '✅' : ''}</td>
+        <td>${item.userId}</td>
+        <td>Rp ${item.bonus.toLocaleString()}</td>
+        <td>${item.klaim}x</td>
+        <td>${item.scatter}</td>
+        <td>${item.tanggal}</td>
+        <td>${item.staff}</td>
+        <td><a href="${item.linkScatter}" target="_blank" rel="noopener noreferrer">Link Scatter</a></td>
+        <td><a href="${item.linkMenang}" target="_blank" rel="noopener noreferrer">Link Menang</a></td>
+        <td><a href="${item.linkSeamless}" target="_blank" rel="noopener noreferrer">Link Seamless</a></td>
+        <td><a href="${item.linkHistory}" target="_blank" rel="noopener noreferrer">Link History</a></td>
+        <td>${item.roundId}</td>
+        <td>
+          <button class="btn edit" onclick="editData(${dataBonus.indexOf(item)})">Edit</button>
+          <button class="btn hapus" onclick="hapusData(${dataBonus.indexOf(item)})">Hapus</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function applyFilter() {
+    const input = document.getElementById('filterTanggal').value;
+    if (input) {
+      tanggalFilter = new Date(input);
+      tampilkanTabel();
+    } else {
+      showNotif("⚠️ Silakan pilih tanggal terlebih dahulu.");
+    }
+  }
+
+  function mundurSehari() {
+    if (!tanggalFilter) tanggalFilter = new Date();
+    tanggalFilter.setDate(tanggalFilter.getDate() - 1);
+    document.getElementById('filterTanggal').value = tanggalFilter.toISOString().split('T')[0];
+    tampilkanTabel();
+  }
+
+  function showNotif(pesan, warna = "#f44336") {
+    const notif = document.getElementById('notif');
+    notif.textContent = pesan;
+    notif.style.backgroundColor = warna;
+    notif.classList.add('show');
+    setTimeout(() => {
+      notif.classList.remove('show');
+    }, 3000);
+  }
+
+  function editData(index) {
+    const item = dataBonus[index];
+    indexEdit = index;
+    document.getElementById('doneManual').checked = item.done;
+    document.getElementById('userId').value = item.userId;
+    document.getElementById('nominalBet').value = item.nominalBet;
+    document.getElementById('totalScatter').value = item.scatter;
+    document.getElementById('jumlahKlaim').value = item.klaim;
+    document.getElementById('tanggal').value = item.tanggal;
+    document.getElementById('staff').value = item.staff;
+    document.getElementById('lampiranScatter').value = item.linkScatter;
+    document.getElementById('lampiranMenang').value = item.linkMenang;
+    document.getElementById('lampiranSeamless').value = item.linkSeamless;
+    document.getElementById('lampiranHistory').value = item.linkHistory;
+    document.getElementById('roundId').value = item.roundId;
+
+    const btn = document.querySelector('.btn.tambah');
+    btn.textContent = "UPDATE";
+    btn.disabled = false;
+
+    // Tampilkan tombol batal edit
+    document.getElementById('btnCancelEdit').style.display = 'inline-block';
+
+    // Fokus ke userId supaya mudah diedit
+    document.getElementById('userId').focus();
+  }
+
+  function batalEdit() {
+    document.getElementById('formBonus').reset();
+    document.getElementById('jumlahKlaim').value = 1;
+    indexEdit = null;
+    const btn = document.querySelector('.btn.tambah');
+    btn.textContent = "ACCEPT";
+    btn.disabled = false;
+    document.getElementById('btnCancelEdit').style.display = 'none';
+
+    // Fokus ke userId setelah batal
+    document.getElementById('userId').focus();
+  }
+
+  document.getElementById('userId').addEventListener('input', function () {
+    const userId = this.value.trim().toLowerCase();
+    const klaim = riwayatKlaim[userId] || 0;
+    document.getElementById('jumlahKlaim').value = klaim > 0 ? klaim : 1;
+    const btn = document.querySelector('.btn.tambah');
+    btn.disabled = (klaim >= 3 && indexEdit === null);
+    btn.textContent = klaim >= 3 && indexEdit === null ? "❌ MAX KLAIM" : (indexEdit !== null ? "UPDATE" : "ACCEPT");
+  });
+
+  function tambahData(e) {
+    e.preventDefault();
+
+    const doneManual = document.getElementById('doneManual').checked;
+    const userId = document.getElementById('userId').value.trim().toLowerCase();
+    const nominalBet = parseInt(document.getElementById('nominalBet').value);
+    const scatter = parseInt(document.getElementById('totalScatter').value);
+    const tanggal = document.getElementById('tanggal').value;
+    const staff = document.getElementById('staff').value.trim();
+    const linkScatter = document.getElementById('lampiranScatter').value.trim();
+    const linkMenang = document.getElementById('lampiranMenang').value.trim();
+    const linkSeamless = document.getElementById('lampiranSeamless').value.trim();
+    const linkHistory = document.getElementById('lampiranHistory').value.trim();
+    const roundId = document.getElementById('roundId').value.trim().toUpperCase();  // Konsisten case upper
+    const klaimSaatIni = riwayatKlaim[userId] || 0;
+
+    if (indexEdit === null && klaimSaatIni >= 3) {
+      alert(`⚠️ User ID "${userId}" sudah mencapai maksimal 3x klaim.`);
+      return;
+    }
+
+    // Cek duplikat Round ID untuk input baru
+    if (indexEdit === null && dataBonus.some(d => d.roundId.toUpperCase() === roundId)) {
+      showNotif("⚠️ Round ID sudah ada. Awas Mistake.");
+      return;
+      }
+      
+
+      let bonusAuto = 0;
+      if (scatter === 3) {
+        bonusAuto = {
+          1600: 30000,
+          2000: 50000,
+          10000: 80000,
+          20000: 100000
+        }[nominalBet] || 0;
+      }
+
+      if (indexEdit !== null) {
+  // EDIT MODE
+  const oldUserId = dataBonus[indexEdit].userId;
+
+  if (userId !== oldUserId) {
+    // Jika user ID berubah, kita kurangi klaim lama & tambah klaim baru
+    if ((riwayatKlaim[userId] || 0) >= 3) {
+      alert(`⚠️ User ID "${userId}" sudah mencapai maksimal 3x klaim.`);
+      return;
+    }
+
+    // Update riwayat klaim untuk user lama & baru
+    riwayatKlaim[oldUserId]--;
+    if (riwayatKlaim[oldUserId] <= 0) delete riwayatKlaim[oldUserId];
+
+    riwayatKlaim[userId] = (riwayatKlaim[userId] || 0) + 1;
+  }
+
+  // ⛔ JANGAN UBAH riwayatKlaim jika userId tetap sama
+
+  dataBonus[indexEdit] = {
+    done: doneManual,
+    userId,
+    nominalBet,
+    bonus: bonusAuto,
+    klaim: riwayatKlaim[userId], // tetap
+    scatter,
+    tanggal,
+    staff,
+    linkScatter,
+    linkMenang,
+    linkSeamless,
+    linkHistory,
+    roundId
+  };
+
+  indexEdit = null;
+} else {
+  // TAMBAH BARU
+  dataBonus.push({
+    done: doneManual,
+    userId,
+    nominalBet,
+    bonus: bonusAuto,
+    klaim: klaimSaatIni + 1,
+    scatter,
+    tanggal,
+    staff,
+    linkScatter,
+    linkMenang,
+    linkSeamless,
+    linkHistory,
+    roundId
+  });
+
+  riwayatKlaim[userId] = klaimSaatIni + 1;
+}
+
+      simpanKeLocalStorage();
+      tampilkanTabel();
+      document.getElementById('formBonus').reset();
+      document.getElementById('jumlahKlaim').value = 1;
+      const btn = document.querySelector('.btn.tambah');
+      btn.disabled = false;
+      btn.textContent = "ACCEPT";
+    }
+
+    function hapusData(index) {
+      const user = dataBonus[index];
+      if (confirm(`Yakin hapus data klaim ke-${user.klaim} dari "${user.userId}"?`)) {
+        riwayatKlaim[user.userId] -= 1;
+        if (riwayatKlaim[user.userId] <= 0) delete riwayatKlaim[user.userId];
+        dataBonus.splice(index, 1);
+        simpanKeLocalStorage();
+        tampilkanTabel();
+        document.getElementById('userId').dispatchEvent(new Event('input'));
+      }
+    }
+
+    ambilDariLocalStorage();
+tanggalFilter = new Date(); // otomatis set ke hari ini
+document.getElementById('filterTanggal').value = tanggalFilter.toISOString().split('T')[0]; // update input tanggal
+// === Warna Klaim dari localStorage ===
+function simpanWarnaKeLocalStorage() {
+  localStorage.setItem('warnaKlaim1', document.getElementById('warna1').value);
+  localStorage.setItem('warnaKlaim2', document.getElementById('warna2').value);
+  localStorage.setItem('warnaKlaim3', document.getElementById('warna3').value);
+}
+
+function ambilWarnaDariLocalStorage() {
+  if (localStorage.getItem('warnaKlaim1')) document.getElementById('warna1').value = localStorage.getItem('warnaKlaim1');
+  if (localStorage.getItem('warnaKlaim2')) document.getElementById('warna2').value = localStorage.getItem('warnaKlaim2');
+  if (localStorage.getItem('warnaKlaim3')) document.getElementById('warna3').value = localStorage.getItem('warnaKlaim3');
+}
+
+ambilWarnaDariLocalStorage();
+simpanWarnaKeLocalStorage();
+
+tampilkanTabel();
+  </script>
+
+  <canvas id="snow" style="position:fixed; top:0; left:0; pointer-events:none; z-index:999;"></canvas>
+  <script>
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    const snowflakes = [];
+
+    function createSnowflakes() {
+      for (let i = 0; i < 100; i++) {
+        snowflakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 4 + 1,
+          speed: Math.random() * 1 + 0.5
+        });
+      }
+    }
+
+    function drawSnowflakes() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'white';
+      ctx.beginPath();
+      snowflakes.forEach(flake => {
+        ctx.moveTo(flake.x, flake.y);
+        ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+      });
+      ctx.fill();
+      updateSnowflakes();
+    }
+
+    function updateSnowflakes() {
+      snowflakes.forEach(flake => {
+        flake.y += flake.speed;
+        if (flake.y > height) {
+          flake.y = -flake.radius;
+          flake.x = Math.random() * width;
+        }
+      });
+    }
+
+    function loop() {
+      drawSnowflakes();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+    
+    createSnowflakes();
+    loop();
+  </script>
+
+</body>
+</html>
+
+
