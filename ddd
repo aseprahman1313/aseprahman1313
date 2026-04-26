@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin Final</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+    <style>
+      :root {
+        --bg1: #08111f;
+        --bg2: #0f172a;
+        --bg3: #111827;
+        --panel: rgba(17, 24, 39, 0.90);
+        --border: rgba(255,255,255,0.08);
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --primary: #3b82f6;
+        --secondary: #8b5cf6;
+        --shadow: 0 16px 40px rgba(0,0,0,0.30);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        min-height: 100%;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 24%),
+          radial-gradient(circle at top right, rgba(16,185,129,0.12), transparent 26%),
+          radial-gradient(circle at bottom center, rgba(139,92,246,0.16), transparent 34%),
+          linear-gradient(135deg, var(--bg1), var(--bg2) 52%, var(--bg3));
+      }
+
+      .app {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .sidebar {
+        width: 250px;
+        background: rgba(2, 6, 23, 0.84);
+        backdrop-filter: blur(16px);
+        border-right: 1px solid var(--border);
+        padding: 24px 18px;
+        position: sticky;
+        top: 0;
+        height: 100vh;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .brand-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .brand h1 {
+        font-size: 18px;
+        line-height: 1.2;
+      }
+
+      .brand p {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav button {
+        width: 100%;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text);
+        padding: 14px 16px;
+        border-radius: 14px;
+        text-align: left;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.22s ease;
+      }
+
+      .nav button:hover,
+      .nav button.active {
+        background: linear-gradient(135deg, rgba(59,130,246,0.20), rgba(139,92,246,0.18));
+        border-color: rgba(255,255,255,0.09);
+        transform: translateX(4px);
+      }
+
+      .sidebar-footer {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 20px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 14px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .main {
+        flex: 1;
+        padding: 22px;
+      }
+
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .panel h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      .panel-sub {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 16px;
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+
+      .live-clock-box {
+        min-width: 220px;
+        padding: 14px 18px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(139,92,246,0.16), rgba(16,185,129,0.12));
+        box-shadow: var(--shadow);
+        text-align: center;
+      }
+
+      .live-clock-label {
+        font-size: 12px;
+        color: #dbeafe;
+        margin-bottom: 6px;
+      }
+
+      .live-clock-time {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        line-height: 1.08;
+      }
+
+      .live-clock-date {
+        margin-top: 4px;
+        font-size: 13px;
+        color: #e5e7eb;
+      }
+
+      input[type="text"],
+      input[type="date"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.05);
+        color: white;
+        outline: none;
+        font-size: 14px;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #9ca3af;
+      }
+
+      select option {
+        color: #111827;
+      }
+
+      textarea {
+        resize: vertical;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: rgba(255,255,255,0.18);
+        box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+      }
+
+      .btn {
+        border: none;
+        border-radius: 14px;
+        padding: 13px 16px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.22s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.96;
+      }
+
+      .btn.secondary {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.10);
+      }
+
+      .copy-live-btn {
+        background: linear-gradient(180deg, #ff00cc 0%, #7b2cff 55%, #3b82f6 100%);
+        border: 1px solid rgba(255,255,255,0.22);
+        box-shadow:
+          0 8px 24px rgba(123,44,255,0.30),
+          inset 0 1px 0 rgba(255,255,255,0.20);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .copy-live-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 90%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent);
+        transform: skewX(-20deg);
+        transition: left 0.6s ease;
+      }
+
+      .copy-live-btn:hover::before {
+        left: 130%;
+      }
+
+      .copy-live-btn.success {
+        background: linear-gradient(180deg, #8b5cf6 0%, #6366f1 55%, #3b82f6 100%);
+      }
+
+      .empty-state {
+        color: var(--muted);
+        text-align: center;
+        padding: 18px 10px;
+      }
+
+      .pkcs-dual-layout,
+      .rek-dual-layout,
+      .prediksi-dual-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .pkcs-box,
+      .rek-box,
+      .prediksi-box {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 14px;
+      }
+
+      .pkcs-box-title,
+      .rek-box-title,
+      .prediksi-box-title {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 14px;
+        color: #fff;
+      }
+
+      .pkcs-keyword-list,
+      .rekening-list,
+      .prediksi-list {
+        max-height: 590px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-right: 4px;
+      }
+
+      .pkcs-keyword-item,
+      .rekening-item,
+      .prediksi-item {
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.04);
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .pkcs-keyword-item {
+        text-transform: uppercase;
+      }
+
+      .pkcs-keyword-item:hover {
+        background: linear-gradient(135deg, rgba(59,130,246,0.20), rgba(139,92,246,0.16));
+        transform: translateX(4px);
+      }
+
+      .pkcs-keyword-item.active {
+        background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(139,92,246,0.24));
+      }
+
+      .pkcs-result-box {
+        min-height: 110px;
+        max-height: 620px;
+        overflow-y: auto;
+        padding: 24px;
+        border-radius: 18px;
+        white-space: pre-wrap;
+        text-align: center;
+        height: auto;
+        background: linear-gradient(135deg, rgba(244,114,182,0.92), rgba(216,180,254,0.92));
+        color: #111827;
+        font-size: 18px;
+        line-height: 1.8;
+        font-weight: 500;
+      }
+
+      .pkcs-result-box.copy-success {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: 6px;
+        color: #6d28d9;
+      }
+
+      .pkcs-box-right.flash,
+      .prediksi-box-right.flash {
+        animation: boxFlash 0.28s ease;
+      }
+
+      @keyframes boxFlash {
+        0% { transform: scale(0.995); opacity: 0.82; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      .rek-search-input {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,255,255,0.18);
+        background: rgba(0,0,0,0.42);
+        color: white;
+        outline: none;
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .rek-search-input::placeholder {
+        color: #9ca3af;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .rekening-title {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .prediksi-item {
+        text-align: center;
+        text-transform: uppercase;
+        background: linear-gradient(180deg, rgba(25,35,70,0.92), rgba(10,20,55,0.95));
+        box-shadow: inset 0 0 0 1px rgba(255,0,255,0.05);
+      }
+
+      .prediksi-item:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 0, 255, 0.35);
+        box-shadow: 0 0 16px rgba(255,0,255,0.18), inset 0 0 14px rgba(255,0,255,0.06);
+      }
+
+      .prediksi-item.active {
+        background: linear-gradient(180deg, #042a70, #021d55);
+        border-color: rgba(0,255,255,0.45);
+        box-shadow: 0 0 18px rgba(0,255,255,0.16), inset 0 0 16px rgba(0,255,255,0.08);
+      }
+
+      .prediksi-result-card {
+        min-height: 140px;
+        max-height: 620px;
+        overflow-y: auto;
+        padding: 24px;
+        border-radius: 18px;
+        white-space: pre-wrap;
+        text-align: center;
+        background:
+          linear-gradient(180deg, rgba(50,15,25,0.92), rgba(15,20,40,0.92)),
+          rgba(255,255,255,0.03);
+        border: 1px solid rgba(255, 0, 255, 0.18);
+        box-shadow:
+          0 0 20px rgba(255,0,255,0.14),
+          inset 0 0 30px rgba(255,255,255,0.03);
+        color: #ffffff;
+        line-height: 1.7;
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .image-gallery-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+      }
+
+      .image-card-v2 {
+        background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+        border: 2px solid rgba(255, 221, 51, 0.7);
+        border-radius: 18px;
+        padding: 12px;
+        box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .image-card-v2:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: rgba(255, 230, 120, 0.95);
+      }
+
+      .image-card-v2-title {
+        font-size: 15px;
+        font-weight: 800;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        line-height: 1.4;
+      }
+
+      .image-card-v2-media {
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(0,0,0,0.18);
+      }
+
+      .image-card-v2-media img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.35s ease, filter 0.35s ease;
+      }
+
+      .image-card-v2:hover .image-card-v2-media img {
+        transform: scale(1.06);
+        filter: brightness(1.05) saturate(1.08);
+      }
+
+      .image-card-v2-empty {
+        color: var(--muted);
+        text-align: center;
+        padding: 24px 10px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 14px;
+      }
+
+      .image-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: none;
+      }
+
+      .image-modal.show {
+        display: block;
+      }
+
+      .image-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.72);
+        backdrop-filter: blur(4px);
+      }
+
+      .image-modal-content {
+        position: relative;
+        z-index: 2;
+        width: min(92vw, 900px);
+        max-height: 90vh;
+        margin: 4vh auto;
+        background: linear-gradient(180deg, rgba(17,24,39,0.96), rgba(15,23,42,0.96));
+        border: 1px solid rgba(255,255,255,0.10);
+        border-radius: 22px;
+        padding: 18px;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+      }
+
+      .image-modal-title {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 14px;
+        text-transform: uppercase;
+        padding-right: 36px;
+      }
+
+      .image-modal-img {
+        width: 100%;
+        max-height: 72vh;
+        object-fit: contain;
+        display: block;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.03);
+      }
+
+      .image-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+        border: none;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.10);
+        color: #fff;
+        font-size: 26px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      /* =========================
+         SYAIR
+      ========================= */
+
+      .syair-layout {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .syair-sidebar,
+      .syair-preview-panel {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+      }
+
+      .syair-sidebar {
+        padding: 18px;
+        max-height: 88vh;
+        overflow-y: auto;
+      }
+
+      .syair-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .syair-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(59,130,246,0.22), rgba(139,92,246,0.22));
+        border: 1px solid rgba(255,255,255,0.10);
+        color: #fff;
+        font-size: 20px;
+      }
+
+      .syair-group {
+        margin-bottom: 16px;
+      }
+
+      .syair-label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #dbeafe;
+        letter-spacing: 0.6px;
+      }
+
+      .syair-textarea {
+        min-height: 220px;
+        font-size: 18px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+      }
+
+      .syair-info-box {
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 14px;
+        padding: 12px 14px;
+        font-size: 13px;
+        color: #cbd5e1;
+        margin-bottom: 16px;
+        line-height: 1.6;
+      }
+
+      .syair-actions {
+        display: grid;
+        grid-template-columns: 1fr 110px;
+        gap: 12px;
+      }
+
+      .syair-preview-panel {
+        padding: 12px 14px 14px;
+      }
+
+      .syair-preview-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .syair-preview-title {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .syair-preview-frame {
+        background: linear-gradient(180deg, rgba(15,23,42,0.90), rgba(11,16,32,0.92));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 22px;
+        min-height: 560px;
+        padding: 14px;
+      }
+
+.syair-preview-area {
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+      .syair-card {
+        width: min(100%, 1000px);
+        aspect-ratio: 1500 / 1000;
+        position: relative;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #d9d9d9;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.30);
+      }
+
+      .syair-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .syair-date-box {
+        position: absolute;
+        left: 2.5%;
+        top: 17.2%;
+        width: 18%;
+        text-align: left;
+        z-index: 3;
+      }
+
+        .syair-date-box .day-name {
+            position: relative;
+            display: block;
+            font-family: Cursive, Brush Script MT;
+            color: #000000;
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 500;
+            left: 25px;
+            transform: translateY(-33px);
+        }
+
+      .syair-date-box .full-date {
+        position: absolute;
+        font-family: lexend, sans-serif;
+        font-weight: bold;
+        display: block;
+        margin-top: 5px;
+        font-size: 26px;
+        line-height: 1.15;
+        color: black;
+        left: 0%;
+        top: 7%;
+      }
+
+      .syair-shio-box {
+        position: absolute;
+        left: 6.2%;
+        top: 50.2%;
+        width: 13.2%;
+        height: 14%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        overflow: visible;
+      }
+
+      .syair-shio-img {
+          position: absolute;
+          width: 184%;
+          height: 250%;
+          object-fit: contain;
+          left: 33%;
+          top: -154%;
+      }
+
+      .syair-poem-box {
+          position: absolute;
+          left: 37.6%;
+          top: 36.8%;
+          width: 26%;
+          height: 29%;
+          text-align: center;
+          font-family: cursive;
+          color: #222;
+          font-size: clamp(11px, 1.05vw, 15px);
+          line-height: 1.2;
+          padding: 14px 14px 10px;
+          font-weight: 900;
+          overflow: hidden;
+          white-space: normal;
+          word-break: break-word;
+          overflow-wrap: break-word;
+      }
+
+
+      .syair-market-logo {
+        position: absolute;
+        right: 5.2%;
+        top: 66.2%;
+        width: 13%;
+        height: 7%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        overflow: visible;
+      }
+
+    .syair-market-logo img {
+        position: absolute;
+        width: 106%;
+        height: 85%;
+        object-fit: contain;
+        left: 23%;
+        top: -27%;
+        background: black;
+        border-radius: 35px;
+    }
+
+
+      .syair-label-mini {
+          position: absolute;
+          z-index: 2;
+          font-family: cursive, Brush Script MT;
+          color: #111;
+          font-weight: 900;
+          font-size: clamp(11px, 1.35vw, 20px);
+          letter-spacing: 0.4px;
+      }
+
+      .syair-label-bb {
+          left: 4.2%;
+          font-family: 'Cursive', Brush Script MT;
+          top: 54.2%;
+          font-size: 30px;
+          font-weight: 900;
+      }
+
+      .syair-label-colok { left: 24.4%; top: 69.9%; }
+      .syair-label-jaga { left: 47.2%; top: 69.9%; }
+      .syair-label-ekor { left: 27.6%; top: 77.8%; }
+
+
+      .syair-label-kepala {
+          left: 51.4%;
+          top: 77.8%;
+      }
+
+    .syair-label-bbfs {
+    left: 45%;
+    top: 86.2%;
+}
+
+
+        .syair-label-shio {
+            left: 16.2%;
+            top: 60.2%;
+            font-size: clamp(11px, 1.2vw, 18px);
+            font-weight: 900;
+        }
+
+    .syair-angka-main-label {
+        position: absolute;
+        left: 74.8%;
+        top: 91.2%;
+        background: #c0bebd59;
+        width: 11%;
+        font-family: cursive, Brush Script MT;
+        line-height: 1.02;
+        border-radius: 76px;
+        text-align: center;
+        z-index: 3;
+        color: #111;
+        font-weight: 900;
+        font-size: clamp(11px, 1.35vw, 20px);
+        letter-spacing: 0.4px;
+    }
+
+      .num-grid {
+        position: absolute;
+        z-index: 3;
+        display: grid;
+        gap: 0;
+        background: rgba(220,220,220,0.18);
+      }
+
+.num-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, 0.82);
+    color: #111;
+    border-radius: 21px;
+    background: rgb(191 189 188 / 0%);
+    font-weight: 500;
+    font-size: clamp(16px, 2vw, 28px);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0%);
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+
+      /* per cell tetap bisa diatur sendiri */
+      .bb-cell-1 { left: 7px; top: 91px; }
+      .bb-cell-2 { left: 7px; top: 89px; }
+      .bb-cell-3 { left: 7px; top: 87px; }
+      .bb-cell-4 { left: 7px; top: 85px; }
+      .bb-cell-5 { left: 7px; top: 83px; }
+
+      .colok-cell-1 { left: 0px; top: 0px; }
+      .colok-cell-2 { left: 0px; top: 0px; }
+
+      .jaga-cell-1 {
+    left: -3px;
+    top: 0px;
+}
+      .jaga-cell-2 {
+    left: -5px;
+    top: 0px;
+}
+
+
+      .ekor-cell-1 { left: 0px; top: 0px; }
+      .ekor-cell-2 { left: 0px; top: 0px; }
+
+            .kepala-cell-1 {
+          left: 47px;
+          top: 0px;
+      }
+          .kepala-cell-2 {
+          left: 45px;
+          top: 0px;
+      }
+
+            .bbfs-cell-1 {
+          left: 11px;
+          top: 13px;
+      }
+
+            .bbfs-cell-2 {
+          left: 9px;
+          top: 13px;
+      }
+            .bbfs-cell-3 {
+          left: 7px;
+          top: 13px;
+      }
+        .bbfs-cell-4 {
+          left: 5px;
+          top: 13px;
+      }
+          .bbfs-cell-5 {
+          left: 3px;
+          top: 13px;
+      }
+            .bbfs-cell-6 {
+          left: 1px;
+          top: 13px;
+      }
+            .bbfs-cell-7 {
+          left: 0px;
+          top: 13px;
+      }
+
+
+      .mainl-cell-1 {
+          grid-area: m1;
+          left: 0px;
+          top: -55px;
+      }
+      .mainl-cell-2 {
+          grid-area: m2;
+          left: 0px;
+          top: -52px;
+      }
+
+      .mainl-cell-3 {
+          grid-area: m3;
+          left: 0px;
+          top: -49px;
+      }
+
+      .mainl-cell-4 {
+          grid-area: m4;
+          left: 62px;
+          top: -5px;
+      }
+
+      .mainl-cell-5 {
+          grid-area: m5;
+          left: 61px;
+          top: -5px;
+      }
+
+.syair-bb-col {
+    left: 21px;
+    top: 46.2%;
+    width: 7.2%;
+    height: 40%;
+    grid-template-rows: repeat(5, 1fr);
+}
+
+
+      .syair-colok-grid {
+        left: 32.9%;
+        top: 68.9%;
+        width: 12.2%;
+        height: 6.1%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-jaga-grid {
+        left: 54.7%;
+        top: 68.9%;
+        width: 12.2%;
+        height: 6.1%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-ekor-grid {
+        left: 34.8%;
+        top: 76.9%;
+        width: 12.2%;
+        height: 6.1%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-kepala-grid {
+        left: 55.4%;
+        top: 76.9%;
+        width: 12.2%;
+        height: 6.1%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-bbfs-row {
+        left: 24.7%;
+        top: 88.6%;
+        width: 46.1%;
+        height: 7.1%;
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+.syair-main-l-grid {
+    position: absolute;
+    left: 79.8%;
+    top: 79.2%;
+    width: 18.3%;
+    height: 18.3%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:         ". . m1"        ". . m2"        "m4 m5 m3";
+    gap: 0;
+    z-index: 3;
+    background: transparent;
+}
+
+.syair-main-l-grid .num-cell {
+    width: 103%;
+    border-radius: 12px;
+    height: 112%;
+    box-sizing: border-box;
+}
+
+
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        position: absolute;
+        z-index: 2;
+        color: #111;
+        font-weight: 500;
+        font-size: clamp(28px, 3.8vw, 52px);
+        line-height: 1;
+      }
+
+      .syair-cross-top { left: 82.9%; top: 21.2%; }
+      .syair-cross-left { left: 75.4%; top: 33.2%; }
+      .syair-cross-right { left: 90.1%; top: 33.2%; }
+      .syair-cross-bottom { left: 83.2%; top: 46.4%; }
+
+      @media (max-width: 1180px) {
+        .syair-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .pkcs-dual-layout,
+        .rek-dual-layout,
+        .prediksi-dual-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .app {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-footer {
+          position: static;
+          margin-top: 18px;
+        }
+
+        .main {
+          padding: 16px;
+        }
+
+        .panel-header,
+        .syair-preview-top {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .syair-preview-frame {
+          padding: 8px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-badge">DB</div>
+          <div>
+            <h1>Dashboard Admin</h1>
+            <p>Google Sheet Web App</p>
+          </div>
+        </div>
+
+        <div class="nav">
+          <button class="nav-btn active" data-target="pkcsSection">CARI PK APA?</button>
+          <button class="nav-btn" data-target="ewalletSection">DATA REK</button>
+          <button class="nav-btn" data-target="prediksiSection">PREDIKSI</button>
+          <button class="nav-btn" data-target="syairSection">SYAIR TOGEL</button>
+          <button class="nav-btn" data-target="gambarSection">GAMBAR</button>
+        </div>
+
+        <div class="sidebar-footer">
+          Status data:
+          <div id="statusText" style="margin-top:8px;color:#fff;font-weight:bold;">
+            Memuat dashboard...
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section id="pkcsSection" class="section active">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>BACA DULU SEBELUM DI COPY</h3>
+              </div>
+
+              <div class="live-clock-box">
+                <div class="live-clock-label">WAKTU INDONESIA</div>
+                <div id="liveClock" class="live-clock-time">00:00:00</div>
+                <div id="liveDate" class="live-clock-date">Senin, 01 Januari 2026</div>
+              </div>
+            </div>
+
+            <div class="pkcs-dual-layout">
+              <div class="pkcs-box">
+                <div class="pkcs-box-title">Cari Apa??</div>
+                <input type="text" id="pkcsSearchInput" placeholder="Ketik huruf atau kata kunci..." oninput="filterPkcsList()">
+                <div id="pkcsKeywordList" class="pkcs-keyword-list" style="margin-top:14px;">
+                  <div class="empty-state">Ketik kata kunci dulu...</div>
+                </div>
+              </div>
+
+              <div class="pkcs-box pkcs-box-right">
+                <div class="pkcs-box-title">Hasil / Isi</div>
+                <div id="pkcsResultBox" class="pkcs-result-box"></div>
+                <button class="btn copy-live-btn" id="copyPkcsBtn" style="margin-top:14px;min-width:160px;" onclick="copyPkcsResult()">Copy</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="ewalletSection" class="section">
+          <div class="panel">
+            <h3>Cari Nomor Di Sini</h3>
+            <div class="rek-dual-layout">
+              <div class="rek-box">
+                <div class="rek-box-title">Search</div>
+                <input type="text" id="rekeningSearchInput" class="rek-search-input" placeholder="Ketik nomor / nama rekening..." oninput="filterRekeningList()">
+              </div>
+
+              <div class="rek-box">
+                <div class="rek-box-title">Hasil</div>
+                <div id="rekeningList" class="rekening-list">
+                  <div class="empty-state">Ketik nomor atau nama rekening...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="prediksiSection" class="section">
+          <div class="panel">
+            <h3>PREDIKSI</h3>
+            <p class="panel-sub">Pasaran dari kolom E dan isi prediksi dari kolom F.</p>
+
+            <div class="prediksi-dual-layout">
+              <div class="prediksi-box">
+                <div class="prediksi-box-title">Daftar Pasaran</div>
+                <input type="text" id="prediksiSearchInput" placeholder="Cari pasaran..." oninput="filterPrediksiList()">
+                <div id="prediksiList" class="prediksi-list" style="margin-top:14px;">
+                  <div class="empty-state">Memuat data prediksi...</div>
+                </div>
+              </div>
+
+              <div class="prediksi-box prediksi-box-right">
+                <div class="prediksi-box-title">Hasil Prediksi</div>
+                <div id="prediksiResultCard" class="prediksi-result-card">Pilih pasaran di sebelah kiri.</div>
+                <button class="btn copy-live-btn" id="copyPrediksiBtn" style="margin-top:14px;min-width:160px;" onclick="copyPrediksiResult()">Copy</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="syairSection" class="section">
+          <div class="panel">
+            <div class="syair-layout">
+              <div class="syair-sidebar">
+                <div class="syair-head">
+                  <div class="syair-icon">✦</div>
+                  <div>
+                    <h3>Generator Syair</h3>
+                    <p class="panel-sub" style="margin-bottom:0;">Syair togel preview system</p>
+                  </div>
+                </div>
+
+                <div class="syair-group">
+                  <label class="syair-label">TANGGAL RENDER</label>
+                  <input type="date" id="syairDateInput">
+                </div>
+
+                <div class="syair-group">
+                  <label class="syair-label">PASARAN</label>
+                  <select id="syairMarketSelect">
+                    <option value="BANGKOK">SYAIR BANGKOK</option>
+                    <option value="BRUNEI">SYAIR BRUNEI</option>
+                    <option value="CHELSEA">SYAIR CHELSEA</option>
+                    <option value="HUAHIN">SYAIR HUAHIN</option>
+                    <option value="NEVADA">SYAIR NEVADA</option>
+                    <option value="POIPET">SYAIR POIPET</option>
+                  </select>
+                </div>
+
+                <div class="syair-group">
+                  <label class="syair-label">SHIO</label>
+                  <select id="syairShioSelect">
+                    <option value="KUDA">Kuda</option>
+                    <option value="ULAR">Ular</option>
+                    <option value="NAGA">Naga</option>
+                    <option value="KELINCI">Kelinci</option>
+                    <option value="HARIMAU">Harimau</option>
+                    <option value="KERBAU">Kerbau</option>
+                    <option value="TIKUS">Tikus</option>
+                    <option value="BABI">Babi</option>
+                    <option value="ANJING">Anjing</option>
+                    <option value="AYAM">Ayam</option>
+                    <option value="MONYET">Monyet</option>
+                    <option value="KAMBING">Kambing</option>
+                  </select>
+                </div>
+
+                <div class="syair-group">
+                  <label class="syair-label">COPY TEXT</label>
+                  <input type="text" id="syairCopyText" readonly>
+                  <button class="btn copy-live-btn" style="width:100%;margin-top:10px;" onclick="copySyairText()">Copy</button>
+                </div>
+
+                <div class="syair-group">
+                  <label class="syair-label">SYAIR</label>
+                  <textarea id="syairTextArea" class="syair-textarea" placeholder="Tulis syair di sini..."></textarea>
+                </div>
+
+                <div class="syair-info-box">
+                  Saat klik <b>Generate</b>, angka akan dibuat otomatis. Angka main dan jitu digabung bentuk L, tapi tiap kotak tetap bisa digeser sendiri lewat CSS.
+                </div>
+
+                <div class="syair-actions">
+                  <button class="btn copy-live-btn" onclick="generateSyairPreview()">Generate</button>
+                  <button class="btn secondary" onclick="resetSyairForm()">Reset</button>
+                </div>
+              </div>
+
+              <div class="syair-preview-panel">
+                <div class="syair-preview-top">
+                  <div class="syair-preview-title">
+                    <div class="syair-icon">🖼</div>
+                    <h3>PREVIEW HASIL</h3>
+                  </div>
+                  <button class="btn" onclick="copySyairImage()">Copy Image</button>
+                </div>
+
+                <div class="syair-preview-frame">
+                  <div id="syairPreviewArea" class="syair-preview-area"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="gambarSection" class="section">
+          <div class="panel">
+            <h3>CARA GAMBAR APA?</h3>
+            <input type="text" id="gambarSearchInput" class="rek-search-input" placeholder="Cari judul gambar..." oninput="filterStaticImageCards()">
+            <div id="imageGallery" class="image-gallery-cards" style="margin-top:18px;"></div>
+          </div>
+        </section>
+
+        <div id="imagePreviewModal" class="image-modal">
+          <div class="image-modal-backdrop" onclick="closeImageModal()"></div>
+          <div class="image-modal-content">
+            <button class="image-modal-close" onclick="closeImageModal()">&times;</button>
+            <div id="imageModalTitle" class="image-modal-title">Preview Gambar</div>
+            <img id="imageModalImg" class="image-modal-img" src="" alt="Preview Gambar">
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      const dashboardData = {
+        dropdown1: [],
+        dropdown2: [],
+        dropdown3: [],
+        dropdown4: []
+      };
+
+      const staticImageData = [
+        { title: "SS PROFIL DANA", url: "https://snipboard.io/uUh3ZJ.jpg" },
+        { title: "CARA PASANG BBFS", url: "https://snipboard.io/xbH8et.jpg" },
+        { title: "CARA BET", url: "https://snipboard.io/6rm0Iw.jpg" },
+        { title: "PERATURAN PERMAINAN", url: "https://snipboard.io/tPFjuR.jpg" },
+        { title: "MENU SITUS", url: "https://snipboard.io/Xh2nWV.jpg" },
+        { title: "KIRIM GAMBAR", url: "https://i.imgur.com/UCLgkCX.png" },
+        { title: "CARA PREMIUMKAN DANA", url: "https://snipboard.io/5FIVn2.jpg" },
+        { title: "INBOX QRIS", url: "https://snipboard.io/efdGMg.jpg" },
+        { title: "CARA DEPO", url: "https://snipboard.io/m5yDNR.jpg" },
+        { title: "HISTORY BERMAIN", url: "https://snipboard.io/ys9P0C.jpg" },
+        { title: "PERIODE PERMAINAN LIVE PRAGMATIC", url: "https://snipboard.io/Zhw58r.jpg" },
+        { title: "BLACK SCATTER", url: "https://snipboard.io/znjArS.jpg" },
+        { title: "HISTORY NOMOR", url: "https://snipboard.io/J9gfpZ.jpg" },
+        { title: "DAFTAR", url: "https://snipboard.io/c2xtdM.jpg" },
+        { title: "CARA ISI FORM", url: "https://snipboard.io/pCD4Rz.jpg" },
+        { title: "PERATURAN EVENT SCATER", url: "https://i.imgur.com/64lcoFA.png" },
+        { title: "PERATURAN EVENT BUYSPIN&FREESPIN", url: "https://i.imgur.com/wXF8p0F.png" },
+        { title: "PERATURAN SUPER SCATER", url: "https://i.imgur.com/XEknoLl.png" },
+        { title: "SALDO POKER", url: "https://i.imgur.com/DA3P8W8.png" },
+        { title: "SS PROFIL GOPAY", url: "https://i.imgur.com/LxRaEYk.png" },
+        { title: "QRIS KLIK BCA", url: "https://i.imgur.com/yMArqEy.jpeg" },
+        { title: "QRIS MYBCA", url: "https://i.imgur.com/8Z20Gr4.jpeg" },
+        { title: "QRIS MANDIRI", url: "https://i.imgur.com/iWzKAsO.jpeg" },
+        { title: "QRIS BRI", url: "https://i.imgur.com/qIuH3oG.png" },
+        { title: "QRIS NEW BRI", url: "https://i.imgur.com/8HcmOM0.png" },
+        { title: "QRIS BNI", url: "https://i.imgur.com/ec3JyjJ.jpeg" },
+        { title: "QRIS BNI WONDER", url: "https://i.imgur.com/oWR6el2.png" },
+        { title: "QRIS CIMB", url: "https://i.imgur.com/YmmvdjC.jpeg" },
+        { title: "QRIS BANKJAGO", url: "https://i.imgur.com/Qd3Ygkx.jpeg" },
+        { title: "QRIS SEABANK", url: "https://i.imgur.com/pWEXb0V.png" },
+        { title: "QRIS UOB", url: "https://i.imgur.com/ChIwWfD.jpeg" },
+        { title: "QRIS BSI", url: "https://i.imgur.com/WPVYfrj.png" },
+        { title: "QRIS BANK BTN", url: "https://i.imgur.com/oKlTYqN.jpeg" },
+        { title: "QRIS BANK ACEH", url: "https://i.imgur.com/pTj8xaZ.jpeg" },
+        { title: "QRIS BANK JATENG", url: "https://i.imgur.com/uu89cl2.jpeg" },
+        { title: "QRIS OCBC", url: "https://i.imgur.com/Z1PLuYd.jpeg" },
+        { title: "QRIS JAK ONE", url: "https://i.imgur.com/8bFTW1n.jpeg" },
+        { title: "QRIS ALADIN", url: "https://i.imgur.com/G8JB0tR.png" },
+        { title: "QRIS ISAKU", url: "https://i.imgur.com/spsv1wC.jpeg" },
+        { title: "QRIS OVO", url: "https://i.imgur.com/Vlifa1p.png" },
+        { title: "QRIS NEW OVO", url: "https://i.imgur.com/jXM4Dk0.png" },
+        { title: "QRIS LINKAJA", url: "https://i.imgur.com/biIqBcX.jpeg" },
+        { title: "QRIS DANA", url: "https://i.imgur.com/WZG2sGv.jpeg" },
+        { title: "QRIS GOPAY", url: "https://i.imgur.com/O18wvMh.jpeg" },
+        { title: "QRIS SAKUKU", url: "https://i.imgur.com/BWLyjAy.png" },
+        { title: "QRIS SHOPEEPAY", url: "https://i.imgur.com/bH7lwUH.png" },
+        { title: "QRIS SEABANK 2", url: "https://i.imgur.com/QIjestM.jpeg" }
+      ];
+
+      const syairMarketConfig = {
+        BANGKOK: { label: "SYAIR BANGKOK", logo: "https://i.imgur.com/YV1augF.png" },
+        BRUNEI: { label: "SYAIR BRUNEI", logo: "https://i.imgur.com/vx7Pl2f.png" },
+        CHELSEA: { label: "SYAIR CHELSEA", logo: "https://i.imgur.com/n3W8XQb.png" },
+        HUAHIN: { label: "SYAIR HUAHIN", logo: "https://i.imgur.com/R72OnYA.png" },
+        NEVADA: { label: "SYAIR NEVADA", logo: "https://i.imgur.com/cN1cQfs.jpeg" },
+        POIPET: { label: "SYAIR POIPET", logo: "https://i.imgur.com/OjTZ4Cx.png" }
+      };
+
+      const shioImageMap = {
+        ULAR: "https://i.imgur.com/mglySgv.png",
+        NAGA: "https://i.imgur.com/9Fkkfgv.png",
+        KELINCI: "https://i.imgur.com/t7iUc1l.png",
+        KERBAU: "https://i.imgur.com/U2TTNI4.png",
+        ANJING: "https://i.imgur.com/FyDhK4M.png",
+        HARIMAU: "https://i.imgur.com/ufe56Cq.png",
+        BABI: "https://i.imgur.com/OoIv4GZ.png",
+        TIKUS: "https://i.imgur.com/ux1DUW3.png",
+        MONYET: "https://i.imgur.com/7lvGFRy.png",
+        KAMBING: "https://i.imgur.com/yhIgK8D.png",
+        AYAM: "https://i.imgur.com/tHJhLGr.png",
+        KUDA: "https://i.imgur.com/RwNYRjr.png"
+      };
+
+      const SYAIR_TEMPLATE_URL = "https://i.imgur.com/0xik08S.jpeg";
+
+      let filteredPkcsData = [];
+      let filteredPrediksiData = [];
+      let pkcsOriginalResultText = "";
+      let selectedPkcsIndex = -1;
+      let selectedPrediksiIndex = -1;
+      let currentSyairNumbers = null;
+
+      function updateStatus(message) {
+        const el = document.getElementById("statusText");
+        if (el) el.textContent = message;
+      }
+
+      function escapeHtml(text) {
+        return String(text || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function escapeAttribute(text) {
+        return String(text || "")
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function fallbackCopy(text, onSuccess, onFail) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try {
+          const copied = document.execCommand("copy");
+          if (copied) onSuccess();
+          else onFail();
+        } catch (err) {
+          onFail();
+        }
+        document.body.removeChild(temp);
+      }
+
+      function startLiveClock() {
+        function updateClock() {
+          const now = new Date();
+          const time = now.toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+          });
+
+          const date = now.toLocaleDateString("id-ID", {
+            weekday: "long",
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+          });
+
+          const timeEl = document.getElementById("liveClock");
+          const dateEl = document.getElementById("liveDate");
+          if (timeEl) timeEl.textContent = time;
+          if (dateEl) dateEl.textContent = date;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+      }
+
+      function initSidebar() {
+        const buttons = document.querySelectorAll(".nav-btn");
+        const sections = document.querySelectorAll(".section");
+
+        buttons.forEach(btn => {
+          btn.addEventListener("click", () => {
+            buttons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const target = btn.getAttribute("data-target");
+            sections.forEach(sec => sec.classList.remove("active"));
+            const targetEl = document.getElementById(target);
+            if (targetEl) targetEl.classList.add("active");
+          });
+        });
+      }
+
+      function normalizeSearchText(text) {
+        return String(text || "").toLowerCase().replace(/\s+/g, " ").trim();
+      }
+
+      function showPkcsPrompt() {
+        const listEl = document.getElementById("pkcsKeywordList");
+        if (listEl) listEl.innerHTML = '<div class="empty-state">Ketik kata kunci dulu...</div>';
+      }
+
+      function renderPkcsList(data) {
+        const listEl = document.getElementById("pkcsKeywordList");
+        if (!listEl) return;
+
+        if (!data || !data.length) {
+          listEl.innerHTML = '<div class="empty-state">Tidak ada kata kunci ditemukan.</div>';
+          selectedPkcsIndex = -1;
+          return;
+        }
+
+        listEl.innerHTML = data.map((row, index) => `
+          <div class="pkcs-keyword-item ${index === selectedPkcsIndex ? "active" : ""}" onclick="selectPkcsItem(${index})">
+            ${escapeHtml(row[0])}
+          </div>
+        `).join("");
+      }
+
+      function filterPkcsList() {
+        const input = document.getElementById("pkcsSearchInput");
+        const keyword = normalizeSearchText(input ? input.value : "");
+        const source = dashboardData.dropdown1 || [];
+        selectedPkcsIndex = -1;
+
+        if (!keyword) {
+          filteredPkcsData = [];
+          showPkcsPrompt();
+          return;
+        }
+
+        const parts = keyword.split(" ").filter(Boolean);
+        filteredPkcsData = source.filter(row => {
+          const colA = normalizeSearchText(row[0]);
+          return parts.every(part => colA.includes(part));
+        });
+
+        renderPkcsList(filteredPkcsData);
+      }
+
+      function selectPkcsItem(index) {
+        const selected = filteredPkcsData[index];
+        if (!selected) return;
+
+        const resultEl = document.getElementById("pkcsResultBox");
+        const searchInput = document.getElementById("pkcsSearchInput");
+        const rightBox = document.querySelector(".pkcs-box-right");
+
+        if (resultEl) resultEl.textContent = selected[1] || "-";
+
+        if (rightBox) {
+          rightBox.classList.remove("flash");
+          void rightBox.offsetWidth;
+          rightBox.classList.add("flash");
+        }
+
+        if (searchInput) {
+          searchInput.value = "";
+          searchInput.blur();
+        }
+
+        filteredPkcsData = [];
+        selectedPkcsIndex = -1;
+        showPkcsPrompt();
+      }
+
+      function copyPkcsResult() {
+        const resultEl = document.getElementById("pkcsResultBox");
+        const copyBtn = document.getElementById("copyPkcsBtn");
+        const text = resultEl ? resultEl.textContent : "";
+
+        if (!text) {
+          updateStatus("Tidak ada hasil PK CS yang bisa dicopy");
+          return;
+        }
+
+        pkcsOriginalResultText = text;
+
+        const onSuccess = () => {
+          updateStatus("Hasil PK CS berhasil dicopy");
+          if (copyBtn) {
+            copyBtn.classList.add("success");
+            copyBtn.textContent = "Berhasil Dicopy";
+          }
+          if (resultEl) {
+            resultEl.classList.add("copy-success");
+            resultEl.innerHTML = "✔✔✔";
+          }
+          setTimeout(() => {
+            if (resultEl) {
+              resultEl.classList.remove("copy-success");
+              resultEl.textContent = pkcsOriginalResultText;
+            }
+            if (copyBtn) {
+              copyBtn.classList.remove("success");
+              copyBtn.textContent = "Copy";
+            }
+          }, 1800);
+        };
+
+        const onFail = () => updateStatus("Gagal copy hasil PK CS");
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(onSuccess).catch(() => fallbackCopy(text, onSuccess, onFail));
+        } else {
+          fallbackCopy(text, onSuccess, onFail);
+        }
+      }
+
+      function renderRekeningList(data) {
+        const listEl = document.getElementById("rekeningList");
+        if (!listEl) return;
+
+        if (!data || !data.length) {
+          listEl.innerHTML = '<div class="empty-state">Tidak ada data rekening ditemukan.</div>';
+          return;
+        }
+
+        listEl.innerHTML = data.map(item => {
+          const val = Array.isArray(item) ? item[0] : item;
+          return `
+            <div class="rekening-item">
+              <div class="rekening-title">${escapeHtml(val)}</div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function filterRekeningList() {
+        const input = document.getElementById("rekeningSearchInput");
+        const keyword = String(input ? input.value : "").trim().toLowerCase();
+        const source = dashboardData.dropdown3 || [];
+
+        if (!keyword) {
+          document.getElementById("rekeningList").innerHTML = '<div class="empty-state">Ketik nomor atau nama rekening...</div>';
+          return;
+        }
+
+        const filtered = source.filter(row => {
+          const text = String(Array.isArray(row) ? row[0] : row).toLowerCase();
+          return text.includes(keyword);
+        });
+
+        renderRekeningList(filtered);
+      }
+
+      function renderPrediksiList(data) {
+        const listEl = document.getElementById("prediksiList");
+        if (!listEl) return;
+
+        if (!data || !data.length) {
+          listEl.innerHTML = '<div class="empty-state">Tidak ada pasaran ditemukan.</div>';
+          document.getElementById("prediksiResultCard").textContent = "Tidak ada hasil prediksi.";
+          return;
+        }
+
+        listEl.innerHTML = data.map((row, index) => `
+          <div class="prediksi-item ${index === selectedPrediksiIndex ? "active" : ""}" onclick="selectPrediksiItem(${index})">
+            ${escapeHtml(row[0])}
+          </div>
+        `).join("");
+      }
+
+      function filterPrediksiList() {
+        const input = document.getElementById("prediksiSearchInput");
+        const keyword = String(input ? input.value : "").trim().toLowerCase();
+        const source = dashboardData.dropdown2 || [];
+
+        if (!keyword) {
+          filteredPrediksiData = [...source];
+        } else {
+          filteredPrediksiData = source.filter(row => String(row[0] || "").toLowerCase().includes(keyword));
+        }
+
+        selectedPrediksiIndex = filteredPrediksiData.length ? 0 : -1;
+        renderPrediksiList(filteredPrediksiData);
+
+        const resultEl = document.getElementById("prediksiResultCard");
+        if (resultEl) {
+          resultEl.textContent = filteredPrediksiData.length ? (filteredPrediksiData[0][1] || "-") : "Tidak ada hasil prediksi.";
+        }
+      }
+
+      function selectPrediksiItem(index) {
+        const selected = filteredPrediksiData[index];
+        if (!selected) return;
+
+        selectedPrediksiIndex = index;
+        const resultEl = document.getElementById("prediksiResultCard");
+        const rightBox = document.querySelector(".prediksi-box-right");
+
+        if (resultEl) resultEl.textContent = selected[1] || "-";
+
+        document.querySelectorAll(".prediksi-item").forEach((item, i) => {
+          item.classList.toggle("active", i === index);
+        });
+
+        if (rightBox) {
+          rightBox.classList.remove("flash");
+          void rightBox.offsetWidth;
+          rightBox.classList.add("flash");
+        }
+      }
+
+      function copyPrediksiResult() {
+        const resultEl = document.getElementById("prediksiResultCard");
+        const copyBtn = document.getElementById("copyPrediksiBtn");
+        const text = resultEl ? resultEl.textContent : "";
+
+        if (!text || text === "-" || text === "Tidak ada hasil prediksi.") {
+          updateStatus("Tidak ada prediksi yang bisa dicopy");
+          return;
+        }
+
+        const onSuccess = () => {
+          updateStatus("Prediksi berhasil dicopy");
+          if (copyBtn) {
+            copyBtn.classList.add("success");
+            copyBtn.textContent = "Berhasil Dicopy";
+          }
+          setTimeout(() => {
+            if (copyBtn) {
+              copyBtn.classList.remove("success");
+              copyBtn.textContent = "Copy";
+            }
+          }, 1800);
+        };
+
+        const onFail = () => updateStatus("Gagal copy prediksi");
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(onSuccess).catch(() => fallbackCopy(text, onSuccess, onFail));
+        } else {
+          fallbackCopy(text, onSuccess, onFail);
+        }
+      }
+
+      function renderStaticImageCards(data = staticImageData) {
+        const gallery = document.getElementById("imageGallery");
+        if (!gallery) return;
+
+        if (!data.length) {
+          gallery.innerHTML = '<div class="image-card-v2-empty">Tidak ada gambar ditemukan.</div>';
+          return;
+        }
+
+        gallery.innerHTML = data.map(item => `
+          <div class="image-card-v2" onclick="openImageModal('${escapeAttribute(item.title)}','${escapeAttribute(item.url)}')">
+            <div class="image-card-v2-title">${escapeHtml(item.title)}</div>
+            <div class="image-card-v2-media">
+              <img
+                src="${escapeAttribute(item.url)}"
+                alt="${escapeAttribute(item.title)}"
+                loading="lazy"
+                onerror="this.parentElement.innerHTML='<div class=&quot;image-card-v2-empty&quot;>Gambar gagal dimuat</div>'"
+              >
+            </div>
+          </div>
+        `).join("");
+      }
+
+      function filterStaticImageCards() {
+        const input = document.getElementById("gambarSearchInput");
+        const keyword = String(input ? input.value : "").trim().toLowerCase();
+
+        if (!keyword) {
+          renderStaticImageCards(staticImageData);
+          return;
+        }
+
+        const filtered = staticImageData.filter(item => String(item.title).toLowerCase().includes(keyword));
+        renderStaticImageCards(filtered);
+      }
+
+      function openImageModal(title, url) {
+        const modal = document.getElementById("imagePreviewModal");
+        const img = document.getElementById("imageModalImg");
+        const titleEl = document.getElementById("imageModalTitle");
+        if (!modal || !img || !titleEl) return;
+        titleEl.textContent = title || "Preview Gambar";
+        img.src = url || "";
+        modal.classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeImageModal() {
+        const modal = document.getElementById("imagePreviewModal");
+        const img = document.getElementById("imageModalImg");
+        if (modal) modal.classList.remove("show");
+        if (img) img.src = "";
+        document.body.style.overflow = "";
+      }
+
+      function getTodayInputValue() {
+        const d = new Date();
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, "0");
+        const day = String(d.getDate()).padStart(2, "0");
+        return `${y}-${m}-${day}`;
+      }
+
+      function formatSyairDateParts(dateValue) {
+        const d = dateValue ? new Date(dateValue + "T00:00:00") : new Date();
+        return {
+          weekday: d.toLocaleDateString("id-ID", { weekday: "long" }),
+          longDate: d.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }),
+          fullUpper: d.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" }).toUpperCase()
+        };
+      }
+
+      function randInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function randDigit() {
+        return String(randInt(0, 9));
+      }
+
+      function randTwoDigit() {
+        return String(randInt(0, 99)).padStart(2, "0");
+      }
+
+      function generateSyairNumbers() {
+        return {
+          bb: [randTwoDigit(), randTwoDigit(), randTwoDigit(), randTwoDigit(), randTwoDigit()],
+          arah: [randDigit(), randDigit(), randDigit(), randDigit()],
+          colok: [randDigit(), randDigit()],
+          jaga: [randDigit(), randDigit()],
+          ekor: [randDigit(), randDigit()],
+          kepala: [randDigit(), randDigit()],
+          bbfs: [randDigit(), randDigit(), randDigit(), randDigit(), randDigit(), randDigit(), randDigit()],
+          angkaMain: [randDigit(), randDigit(), randDigit()],
+          jitu: [randDigit(), randDigit()]
+        };
+      }
+
+      function getElValue(id, fallback = "") {
+        const el = document.getElementById(id);
+        return el ? (el.value || fallback) : fallback;
+      }
+
+      function updateSyairCopyText() {
+        const marketKey = getElValue("syairMarketSelect", "BANGKOK");
+        const dateValue = getElValue("syairDateInput", getTodayInputValue());
+        const cfg = syairMarketConfig[marketKey] || syairMarketConfig.BANGKOK;
+        const dateInfo = formatSyairDateParts(dateValue);
+        const copyEl = document.getElementById("syairCopyText");
+        if (copyEl) {
+          copyEl.value = `${cfg.label} - ${dateInfo.fullUpper}`;
+        }
+      }
+
+      function buildNumCells(arr, prefix = "cell") {
+        return arr.map((item, index) => {
+          const num = index + 1;
+          return `<div class="num-cell ${prefix}-${num}">${escapeHtml(item)}</div>`;
+        }).join("");
+      }
+
+      function formatSyairText(text) {
+        return String(text || "")
+          .replace(/\r/g, "")
+          .split("\n")
+          .map(line => line.replace(/\s+/g, " ").trim())
+          .filter(line => line !== "")
+          .join("<br>");
+      }
+
+      function renderSyairPreview() {
+        updateSyairCopyText();
+
+        const preview = document.getElementById("syairPreviewArea");
+        if (!preview) return;
+
+        if (!currentSyairNumbers) {
+          currentSyairNumbers = generateSyairNumbers();
+        }
+
+        const marketKey = getElValue("syairMarketSelect", "BANGKOK");
+        const shio = getElValue("syairShioSelect", "NAGA");
+        const dateValue = getElValue("syairDateInput", getTodayInputValue());
+        const rawSyairText = getElValue("syairTextArea", "");
+        const syairText = rawSyairText.trim() ? formatSyairText(rawSyairText) : "Tulis syair di sini...";
+        const dateInfo = formatSyairDateParts(dateValue);
+        const cfg = syairMarketConfig[marketKey] || syairMarketConfig.BANGKOK;
+        const shioUrl = shioImageMap[shio] || "";
+        const n = currentSyairNumbers;
+
+        preview.innerHTML = `
+          <div class="syair-card" id="syairCardCapture">
+            <img class="syair-bg" src="${escapeAttribute(SYAIR_TEMPLATE_URL)}" crossorigin="anonymous" alt="Template Syair">
+
+            <div class="syair-date-box">
+              <span class="day-name">${escapeHtml(dateInfo.weekday)}</span>
+              <span class="full-date">${escapeHtml(dateInfo.longDate)}</span>
+            </div>
+
+            <div class="syair-shio-box">
+              ${shioUrl ? `<img class="syair-shio-img" src="${escapeAttribute(shioUrl)}" crossorigin="anonymous" alt="${escapeAttribute(shio)}">` : ""}
+            </div>
+
+            <div class="syair-poem-box">${syairText}</div>
+
+            <div class="syair-market-logo">
+              <img src="${escapeAttribute(cfg.logo)}" crossorigin="anonymous" alt="${escapeAttribute(cfg.label)}">
+            </div>
+
+            <div class="syair-label-mini syair-label-bb">BB</div>
+            <div class="syair-label-mini syair-label-colok">COLOK</div>
+            <div class="syair-label-mini syair-label-jaga">JAGA</div>
+            <div class="syair-label-mini syair-label-ekor">EKOR</div>
+            <div class="syair-label-mini syair-label-kepala">KEPALA</div>
+            <div class="syair-label-mini syair-label-bbfs">BBFS</div>
+            <div class="syair-label-mini syair-label-shio">SHIO</div>
+            <div class="syair-angka-main-label">ANGKA<br>MAIN</div>
+
+            <div class="num-grid syair-bb-col">
+              ${buildNumCells(n.bb, "bb-cell")}
+            </div>
+
+            <div class="syair-cross-top">${escapeHtml(n.arah[0])}</div>
+            <div class="syair-cross-left">${escapeHtml(n.arah[1])}</div>
+            <div class="syair-cross-right">${escapeHtml(n.arah[2])}</div>
+            <div class="syair-cross-bottom">${escapeHtml(n.arah[3])}</div>
+
+            <div class="num-grid syair-colok-grid">
+              ${buildNumCells(n.colok, "colok-cell")}
+            </div>
+
+            <div class="num-grid syair-jaga-grid">
+              ${buildNumCells(n.jaga, "jaga-cell")}
+            </div>
+
+            <div class="num-grid syair-ekor-grid">
+              ${buildNumCells(n.ekor, "ekor-cell")}
+            </div>
+
+            <div class="num-grid syair-kepala-grid">
+              ${buildNumCells(n.kepala, "kepala-cell")}
+            </div>
+
+            <div class="num-grid syair-bbfs-row">
+              ${buildNumCells(n.bbfs, "bbfs-cell")}
+            </div>
+
+            <div class="num-grid syair-main-l-grid">
+              ${buildNumCells([...n.angkaMain, ...n.jitu], "mainl-cell")}
+            </div>
+          </div>
+        `;
+      }
+
+      function generateSyairPreview() {
+        currentSyairNumbers = generateSyairNumbers();
+        renderSyairPreview();
+        updateStatus("Preview syair berhasil digenerate");
+      }
+
+      function resetSyairForm() {
+        const dateEl = document.getElementById("syairDateInput");
+        const marketEl = document.getElementById("syairMarketSelect");
+        const shioEl = document.getElementById("syairShioSelect");
+        const textEl = document.getElementById("syairTextArea");
+
+        if (dateEl) dateEl.value = getTodayInputValue();
+        if (marketEl) marketEl.value = "BANGKOK";
+        if (shioEl) shioEl.value = "NAGA";
+        if (textEl) textEl.value = "";
+
+        currentSyairNumbers = generateSyairNumbers();
+        renderSyairPreview();
+        updateStatus("Form syair direset");
+      }
+
+      function copySyairText() {
+        const header = getElValue("syairCopyText");
+        const shio = getElValue("syairShioSelect", "NAGA");
+        const text = getElValue("syairTextArea", "");
+        const finalText = `${header}\nSHIO: ${shio}\n\n${text}`;
+
+        const onSuccess = () => updateStatus("Text syair berhasil dicopy");
+        const onFail = () => updateStatus("Gagal copy text syair");
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(finalText).then(onSuccess).catch(() => fallbackCopy(finalText, onSuccess, onFail));
+        } else {
+          fallbackCopy(finalText, onSuccess, onFail);
+        }
+      }
+
+      function waitForImagesLoaded(container) {
+        const images = Array.from(container.querySelectorAll("img"));
+        if (!images.length) return Promise.resolve();
+
+        return Promise.all(
+          images.map(img => {
+            if (img.complete) return Promise.resolve();
+            return new Promise(resolve => {
+              img.onload = resolve;
+              img.onerror = resolve;
+            });
+          })
+        );
+      }
+
+      async function copySyairImage() {
+        const target = document.getElementById("syairCardCapture");
+        if (!target) return;
+
+        try {
+          await waitForImagesLoaded(target);
+
+          const canvas = await html2canvas(target, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: null,
+            logging: false
+          });
+
+          const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+          if (!blob) return;
+
+          if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
+            await navigator.clipboard.write([
+              new ClipboardItem({
+                "image/png": blob
+              })
+            ]);
+            updateStatus("Gambar syair berhasil dicopy");
+          } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "syair-togel.png";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+            updateStatus("Browser tidak support copy image, gambar didownload otomatis");
+          }
+        } catch (err) {
+          console.error(err);
+          updateStatus("Gagal copy image syair");
+        }
+      }
+
+      function loadAllData() {
+        let loaded = 0;
+        const total = 4;
+
+        function done(msg) {
+          loaded++;
+          updateStatus(`${msg} (${loaded}/${total})`);
+          if (loaded === total) {
+            initPrediksiData();
+            renderStaticImageCards(staticImageData);
+            initSyairGenerator();
+            showPkcsPrompt();
+            updateStatus("Semua data berhasil dimuat");
+          }
+        }
+
+        google.script.run
+          .withSuccessHandler(data => {
+            dashboardData.dropdown1 = data || [];
+            done("PK CS berhasil dimuat");
+          })
+          .withFailureHandler(() => {
+            dashboardData.dropdown1 = [];
+            done("PK CS gagal dimuat");
+          })
+          .getDropdownData1();
+
+        google.script.run
+          .withSuccessHandler(data => {
+            dashboardData.dropdown2 = data || [];
+            done("Prediksi berhasil dimuat");
+          })
+          .withFailureHandler(() => {
+            dashboardData.dropdown2 = [];
+            done("Prediksi gagal dimuat");
+          })
+          .getDropdownData2();
+
+        google.script.run
+          .withSuccessHandler(data => {
+            dashboardData.dropdown3 = data || [];
+            done("Data rekening berhasil dimuat");
+          })
+          .withFailureHandler(() => {
+            dashboardData.dropdown3 = [];
+            done("Data rekening gagal dimuat");
+          })
+          .getDropdownData3();
+
+        google.script.run
+          .withSuccessHandler(data => {
+            dashboardData.dropdown4 = data || [];
+            done("Kolom A berhasil dimuat");
+          })
+          .withFailureHandler(() => {
+            dashboardData.dropdown4 = [];
+            done("Kolom A gagal dimuat");
+          })
+          .getDropdownData4();
+      }
+
+      function initPrediksiData() {
+        filteredPrediksiData = [...(dashboardData.dropdown2 || [])];
+        selectedPrediksiIndex = filteredPrediksiData.length ? 0 : -1;
+        renderPrediksiList(filteredPrediksiData);
+
+        const resultEl = document.getElementById("prediksiResultCard");
+        if (resultEl) {
+          resultEl.textContent = filteredPrediksiData.length ? (filteredPrediksiData[0][1] || "-") : "Tidak ada hasil prediksi.";
+        }
+      }
+
+      function initSyairGenerator() {
+        const dateEl = document.getElementById("syairDateInput");
+        const marketEl = document.getElementById("syairMarketSelect");
+        const shioEl = document.getElementById("syairShioSelect");
+        const textEl = document.getElementById("syairTextArea");
+
+        if (dateEl && !dateEl.value) dateEl.value = getTodayInputValue();
+        if (marketEl) marketEl.addEventListener("change", renderSyairPreview);
+        if (shioEl) shioEl.addEventListener("change", renderSyairPreview);
+        if (dateEl) dateEl.addEventListener("change", renderSyairPreview);
+        if (textEl) textEl.addEventListener("input", renderSyairPreview);
+
+        currentSyairNumbers = generateSyairNumbers();
+        renderSyairPreview();
+      }
+
+      function initKeyboardShortcuts() {
+        document.addEventListener("keydown", function(event) {
+          const isAltC = event.altKey && (event.key === "c" || event.key === "C");
+          const isAltX = event.altKey && (event.key === "x" || event.key === "X");
+          const isEscape = event.key === "Escape";
+
+          if (isAltC) {
+            const pkcsSection = document.getElementById("pkcsSection");
+            if (pkcsSection && pkcsSection.classList.contains("active")) {
+              event.preventDefault();
+              copyPkcsResult();
+            }
+          }
+
+          if (isAltX) {
+            const prediksiSection = document.getElementById("prediksiSection");
+            if (prediksiSection && prediksiSection.classList.contains("active")) {
+              event.preventDefault();
+              copyPrediksiResult();
+            }
+          }
+
+          if (isEscape) closeImageModal();
+        });
+      }
+
+      window.onload = function() {
+        initSidebar();
+        initKeyboardShortcuts();
+        startLiveClock();
+        loadAllData();
+      };
+    </script>
+  </body>
+</html>
