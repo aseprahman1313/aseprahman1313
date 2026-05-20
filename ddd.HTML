@@ -196,6 +196,7 @@
       }
 
       input[type="text"],
+      input[type="password"],
       input[type="date"],
       select,
       textarea {
@@ -295,6 +296,54 @@
         align-items: start;
       }
 
+      .pkcs-dual-layout {
+        grid-template-columns: minmax(280px, 360px) 1fr;
+        gap: 24px;
+      }
+
+      .pkcs-modern-panel {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .pkcs-modern-panel::before {
+        content: "";
+        position: absolute;
+        inset: -40% -10% auto auto;
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle, rgba(34,211,238,0.14), transparent 62%);
+        pointer-events: none;
+      }
+
+      .pkcs-header-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .pkcs-header-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(34,211,238,0.25), rgba(168,85,247,0.22));
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: 0 12px 30px rgba(34,211,238,0.10);
+        font-size: 22px;
+      }
+
+      .pkcs-kicker {
+        font-size: 11px;
+        letter-spacing: 1.1px;
+        color: #67e8f9;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
       .pkcs-box,
       .rek-box,
       .prediksi-box {
@@ -302,6 +351,15 @@
         border: 1px solid var(--border);
         border-radius: 18px;
         padding: 14px;
+      }
+
+      .pkcs-box {
+        position: relative;
+        background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(17,24,39,0.72));
+        border: 1px solid rgba(148,163,184,0.16);
+        border-radius: 24px;
+        padding: 18px;
+        box-shadow: 0 18px 42px rgba(0,0,0,0.22);
       }
 
       .pkcs-box-title,
@@ -313,6 +371,50 @@
         color: #fff;
       }
 
+      .pkcs-box-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+      }
+
+      .pkcs-mini-pill {
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(34,211,238,0.12);
+        border: 1px solid rgba(34,211,238,0.24);
+        color: #a5f3fc;
+        font-size: 11px;
+        font-weight: 900;
+        white-space: nowrap;
+      }
+
+      .pkcs-search-wrap {
+        position: relative;
+        margin-bottom: 14px;
+      }
+
+      .pkcs-search-icon {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #67e8f9;
+        font-size: 15px;
+        opacity: 0.9;
+      }
+
+      .pkcs-search-wrap input {
+        padding-left: 42px;
+        min-height: 48px;
+        background: rgba(15,23,42,0.74);
+        border-color: rgba(34,211,238,0.16);
+        font-weight: 700;
+      }
+
       .pkcs-keyword-list,
       .rekening-list,
       .prediksi-list {
@@ -322,6 +424,11 @@
         flex-direction: column;
         gap: 10px;
         padding-right: 4px;
+      }
+
+      .pkcs-keyword-list {
+        max-height: 610px;
+        gap: 12px;
       }
 
       .pkcs-keyword-item,
@@ -338,42 +445,105 @@
       }
 
       .pkcs-keyword-item {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 12px;
         text-transform: uppercase;
+        border-radius: 18px;
+        padding: 14px 14px;
+        background: linear-gradient(135deg, rgba(15,23,42,0.86), rgba(30,41,59,0.62));
+        border: 1px solid rgba(148,163,184,0.14);
+        box-shadow: inset 3px 0 0 rgba(34,211,238,0.64);
+      }
+
+      .pkcs-keyword-item::before {
+        content: "";
+        width: 34px;
+        height: 34px;
+        flex: 0 0 34px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, rgba(34,211,238,0.22), rgba(168,85,247,0.20));
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .pkcs-keyword-item::after {
+        content: "›";
+        margin-left: auto;
+        color: #67e8f9;
+        font-size: 22px;
+        line-height: 1;
+        opacity: 0.75;
       }
 
       .pkcs-keyword-item:hover {
-        background: linear-gradient(135deg, rgba(59,130,246,0.20), rgba(139,92,246,0.16));
-        transform: translateX(4px);
+        background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(139,92,246,0.18));
+        border-color: rgba(34,211,238,0.30);
+        transform: translateX(5px) translateY(-1px);
+        box-shadow: 0 12px 24px rgba(34,211,238,0.08), inset 3px 0 0 rgba(34,211,238,0.95);
       }
 
       .pkcs-keyword-item.active {
-        background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(139,92,246,0.24));
+        background: linear-gradient(135deg, rgba(34,211,238,0.25), rgba(139,92,246,0.26));
+        border-color: rgba(34,211,238,0.36);
       }
 
       .pkcs-result-box {
-        min-height: 110px;
+        position: relative;
+        min-height: 180px;
         max-height: 620px;
         overflow-y: auto;
-        padding: 24px;
-        border-radius: 18px;
+        padding: 32px 30px;
+        border-radius: 22px;
         white-space: pre-wrap;
         text-align: center;
         height: auto;
-        background: linear-gradient(135deg, rgba(244,114,182,0.92), rgba(216,180,254,0.92));
-        color: #111827;
+        background:
+          radial-gradient(circle at top left, rgba(255,255,255,0.26), transparent 28%),
+          linear-gradient(135deg, rgba(244,114,182,0.94), rgba(216,180,254,0.94), rgba(125,211,252,0.86));
+        color: #0f172a;
         font-size: 18px;
-        line-height: 1.8;
-        font-weight: 500;
+        line-height: 1.9;
+        font-weight: 700;
+        border: 1px solid rgba(255,255,255,0.18);
+        box-shadow: 0 18px 46px rgba(0,0,0,0.24), inset 0 1px 0 rgba(255,255,255,0.35);
+      }
+
+      .pkcs-result-box:empty::before {
+        content: "Pilih kata kunci di sebelah kiri untuk menampilkan isi PK.";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 120px;
+        color: rgba(15,23,42,0.62);
+        font-weight: 900;
       }
 
       .pkcs-result-box.copy-success {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: 6px;
-        color: #6d28d9;
+        min-height: 180px;
+        font-size: 34px;
+        font-weight: 900;
+        letter-spacing: 8px;
+        color: #0f766e;
+      }
+
+      .pkcs-action-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+
+      .pkcs-helper-text {
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 700;
       }
 
       .pkcs-box-right.flash,
@@ -412,6 +582,401 @@
         line-height: 1.5;
         white-space: pre-wrap;
         word-break: break-word;
+      }
+
+
+      /* =========================
+         DATA REK MODERN
+      ========================= */
+
+      .rek-modern-panel {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .rek-modern-panel::before {
+        content: "";
+        position: absolute;
+        right: -170px;
+        top: -210px;
+        width: 520px;
+        height: 520px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(16,185,129,0.18), transparent 64%);
+        pointer-events: none;
+      }
+
+      .rek-modern-header {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .rek-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .rek-icon-badge {
+        width: 46px;
+        height: 46px;
+        border-radius: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(16,185,129,0.25), rgba(34,211,238,0.20));
+        border: 1px solid rgba(255,255,255,0.10);
+        box-shadow: 0 16px 32px rgba(16,185,129,0.10);
+        font-size: 22px;
+      }
+
+      .rek-kicker {
+        font-size: 11px;
+        letter-spacing: 1.15px;
+        color: #5eead4;
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      .rek-modern-header h3 {
+        margin: 0;
+      }
+
+      .rek-summary-pill {
+        min-width: 190px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(59,130,246,0.14));
+        border: 1px solid rgba(94,234,212,0.18);
+        box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+      }
+
+      .rek-summary-label {
+        color: #99f6e4;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+      }
+
+      .rek-summary-value {
+        color: #fff;
+        font-size: 26px;
+        line-height: 1.1;
+        font-weight: 900;
+        margin-top: 4px;
+      }
+
+      .rek-modern-layout {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(340px, 440px) 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .rek-modern-box {
+        background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(17,24,39,0.70));
+        border: 1px solid rgba(148,163,184,0.16);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: 0 18px 42px rgba(0,0,0,0.20);
+      }
+
+      .rek-modern-box-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 900;
+      }
+
+      .rek-live-badge {
+        padding: 7px 11px;
+        border-radius: 999px;
+        color: #a7f3d0;
+        background: rgba(16,185,129,0.14);
+        border: 1px solid rgba(16,185,129,0.24);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.6px;
+      }
+
+      .rek-search-card {
+        position: relative;
+        margin-bottom: 14px;
+      }
+
+      .rek-search-card::before {
+        content: "⌕";
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #67e8f9;
+        font-weight: 900;
+        z-index: 1;
+      }
+
+      .rek-search-card .rek-search-input {
+        padding: 15px 16px 15px 44px;
+        border-radius: 16px;
+        text-align: left;
+        font-size: 16px;
+        background: rgba(15,23,42,0.76);
+        border-color: rgba(34,211,238,0.16);
+        font-weight: 800;
+      }
+
+      .rek-search-hint {
+        color: #94a3b8;
+        font-size: 12px;
+        line-height: 1.6;
+        font-weight: 700;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .rek-result-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .rek-result-count {
+        color: #cbd5e1;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .rekening-list.rek-modern-list {
+        max-height: 650px;
+        gap: 13px;
+        padding-right: 6px;
+      }
+
+      .rekening-list.rek-modern-list::-webkit-scrollbar,
+      .pkcs-keyword-list::-webkit-scrollbar,
+      .prediksi-list::-webkit-scrollbar {
+        width: 9px;
+      }
+
+      .rekening-list.rek-modern-list::-webkit-scrollbar-track,
+      .pkcs-keyword-list::-webkit-scrollbar-track,
+      .prediksi-list::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.04);
+        border-radius: 999px;
+      }
+
+      .rekening-list.rek-modern-list::-webkit-scrollbar-thumb,
+      .pkcs-keyword-list::-webkit-scrollbar-thumb,
+      .prediksi-list::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, rgba(34,211,238,0.75), rgba(139,92,246,0.75));
+        border-radius: 999px;
+      }
+
+      .rekening-item.rek-card-modern {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 14px;
+        align-items: center;
+        padding: 18px;
+        border-radius: 20px;
+        background:
+          radial-gradient(circle at top left, rgba(16,185,129,0.12), transparent 28%),
+          linear-gradient(135deg, rgba(15,23,42,0.90), rgba(30,41,59,0.68));
+        border: 1px solid rgba(148,163,184,0.16);
+        box-shadow: inset 4px 0 0 rgba(16,185,129,0.72);
+        cursor: default;
+      }
+
+      .rekening-item.rek-card-modern:hover {
+        border-color: rgba(94,234,212,0.30);
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(16,185,129,0.08), inset 4px 0 0 rgba(34,211,238,0.88);
+      }
+
+      .rek-card-main {
+        min-width: 0;
+      }
+
+      .rek-card-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: #99f6e4;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.7px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .rek-card-label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 12px rgba(34,197,94,0.80);
+      }
+
+      .rekening-item.rek-card-modern .rekening-title {
+        font-size: 17px;
+        line-height: 1.65;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+      }
+
+      .rek-copy-mini {
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 14px;
+        padding: 11px 14px;
+        background: linear-gradient(135deg, rgba(34,211,238,0.24), rgba(139,92,246,0.22));
+        color: #fff;
+        font-weight: 900;
+        cursor: pointer;
+        transition: 0.22s ease;
+        white-space: nowrap;
+      }
+
+      .rek-copy-mini:hover {
+        transform: translateY(-2px);
+        border-color: rgba(34,211,238,0.34);
+      }
+
+      .rek-copy-mini.success {
+        background: linear-gradient(135deg, #10b981, #22c55e);
+      }
+
+      .rek-empty-modern {
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 24px;
+        border-radius: 20px;
+        color: #94a3b8;
+        text-align: center;
+        background: rgba(255,255,255,0.035);
+        border: 1px dashed rgba(148,163,184,0.18);
+      }
+
+      .rek-empty-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(34,211,238,0.10);
+        color: #67e8f9;
+        font-size: 24px;
+        margin-bottom: 2px;
+      }
+
+
+
+      /* FIX COPY IMAGE SYAIR: hasil export mengikuti preview dan tidak memotong bawah */
+      .syair-preview-area {
+        justify-content: center;
+      }
+
+      .syair-card.syair-copy-clone {
+        max-width: none !important;
+        min-width: 0 !important;
+        box-shadow: none !important;
+        transform: none !important;
+        margin: 0 !important;
+      }
+
+
+
+      /* =========================
+         SYAIR FONT UPDATE - ALL MARKED TEXT
+         Font dibuat tebal mirip judul atas tanpa mengubah posisi layout.
+      ========================= */
+      .syair-date-box .day-name,
+      .syair-date-box .full-date,
+      .syair-label-mini,
+      .syair-label-bb,
+      .syair-label-shio,
+      .syair-label-colok,
+      .syair-label-jaga,
+      .syair-label-ekor,
+      .syair-label-kepala,
+      .syair-label-bbfs,
+      .syair-angka-main-label,
+      .num-cell,
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        font-family: Impact, "Arial Black", "Franklin Gothic Heavy", sans-serif !important;
+        font-weight: 900 !important;
+        letter-spacing: 0.45px;
+        color: #111 !important;
+        text-shadow:
+          0.5px 0.5px 0 rgba(0,0,0,0.20),
+          -0.25px -0.25px 0 rgba(255,255,255,0.18);
+      }
+
+      .syair-date-box .day-name {
+        font-size: 32px;
+        line-height: 0.98;
+      }
+
+      .syair-date-box .full-date {
+        font-size: 25px;
+        line-height: 1.08;
+      }
+
+      .syair-label-mini,
+      .syair-angka-main-label {
+        text-transform: uppercase;
+      }
+
+      .num-cell {
+        font-size: clamp(17px, 2.05vw, 30px);
+      }
+
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        font-size: clamp(30px, 3.95vw, 56px);
+      }
+
+      @media (max-width: 1180px) {
+        .rek-modern-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .rek-modern-header {
+          flex-direction: column;
+        }
+
+        .rek-summary-pill {
+          width: 100%;
+        }
       }
 
       .prediksi-item {
@@ -579,6 +1144,423 @@
         cursor: pointer;
       }
 
+
+
+      /* =========================
+         PREDIKSI MODERN + OPEN CLOSE
+      ========================= */
+
+      .prediksi-modern-panel {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .prediksi-modern-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 14% 10%, rgba(34,211,238,0.12), transparent 26%),
+          radial-gradient(circle at 88% 6%, rgba(236,72,153,0.14), transparent 24%),
+          radial-gradient(circle at 60% 110%, rgba(139,92,246,0.12), transparent 34%);
+      }
+
+      .prediksi-modern-panel > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .prediksi-header-modern {
+        align-items: center;
+      }
+
+      .prediksi-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 11px;
+        margin-bottom: 10px;
+        border-radius: 999px;
+        background: rgba(34,211,238,0.10);
+        border: 1px solid rgba(34,211,238,0.22);
+        color: #a5f3fc;
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .prediksi-live-card {
+        min-width: 240px;
+        padding: 16px 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background:
+          linear-gradient(135deg, rgba(59,130,246,0.22), rgba(168,85,247,0.18), rgba(34,211,238,0.10));
+        box-shadow: 0 18px 45px rgba(0,0,0,0.26);
+        text-align: center;
+      }
+
+      .prediksi-live-label {
+        font-size: 11px;
+        color: #bfdbfe;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .prediksi-live-time {
+        margin-top: 6px;
+        color: #fff;
+        font-size: 34px;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .prediksi-live-summary {
+        margin-top: 8px;
+        color: #e0f2fe;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .prediksi-toolbar-modern {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .prediksi-search-wrap {
+        position: relative;
+      }
+
+      .prediksi-search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #93c5fd;
+        font-size: 18px;
+        z-index: 2;
+      }
+
+      .prediksi-search-wrap input {
+        padding-left: 44px;
+        height: 48px;
+        background: rgba(15,23,42,0.66);
+        border-color: rgba(148,163,184,0.18);
+      }
+
+      #prediksiStatusFilter {
+        height: 48px;
+        background: rgba(15,23,42,0.66);
+        border-color: rgba(148,163,184,0.18);
+        font-weight: 800;
+      }
+
+      .prediksi-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .prediksi-stat-card {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.045);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      }
+
+      .prediksi-stat-card.open {
+        background: linear-gradient(135deg, rgba(16,185,129,0.14), rgba(34,211,238,0.08));
+        border-color: rgba(16,185,129,0.20);
+      }
+
+      .prediksi-stat-card.closed {
+        background: linear-gradient(135deg, rgba(244,63,94,0.13), rgba(251,113,133,0.06));
+        border-color: rgba(244,63,94,0.18);
+      }
+
+      .prediksi-stat-label {
+        display: block;
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 800;
+        margin-bottom: 7px;
+      }
+
+      .prediksi-stat-card strong {
+        color: #fff;
+        font-size: 26px;
+        line-height: 1;
+      }
+
+      .prediksi-modern-layout {
+        display: grid;
+        grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .prediksi-market-panel,
+      .prediksi-result-panel {
+        min-width: 0;
+        background: rgba(15,23,42,0.58);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 16px;
+        box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+      }
+
+      .prediksi-market-list {
+        max-height: calc(100vh - 330px);
+        min-height: 430px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        gap: 10px;
+        padding: 4px 10px 8px 0;
+        scrollbar-gutter: stable;
+      }
+
+      .prediksi-market-card {
+        position: relative;
+        padding: 12px 10px 12px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: linear-gradient(135deg, rgba(30,41,59,0.86), rgba(15,23,42,0.92));
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        overflow: visible;
+      }
+
+      .prediksi-market-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        bottom: 12px;
+        width: 4px;
+        border-radius: 999px;
+        background: #64748b;
+      }
+
+      .prediksi-market-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(34,211,238,0.34);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.22);
+      }
+
+      .prediksi-market-card.active {
+        border-color: rgba(34,211,238,0.70);
+        box-shadow: 0 0 0 1px rgba(34,211,238,0.18), 0 16px 36px rgba(14,165,233,0.12);
+      }
+
+      .prediksi-market-card.is-open {
+        background: linear-gradient(135deg, rgba(6,78,59,0.88), rgba(8,47,73,0.86));
+      }
+
+      .prediksi-market-card.is-open::before {
+        background: linear-gradient(180deg, #34d399, #22d3ee);
+        box-shadow: 0 0 18px rgba(52,211,153,0.72);
+      }
+
+      .prediksi-market-card.is-closed {
+        opacity: 0.82;
+      }
+
+      .prediksi-market-card.is-closed::before {
+        background: linear-gradient(180deg, #fb7185, #f97316);
+      }
+
+      .prediksi-market-card.no-schedule::before {
+        background: linear-gradient(180deg, #facc15, #f59e0b);
+      }
+
+      .prediksi-market-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .prediksi-market-name {
+        min-width: 0;
+        color: #f8fafc;
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 1.35;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        word-break: break-word;
+      }
+
+      .prediksi-status-pill {
+        flex: 0 0 auto;
+        min-width: 56px;
+        padding: 6px 8px;
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 0.4px;
+        text-align: center;
+        white-space: nowrap;
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .prediksi-status-pill.open {
+        color: #052e16;
+        background: linear-gradient(135deg, #86efac, #22d3ee);
+      }
+
+      .prediksi-status-pill.closed {
+        color: #fff;
+        background: linear-gradient(135deg, #f43f5e, #fb7185);
+      }
+
+      .prediksi-status-pill.unknown {
+        color: #111827;
+        background: linear-gradient(135deg, #fde68a, #facc15);
+      }
+
+      .prediksi-market-meta {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+        margin-top: 10px;
+        color: #cbd5e1;
+        font-size: 11px;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .prediksi-countdown {
+        color: #a5f3fc;
+        text-align: left;
+      }
+
+      .prediksi-market-card.is-closed .prediksi-countdown {
+        color: #fecdd3;
+      }
+
+      .prediksi-result-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .prediksi-selected-meta {
+        display: none;
+      }
+
+      .prediksi-result-card-modern {
+        min-height: 460px;
+        max-height: calc(100vh - 330px);
+        padding: 28px 24px 34px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        text-align: center;
+        background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(30,15,42,0.92));
+        border-color: rgba(34,211,238,0.16);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        scrollbar-gutter: stable;
+      }
+
+      .prediksi-result-card-modern::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .prediksi-result-card-modern::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.05);
+        border-radius: 999px;
+      }
+
+      .prediksi-result-card-modern::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, rgba(34,211,238,0.75), rgba(168,85,247,0.75));
+        border-radius: 999px;
+      }
+
+      .prediksi-result-empty {
+        min-height: 360px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #94a3b8;
+        text-align: center;
+        padding: 22px;
+        width: 100%;
+      }
+
+      .prediksi-result-head,
+      .prediksi-result-title-row,
+      .prediksi-result-title,
+      .prediksi-result-time {
+        display: none;
+      }
+
+      .prediksi-result-body {
+        width: min(100%, 820px);
+        margin: 0 auto;
+        padding: 0 6px;
+        white-space: pre-wrap;
+        color: #ffffff;
+        font-size: 18px;
+        line-height: 1.9;
+        font-weight: 800;
+        max-height: none;
+        overflow: visible;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
+
+      .prediksi-result-panel {
+        overflow: hidden;
+      }
+
+      .prediksi-result-top .btn {
+        flex: 0 0 auto;
+      }
+
+      .prediksi-result-title-row .prediksi-status-pill {
+        min-width: 70px;
+      }
+
+      @media (max-width: 1280px) {
+        .prediksi-modern-layout {
+          grid-template-columns: minmax(280px, 330px) minmax(0, 1fr);
+        }
+
+        .prediksi-market-name {
+          font-size: 12px;
+        }
+
+        .prediksi-status-pill {
+          min-width: 50px;
+          font-size: 8.5px;
+          padding: 5px 7px;
+        }
+      }
+
+
+      @media (max-width: 980px) {
+        .prediksi-modern-layout,
+        .prediksi-toolbar-modern {
+          grid-template-columns: 1fr;
+        }
+
+        .prediksi-stat-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
       /* =========================
          SYAIR
       ========================= */
@@ -684,23 +1666,33 @@
         border-radius: 22px;
         min-height: 560px;
         padding: 14px;
+        overflow: auto;
       }
 
-.syair-preview-area {
-    min-height: 570px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
+      .syair-preview-area {
+        min-height: 570px;
+        display: block;
+      }
+
+      .syair-preview-stage {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        overflow: hidden;
+        padding-top: 10px;
+      }
 
       .syair-card {
-        width: min(100%, 1000px);
-        aspect-ratio: 1500 / 1000;
+        width: 1500px;
+        height: 1000px;
         position: relative;
         border-radius: 14px;
         overflow: hidden;
         background: #d9d9d9;
         box-shadow: 0 18px 40px rgba(0,0,0,0.30);
+        flex: 0 0 auto;
+        transform-origin: top center;
       }
 
       .syair-bg {
@@ -822,13 +1814,15 @@
           letter-spacing: 0.4px;
       }
 
-      .syair-label-bb {
-          left: 4.2%;
-          font-family: 'Cursive', Brush Script MT;
-          top: 54.2%;
-          font-size: 30px;
-          font-weight: 900;
-      }
+.syair-label-bb {
+    left: 4.4%;
+    top: 58.5%;
+    font-size: clamp(18px, 2.1vw, 32px);
+    letter-spacing: 0;
+}
+
+
+
 
       .syair-label-colok { left: 24.4%; top: 69.9%; }
       .syair-label-jaga { left: 47.2%; top: 69.9%; }
@@ -842,7 +1836,7 @@
 
     .syair-label-bbfs {
     left: 45%;
-    top: 86.2%;
+    top: 85.4%;
 }
 
 
@@ -856,7 +1850,7 @@
     .syair-angka-main-label {
         position: absolute;
         left: 74.8%;
-        top: 91.2%;
+        top: 88.8%;
         background: #c0bebd59;
         width: 11%;
         font-family: cursive, Brush Script MT;
@@ -1031,18 +2025,18 @@
 
       .syair-bbfs-row {
         left: 24.7%;
-        top: 88.6%;
+        top: 86.8%;
         width: 46.1%;
-        height: 7.1%;
+        height: 6.8%;
         grid-template-columns: repeat(7, 1fr);
       }
 
 .syair-main-l-grid {
     position: absolute;
     left: 79.8%;
-    top: 79.2%;
+    top: 77.6%;
     width: 18.3%;
-    height: 18.3%;
+    height: 17.6%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -1072,10 +2066,23 @@
         line-height: 1;
       }
 
-      .syair-cross-top { left: 82.9%; top: 21.2%; }
-      .syair-cross-left { left: 75.4%; top: 33.2%; }
-      .syair-cross-right { left: 90.1%; top: 33.2%; }
-      .syair-cross-bottom { left: 83.2%; top: 46.4%; }
+      .syair-cross-top {
+    left: 83.1%;
+    top: 22.2%;
+}
+
+      .syair-cross-left {
+    left: 76.8%;
+    top: 33.2%;
+}
+      .syair-cross-right {
+    left: 89.2%;
+    top: 33.2%;
+}
+.syair-cross-bottom {
+    left: 83.7%;
+    top: 45.2%;
+}
 
       @media (max-width: 1180px) {
         .syair-layout {
@@ -1123,10 +2130,1601 @@
           padding: 8px;
         }
       }
+
+      /* =========================
+         IMAGE EDIT MODAL CUSTOM
+      ========================= */
+      .image-edit-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: none;
+      }
+
+      .image-edit-modal.show {
+        display: block;
+      }
+
+      .image-edit-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.72);
+        backdrop-filter: blur(6px);
+      }
+
+      .image-edit-content {
+        position: relative;
+        z-index: 2;
+        width: min(94vw, 720px);
+        margin: 5vh auto;
+        background: linear-gradient(180deg, rgba(15,23,42,0.98), rgba(17,24,39,0.98));
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+      }
+
+      .image-edit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .image-edit-header h3 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        color: #fff;
+      }
+
+      .image-edit-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .image-edit-close {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        font-size: 26px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .image-edit-grid {
+        display: grid;
+        grid-template-columns: 1fr 230px;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .image-edit-form {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+      }
+
+      .image-edit-label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 12px;
+        font-weight: 800;
+        color: #dbeafe;
+        letter-spacing: 0.5px;
+      }
+
+      .image-edit-preview {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.04);
+        min-height: 260px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image-edit-preview img {
+        width: 100%;
+        height: 260px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .image-edit-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 760px) {
+        .image-edit-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .image-edit-content {
+          margin: 2vh auto;
+          max-height: 96vh;
+          overflow-y: auto;
+        }
+      }
+
+
+      /* =========================
+         IMAGE DELETE MODAL CUSTOM
+      ========================= */
+      .image-delete-content {
+        position: relative;
+        z-index: 2;
+        width: min(92vw, 520px);
+        margin: 13vh auto;
+        background:
+          radial-gradient(circle at top left, rgba(248,113,113,0.16), transparent 34%),
+          linear-gradient(180deg, rgba(15,23,42,0.98), rgba(17,24,39,0.98));
+        border: 1px solid rgba(248,113,113,0.22);
+        border-radius: 26px;
+        padding: 22px;
+        box-shadow: 0 26px 80px rgba(0,0,0,0.58);
+      }
+
+      .image-delete-icon {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, rgba(239,68,68,0.24), rgba(251,113,133,0.18));
+        border: 1px solid rgba(248,113,113,0.22);
+        color: #fecaca;
+        font-size: 28px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.10);
+      }
+
+      .image-delete-title {
+        font-size: 22px;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 8px;
+      }
+
+      .image-delete-text {
+        color: #cbd5e1;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .image-delete-card {
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 14px;
+        align-items: center;
+        padding: 12px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(255,255,255,0.05);
+        margin-bottom: 18px;
+      }
+
+      .image-delete-card img {
+        width: 92px;
+        height: 92px;
+        object-fit: cover;
+        border-radius: 14px;
+        background: rgba(0,0,0,0.22);
+      }
+
+      .image-delete-name {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 900;
+        line-height: 1.35;
+        word-break: break-word;
+      }
+
+      .image-delete-category {
+        display: inline-flex;
+        margin-top: 8px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        color: #dbeafe;
+        font-size: 11px;
+        font-weight: 800;
+        background: rgba(59,130,246,0.14);
+        border: 1px solid rgba(59,130,246,0.22);
+      }
+
+      .image-delete-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .btn.danger {
+        background: linear-gradient(135deg, #ef4444, #fb7185);
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 10px 28px rgba(239,68,68,0.22);
+      }
+
+      .btn.danger:hover {
+        box-shadow: 0 14px 34px rgba(239,68,68,0.30);
+      }
+
+      .image-card-delete-btn {
+        background: linear-gradient(135deg, rgba(239,68,68,0.20), rgba(251,113,133,0.14)) !important;
+        border: 1px solid rgba(248,113,113,0.24) !important;
+        color: #fecaca !important;
+      }
+
+      @media (max-width: 560px) {
+        .image-delete-card {
+          grid-template-columns: 1fr;
+        }
+
+        .image-delete-card img {
+          width: 100%;
+          height: 180px;
+        }
+
+        .image-delete-actions {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+
+      /* =========================
+         IMAGE MANAGER PRO - ADD UI
+      ========================= */
+      .image-manager-hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .image-manager-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+        cursor: pointer;
+        transition: 0.22s ease;
+        min-height: 92px;
+      }
+
+      .image-manager-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(96,165,250,0.38);
+        box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+      }
+
+      .image-manager-card-primary {
+        background: linear-gradient(135deg, rgba(59,130,246,0.18), rgba(139,92,246,0.17), rgba(16,185,129,0.10));
+      }
+
+      .image-manager-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 25px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        box-shadow: 0 12px 26px rgba(59,130,246,0.20);
+        flex: 0 0 auto;
+      }
+
+      .image-manager-card-title {
+        color: #fff;
+        font-size: 15px;
+        font-weight: 900;
+        margin-bottom: 4px;
+      }
+
+      .image-manager-card-desc {
+        color: #cbd5e1;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .image-drop-zone {
+        border: 2px dashed rgba(255,255,255,0.18);
+        border-radius: 22px;
+        padding: 30px 20px;
+        text-align: center;
+        margin-bottom: 18px;
+        background:
+          radial-gradient(circle at top, rgba(59,130,246,0.10), transparent 42%),
+          rgba(255,255,255,0.03);
+        transition: 0.25s ease;
+      }
+
+      .image-drop-zone.drag-active {
+        border-color: rgba(96,165,250,0.85);
+        background:
+          radial-gradient(circle at top, rgba(96,165,250,0.18), transparent 46%),
+          rgba(59,130,246,0.10);
+        transform: scale(0.995);
+      }
+
+      .image-drop-icon {
+        width: 62px;
+        height: 62px;
+        margin: 0 auto 12px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.08);
+        font-size: 28px;
+      }
+
+      .image-drop-title {
+        font-size: 19px;
+        font-weight: 900;
+        color: #fff;
+        margin-bottom: 6px;
+      }
+
+      .image-drop-sub {
+        color: #94a3b8;
+        font-size: 13px;
+      }
+
+      .image-manager-filterbar {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .image-manager-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+      }
+
+      .image-add-preview {
+        position: relative;
+      }
+
+      .image-add-preview-empty {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 18px;
+        color: #94a3b8;
+        font-size: 13px;
+        background: rgba(15,23,42,0.65);
+      }
+
+      .image-add-preview.has-image .image-add-preview-empty {
+        display: none;
+      }
+
+      @media (max-width: 760px) {
+        .image-manager-filterbar {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+
+      @media (max-width: 640px) {
+        .pkcs-dual-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .pkcs-header-title {
+          align-items: flex-start;
+        }
+
+        .pkcs-result-box {
+          padding: 24px 18px;
+          font-size: 16px;
+          line-height: 1.75;
+        }
+
+        .pkcs-action-row .btn {
+          width: 100%;
+        }
+      }
+
+
+
+      /* =========================
+         PKCS MODERN WIDE FIX
+      ========================= */
+      .pkcs-dual-layout {
+        grid-template-columns: minmax(430px, 520px) minmax(0, 1fr);
+        gap: 28px;
+      }
+
+      .pkcs-box {
+        padding: 22px;
+      }
+
+      .pkcs-keyword-list {
+        max-height: 650px;
+        gap: 11px;
+        padding-right: 8px;
+      }
+
+      .pkcs-keyword-item {
+        min-height: 54px;
+        padding: 14px 18px 14px 16px;
+        gap: 14px;
+        line-height: 1.35;
+        letter-spacing: 0.15px;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+      }
+
+      .pkcs-keyword-item::before {
+        width: 10px;
+        height: 34px;
+        flex: 0 0 10px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #22d3ee, #8b5cf6);
+        border: none;
+        box-shadow: 0 0 16px rgba(34,211,238,0.35);
+      }
+
+      .pkcs-keyword-item::after {
+        flex: 0 0 auto;
+        padding-left: 10px;
+      }
+
+      .pkcs-result-box {
+        min-height: 240px;
+        padding: 36px 38px;
+        font-size: 19px;
+      }
+
+      .pkcs-action-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+      }
+
+      @media (max-width: 1300px) {
+        .pkcs-dual-layout {
+          grid-template-columns: minmax(380px, 460px) minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 980px) {
+        .pkcs-dual-layout {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+
+      /* =========================
+         DATA REK VISIBLE FIX
+      ========================= */
+
+      .rekening-list.rek-modern-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        max-height: 650px !important;
+        overflow-y: auto !important;
+        padding: 4px 8px 8px 2px !important;
+      }
+
+      .rekening-item.rek-card-modern {
+        min-height: auto !important;
+        height: auto !important;
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) auto !important;
+        align-items: start !important;
+        gap: 16px !important;
+        padding: 18px 20px !important;
+        overflow: visible !important;
+      }
+
+      .rekening-item.rek-card-modern .rek-card-main {
+        min-width: 0 !important;
+        overflow: visible !important;
+      }
+
+      .rekening-item.rek-card-modern .rekening-title {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #ffffff !important;
+        font-size: 17px !important;
+        line-height: 1.75 !important;
+        font-weight: 850 !important;
+        white-space: pre-wrap !important;
+        word-break: break-word !important;
+        overflow-wrap: anywhere !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+
+      .rekening-item.rek-card-modern .rek-copy-mini {
+        position: static !important;
+        align-self: start !important;
+        margin-top: 2px !important;
+        min-width: 78px !important;
+      }
+
+      @media (max-width: 720px) {
+        .rekening-item.rek-card-modern {
+          grid-template-columns: 1fr !important;
+        }
+
+        .rekening-item.rek-card-modern .rek-copy-mini {
+          width: 100% !important;
+        }
+      }
+
+
+
+      /* =====================================================
+         ALL UPGRADE PACK: PREMIUM SIDEBAR, LOGIN, LOADING,
+         SYAIR POLISH, BACKUP TOOLS
+      ===================================================== */
+      body.dashboard-locked .app {
+        filter: blur(10px);
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .app-loading-overlay,
+      .login-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 30000;
+      }
+
+      .app-loading-overlay {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background:
+          radial-gradient(circle at 20% 20%, rgba(59,130,246,0.22), transparent 28%),
+          radial-gradient(circle at 80% 10%, rgba(236,72,153,0.18), transparent 26%),
+          rgba(2,6,23,0.82);
+        backdrop-filter: blur(12px);
+      }
+
+      .app-loading-overlay.show {
+        display: flex;
+      }
+
+      .app-loading-card {
+        width: min(92vw, 420px);
+        padding: 28px;
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(15,23,42,0.94), rgba(17,24,39,0.96));
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+        text-align: center;
+      }
+
+      .app-loader-ring {
+        width: 74px;
+        height: 74px;
+        margin: 0 auto 18px;
+        border-radius: 999px;
+        border: 5px solid rgba(255,255,255,0.10);
+        border-top-color: #60a5fa;
+        border-right-color: #a78bfa;
+        animation: appSpin 0.9s linear infinite;
+      }
+
+      @keyframes appSpin { to { transform: rotate(360deg); } }
+
+      .app-loading-title {
+        color: #fff;
+        font-size: 22px;
+        font-weight: 900;
+        margin-bottom: 8px;
+      }
+
+      .app-loading-text {
+        color: #cbd5e1;
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .login-screen {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+        background:
+          radial-gradient(circle at top left, rgba(59,130,246,0.24), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(139,92,246,0.24), transparent 32%),
+          linear-gradient(135deg, #020617, #0f172a 52%, #111827);
+      }
+
+      .login-screen.show {
+        display: flex;
+      }
+
+      .login-card {
+        width: min(94vw, 430px);
+        padding: 28px;
+        border-radius: 30px;
+        background: linear-gradient(180deg, rgba(15,23,42,0.96), rgba(17,24,39,0.98));
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: 0 30px 90px rgba(0,0,0,0.48);
+      }
+
+      .login-logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+        font-size: 26px;
+        font-weight: 900;
+        color: #fff;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981);
+        box-shadow: 0 16px 34px rgba(59,130,246,0.24);
+      }
+
+      .login-card h2 {
+        color: #fff;
+        font-size: 26px;
+        margin-bottom: 8px;
+      }
+
+      .login-card p {
+        color: #94a3b8;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .login-field {
+        margin-bottom: 14px;
+      }
+
+      .login-field label {
+        display: block;
+        color: #dbeafe;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.6px;
+        margin-bottom: 8px;
+      }
+
+      .login-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .login-error {
+        display: none;
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        background: rgba(239,68,68,0.12);
+        border: 1px solid rgba(239,68,68,0.22);
+        color: #fecaca;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .login-error.show {
+        display: block;
+      }
+
+      .sidebar {
+        background:
+          linear-gradient(180deg, rgba(2,6,23,0.96), rgba(15,23,42,0.88)),
+          radial-gradient(circle at top, rgba(59,130,246,0.18), transparent 35%);
+      }
+
+      .brand-badge {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brand-badge::after {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.30), transparent);
+        transform: rotate(25deg) translateX(-140%);
+        animation: badgeShine 4s ease-in-out infinite;
+      }
+
+      @keyframes badgeShine {
+        0%, 55% { transform: rotate(25deg) translateX(-140%); }
+        75%, 100% { transform: rotate(25deg) translateX(140%); }
+      }
+
+      .nav button {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+      }
+
+      .nav button::before {
+        width: 32px;
+        height: 32px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.08);
+        flex: 0 0 auto;
+      }
+
+      .nav button:nth-child(1)::before { content: "📋"; }
+      .nav button:nth-child(2)::before { content: "🏦"; }
+      .nav button:nth-child(3)::before { content: "📈"; }
+      .nav button:nth-child(4)::before { content: "✦"; }
+      .nav button:nth-child(5)::before { content: "🖼"; }
+      .nav button:nth-child(6)::before { content: "⚙️"; }
+      .nav button:nth-child(7)::before { content: "👑"; }
+
+      .logout-btn {
+        width: 100%;
+        margin-top: 12px;
+        padding: 11px 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(248,113,113,0.24);
+        background: rgba(239,68,68,0.10);
+        color: #fecaca;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .logout-btn:hover {
+        background: rgba(239,68,68,0.18);
+      }
+
+      .syair-sidebar,
+      .syair-preview-panel {
+        box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+      }
+
+      .syair-head {
+        padding: 14px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, rgba(59,130,246,0.16), rgba(139,92,246,0.14));
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .syair-group input,
+      .syair-group select,
+      .syair-group textarea {
+        background: rgba(2,6,23,0.42);
+      }
+
+      .syair-preview-frame {
+        background:
+          radial-gradient(circle at top left, rgba(59,130,246,0.13), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(236,72,153,0.10), transparent 28%),
+          linear-gradient(180deg, rgba(15,23,42,0.92), rgba(11,16,32,0.94));
+      }
+
+      .backup-mini-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 18px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      .backup-mini-title {
+        font-weight: 900;
+        color: #fff;
+      }
+
+      .backup-mini-desc {
+        margin-top: 3px;
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+
+
+      /* =========================
+         ADMIN LOGIN + MANAGER FIX
+      ========================= */
+      .login-field input {
+        width: 100%;
+        min-height: 48px;
+        display: block;
+        padding: 13px 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.13);
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        outline: none;
+        font-size: 14px;
+        font-weight: 700;
+        box-sizing: border-box;
+      }
+
+      .login-field input:focus {
+        border-color: rgba(34,211,238,0.42);
+        box-shadow: 0 0 0 3px rgba(34,211,238,0.12);
+      }
+
+      .login-field input::placeholder {
+        color: #64748b;
+        font-weight: 600;
+      }
+
+      .login-note-master {
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        background: rgba(34,211,238,0.08);
+        border: 1px solid rgba(34,211,238,0.16);
+        color: #bae6fd;
+        font-size: 12px;
+        line-height: 1.55;
+        font-weight: 700;
+      }
+
+      .nav .master-only,
+      .section.master-only {
+        display: none !important;
+      }
+
+      body.master-mode .nav .master-only {
+        display: flex !important;
+      }
+
+      body.master-mode .section.master-only.active {
+        display: block !important;
+      }
+
+      .admin-manager-grid {
+        display: grid;
+        grid-template-columns: minmax(320px, 420px) 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .admin-manager-card {
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(180deg, rgba(15,23,42,0.88), rgba(17,24,39,0.82));
+        box-shadow: 0 18px 40px rgba(0,0,0,0.20);
+        padding: 20px;
+      }
+
+      .admin-manager-title {
+        color: #fff;
+        font-size: 18px;
+        font-weight: 900;
+        margin-bottom: 8px;
+      }
+
+      .admin-manager-sub {
+        color: #94a3b8;
+        font-size: 13px;
+        line-height: 1.55;
+        margin-bottom: 18px;
+      }
+
+      .admin-form-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .admin-form-stack label {
+        display: block;
+        margin-bottom: 7px;
+        color: #dbeafe;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+      }
+
+      .admin-list {
+        display: grid;
+        gap: 12px;
+        max-height: 560px;
+        overflow-y: auto;
+        padding-right: 5px;
+      }
+
+      .admin-user-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+        padding: 15px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: linear-gradient(135deg, rgba(34,211,238,0.10), rgba(139,92,246,0.10));
+      }
+
+      .admin-user-name {
+        color: #fff;
+        font-weight: 900;
+        font-size: 15px;
+        word-break: break-word;
+      }
+
+      .admin-user-role {
+        margin-top: 4px;
+        color: #a5f3fc;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .admin-user-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .admin-mini-btn {
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        border-radius: 12px;
+        padding: 9px 12px;
+        font-size: 12px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .admin-mini-btn.danger {
+        background: rgba(244,63,94,0.16);
+        border-color: rgba(244,63,94,0.28);
+        color: #fecdd3;
+      }
+
+      .admin-master-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 6px 10px;
+        margin-top: 10px;
+        background: rgba(250,204,21,0.12);
+        border: 1px solid rgba(250,204,21,0.24);
+        color: #fde68a;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      @media (max-width: 980px) {
+        .admin-manager-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+
+
+      /* =====================================================
+         SYAIR STYLE BARU - KOTAK TEGAS SEPERTI CONTOH
+         ===================================================== */
+      .syair-card {
+        border-radius: 16px;
+        overflow: hidden;
+        background: #d6d6d6;
+      }
+
+      .syair-card,
+      .syair-card * {
+        font-family: "Trebuchet MS", Arial, sans-serif !important;
+      }
+
+      .syair-date-box {
+        left: 4.2%;
+        top: 13.4%;
+        width: 18%;
+        text-align: left;
+      }
+
+      .syair-date-box .day-name {
+        position: static;
+        display: block;
+        transform: none;
+        left: auto;
+        color: #111;
+        font-size: clamp(22px, 2.7vw, 38px);
+        line-height: 1.02;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      .syair-date-box .full-date {
+        position: static;
+        display: block;
+        margin-top: 7px;
+        color: #111;
+        font-size: clamp(16px, 1.8vw, 28px);
+        line-height: 1.05;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+
+      .syair-shio-box {
+        left: 13.4%;
+        top: 34.5%;
+        width: 19.2%;
+        height: 22.5%;
+        overflow: visible;
+      }
+
+      .syair-shio-img {
+        position: absolute;
+        width: 118%;
+        height: 118%;
+        left: -4%;
+        top: -8%;
+        object-fit: contain;
+      }
+
+.syair-poem-box {
+    left: 36.5%;
+    top: 34.5%;
+    width: 29%;
+    height: 23.2%;
+    padding: 16px 18px 12px;
+    color: #000000;
+    font-size: clamp(13px, 1.22vw, 27px);
+    line-height: 1.14;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: none;
+    letter-spacing: 0;
+    overflow: hidden;
+}
+
+
+      .syair-poem-inner {
+        width: 76%;
+        max-width: 76%;
+        margin: 0 auto;
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: break-word;
+        text-wrap: balance;
+      }
+
+      .syair-label-mini,
+      .syair-angka-main-label,
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        color: #111 !important;
+        font-weight: 700 !important;
+        text-shadow: none;
+      }
+
+.syair-label-bb {
+    left: 4.4%;
+    top: 55.5%;
+    font-size: clamp(18px, 2.1vw, 32px);
+    letter-spacing: 0;
+}
+
+.syair-label-shio {
+    left: 20.4%;
+    top: 59.1%;
+    font-size: clamp(14px, 1.5vw, 26px);
+    letter-spacing: 0;
+}
+
+.syair-label-colok {
+    left: 26.8%;
+    top: 68.8%;
+    font-size: clamp(15px, 1.55vw, 23px);
+}
+
+.syair-label-jaga {
+    left: 48.7%;
+    top: 68.8%;
+    font-size: clamp(15px, 1.55vw, 24px);
+}
+
+
+.syair-label-ekor {
+    left: 29.1%;
+    top: 77.8%;
+    font-size: clamp(15px, 1.55vw, 24px);
+}
+
+.syair-label-kepala {
+    left: 49.2%;
+    top: 77.8%;
+    font-size: clamp(15px, 1.55vw, 24px);
+}
+
+
+.syair-label-bbfs {
+    left: 44.4%;
+    top: 84.5%;
+    font-size: clamp(15px, 1.55vw, 28px);
+    z-index: 5;
+}
+ 
+
+.syair-angka-main-label {
+    left: 71.5%;
+    top: 89.8%;
+    width: 10%;
+    background: #00000000;
+    border-radius: 0;
+    font-size: clamp(16px, 1.7vw, 31px);
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+
+
+      .num-grid {
+        background: transparent;
+        gap: 0;
+      }
+
+      .num-cell {
+        border: 2px solid rgba(0,0,0,0.92) !important;
+        border-radius: 0 !important;
+        background: rgba(220,220,220,0.08) !important;
+        color: #111 !important;
+        font-weight: 500 !important;
+        font-size: clamp(18px, 2.25vw, 34px) !important;
+        line-height: 1 !important;
+        box-shadow: none !important;
+        letter-spacing: 0;
+      }
+
+      .syair-bb-col {
+        left: 3.0%;
+        top: 61.6%;
+        width: 6.7%;
+        height: 34.4%;
+        grid-template-rows: repeat(5, 1fr);
+      }
+
+      .syair-bb-col .num-cell {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .bb-cell-1,
+      .bb-cell-2,
+      .bb-cell-3,
+      .bb-cell-4,
+      .bb-cell-5,
+      .colok-cell-1,
+      .colok-cell-2,
+      .jaga-cell-1,
+      .jaga-cell-2,
+      .ekor-cell-1,
+      .ekor-cell-2,
+      .kepala-cell-1,
+      .kepala-cell-2,
+      .bbfs-cell-1,
+      .bbfs-cell-2,
+      .bbfs-cell-3,
+      .bbfs-cell-4,
+      .bbfs-cell-5,
+      .bbfs-cell-6,
+      .bbfs-cell-7,
+      .mainl-cell-1,
+      .mainl-cell-2,
+      .mainl-cell-3,
+      .mainl-cell-4,
+      .mainl-cell-5 {
+        left: 0 !important;
+        top: 10px !important;
+      }
+
+      .syair-colok-grid {
+        left: 34.2%;
+        top: 65.8%;
+        width: 9.5%;
+        height: 6.6%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-jaga-grid {
+        left: 55.6%;
+        top: 65.8%;
+        width: 9.5%;
+        height: 6.6%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-ekor-grid {
+        left: 34.2%;
+        top: 74.9%;
+        width: 9.5%;
+        height: 6.6%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-kepala-grid {
+        left: 55.6%;
+        top: 74.9%;
+        width: 9.5%;
+        height: 6.6%;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .syair-bbfs-row {
+        left: 24.2%;
+        top: 87.5%;
+        width: 47.1%;
+        height: 8.2%;
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+.syair-bbfs-row::before {
+    content: "2D\A ANGKA\A JITU";
+    white-space: pre;
+    position: absolute;
+    left: -31.5%;
+    top: 1%;
+    width: 20%;
+    color: #111;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: clamp(12px, 1.35vw, 32px);
+    line-height: 1;
+    font-weight: 700;
+    text-align: center;
+    z-index: 5;
+}
+
+.syair-main-l-grid {
+  left: 83.1%;
+  top: 68.1%;
+  width: 14.4%;
+  height: 27.8%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    ". . m1"
+    ". . m2"
+    "m3 m4 m5";
+  background: transparent;
+}
+
+      .syair-main-l-grid .num-cell {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        font-size: clamp(30px, 4.2vw, 56px) !important;
+        line-height: 1;
+      }
+
+      .syair-cross-top {
+    left: 83.1%;
+    top: 22.2%;
+}
+
+      .syair-cross-left {
+    left: 76.8%;
+    top: 33.2%;
+}
+      .syair-cross-right {
+    left: 89.2%;
+    top: 33.2%;
+}
+.syair-cross-bottom {
+    left: 83.7%;
+    top: 45.2%;
+}
+
+
+      .syair-market-logo {
+        right: 5.2%;
+        top: 61.2%;
+        width: 14.6%;
+        height: 8.4%;
+      }
+
+.syair-market-logo img {
+    width: 120%;
+    height: 105%;
+    left: 0;
+    top: -77px;
+    object-fit: contain;
+    background: #000000;
+    border-radius: 50px;
+}
+      .syair-card.syair-copy-clone {
+        width: 1500px !important;
+        height: 1000px !important;
+        min-width: 1500px !important;
+        min-height: 1000px !important;
+        max-width: none !important;
+        max-height: none !important;
+      }
+
+    
+
+      /* =====================================================
+         FINAL FIX ARAH / KOMPAS SYAIR
+         Angka arah dibuat lebih ringan, simetris, dan rapi.
+      ===================================================== */
+      .syair-cross-top,
+      .syair-cross-left,
+      .syair-cross-right,
+      .syair-cross-bottom {
+        font-family: "Trebuchet MS", Arial, sans-serif !important;
+        font-weight: 500 !important;
+        font-size: clamp(28px, 3.55vw, 48px) !important;
+        line-height: 1 !important;
+        letter-spacing: 0 !important;
+        color: #111 !important;
+        text-shadow: none !important;
+        width: 6.2% !important;
+        height: 7.2% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 4 !important;
+      }
+
+.syair-cross-top {
+    left: 84.8% !important;
+    top: 26.6% !important;
+}
+
+
+.syair-cross-left {
+    left: 78.2% !important;
+    top: 36.6% !important;
+}
+
+.syair-cross-right {
+    left: 91.4% !important;
+    top: 36.6% !important;
+}
+
+.syair-cross-bottom {
+    left: 84.8% !important;
+    top: 48.8% !important;
+}
+
+    
+
+      /* =========================================
+         FINAL STABLE ARAH / KOMPAS LAYOUT
+         Dibuat dalam 1 wrapper supaya preview & export sama.
+      ========================================= */
+      .syair-arah-group {
+        position: absolute;
+        left: 84.6%;
+        top: 36.7%;
+        width: 16.5%;
+        height: 31%;
+        transform: translate(-50%, -50%);
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .syair-arah-star {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 34%;
+        height: 34%;
+        transform: translate(-50%, -50%);
+        overflow: visible;
+      }
+
+      .syair-arah-num {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28%;
+        height: 22%;
+        font-family: "Trebuchet MS", Arial, sans-serif !important;
+        font-size: 4.2vw;
+        font-weight: 400 !important;
+        line-height: 1;
+        color: #111;
+        text-shadow: none !important;
+        letter-spacing: 0;
+      }
+
+      .syair-arah-group .arah-top {
+        left: 50%;
+        top: 4%;
+        transform: translateX(-50%);
+      }
+
+      .syair-arah-group .arah-left {
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .syair-arah-group .arah-right {
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .syair-arah-group .arah-bottom {
+        left: 50%;
+        bottom: 4%;
+        transform: translateX(-50%);
+      }
+
+      .syair-copy-clone .syair-arah-num {
+        font-size: 62px;
+      }
+
+      @media (max-width: 1200px) {
+        .syair-arah-num {
+          font-size: 4vw;
+        }
+      }
+
+    
+
+      /* =====================================================
+         FINAL SYAIR POEM TEXT - RAPI & TIDAK TERPOTONG
+         Style ini sengaja ditaruh paling bawah agar menimpa CSS lama.
+      ===================================================== */
+      .syair-poem-box {
+        position: absolute !important;
+        left: 36.2% !important;
+        top: 34.0% !important;
+        width: 29.8% !important;
+        height: 25.2% !important;
+        padding: 12px 18px 10px !important;
+        color: #111 !important;
+        font-family: Arial, Helvetica, sans-serif !important;
+        font-size: 27px !important;
+        line-height: 1.12 !important;
+        font-weight: 500 !important;
+        text-align: center !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        letter-spacing: 0 !important;
+        text-shadow: none !important;
+      }
+
+      .syair-poem-inner {
+        width: 82% !important;
+        max-width: 82% !important;
+        min-height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+        text-align: center !important;
+        white-space: normal !important;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        text-wrap: balance;
+      }
+
+      .syair-poem-box.lines-1 .syair-poem-inner,
+      .syair-poem-box.lines-2 .syair-poem-inner,
+      .syair-poem-box.lines-3 .syair-poem-inner,
+      .syair-poem-box.lines-4 .syair-poem-inner {
+        font-size: 1em !important;
+        line-height: 1.14 !important;
+      }
+
+      .syair-poem-box.lines-5 .syair-poem-inner {
+        font-size: 0.96em !important;
+        line-height: 1.10 !important;
+      }
+
+      .syair-poem-box.lines-6 .syair-poem-inner {
+        font-size: 0.90em !important;
+        line-height: 1.06 !important;
+        width: 84% !important;
+        max-width: 84% !important;
+      }
+
+      .syair-poem-box.lines-7 .syair-poem-inner,
+      .syair-poem-box.lines-8 .syair-poem-inner {
+        font-size: 0.82em !important;
+        line-height: 1.02 !important;
+        width: 86% !important;
+        max-width: 86% !important;
+      }
+
+      .syair-copy-clone .syair-poem-box {
+        font-size: 20px !important;
+      }
+
     </style>
   </head>
 
   <body>
+
+    <div id="loginScreen" class="login-screen">
+      <div class="login-card">
+        <div class="login-logo">DB</div>
+        <h2>Login Admin</h2>
+        <p>Masuk dulu untuk membuka dashboard. Admin bisa ubah password sendiri di menu <b>Pengaturan</b>.</p>
+        <div class="login-field">
+          <label>USERNAME</label>
+          <input type="text" id="loginUsername" placeholder="Masukkan username" autocomplete="username">
+        </div>
+        <div class="login-field">
+          <label>PASSWORD</label>
+          <input type="password" id="loginPassword" placeholder="Masukkan password" autocomplete="current-password">
+        </div>
+        <div class="login-actions">
+          <button class="btn copy-live-btn" onclick="doAdminLogin()">Masuk Dashboard</button>
+        </div>
+        <div id="loginError" class="login-error">Username atau password salah.</div>
+        <div class="login-note-master">Master: <b>aseprahman</b> / <b>1</b>. Hanya master yang bisa mendaftarkan admin baru.</div>
+      </div>
+    </div>
+
+    <div id="appLoadingOverlay" class="app-loading-overlay show">
+      <div class="app-loading-card">
+        <div class="app-loader-ring"></div>
+        <div class="app-loading-title">Memuat Dashboard</div>
+        <div id="appLoadingText" class="app-loading-text">Mengambil data dari Google Sheet...</div>
+      </div>
+    </div>
+
     <div class="app">
       <aside class="sidebar">
         <div class="brand">
@@ -1143,6 +3741,8 @@
           <button class="nav-btn" data-target="prediksiSection">PREDIKSI</button>
           <button class="nav-btn" data-target="syairSection">SYAIR TOGEL</button>
           <button class="nav-btn" data-target="gambarSection">GAMBAR</button>
+          <button class="nav-btn" data-target="accountSettingsSection">PENGATURAN</button>
+          <button class="nav-btn master-only" id="adminManagerNavBtn" data-target="adminManagerSection">ADMIN</button>
         </div>
 
         <div class="sidebar-footer">
@@ -1150,15 +3750,21 @@
           <div id="statusText" style="margin-top:8px;color:#fff;font-weight:bold;">
             Memuat dashboard...
           </div>
+          <button class="logout-btn" onclick="logoutAdmin()">Logout Admin</button>
         </div>
       </aside>
 
       <main class="main">
         <section id="pkcsSection" class="section active">
-          <div class="panel">
+          <div class="panel pkcs-modern-panel">
             <div class="panel-header">
-              <div>
-                <h3>BACA DULU SEBELUM DI COPY</h3>
+              <div class="pkcs-header-title">
+                <div class="pkcs-header-icon">📋</div>
+                <div>
+                  <div class="pkcs-kicker">PK CS QUICK COPY</div>
+                  <h3>BACA DULU SEBELUM DI COPY</h3>
+                  <p class="panel-sub">Cari kata kunci, pilih template, lalu copy hasilnya dengan cepat.</p>
+                </div>
               </div>
 
               <div class="live-clock-box">
@@ -1170,35 +3776,80 @@
 
             <div class="pkcs-dual-layout">
               <div class="pkcs-box">
-                <div class="pkcs-box-title">Cari Apa??</div>
-                <input type="text" id="pkcsSearchInput" placeholder="Ketik huruf atau kata kunci..." oninput="filterPkcsList()">
-                <div id="pkcsKeywordList" class="pkcs-keyword-list" style="margin-top:14px;">
+                <div class="pkcs-box-title">
+                  <span>Cari Template</span>
+                  <span class="pkcs-mini-pill">LIVE SEARCH</span>
+                </div>
+                <div class="pkcs-search-wrap">
+                  <span class="pkcs-search-icon">⌕</span>
+                  <input type="text" id="pkcsSearchInput" placeholder="Ketik huruf atau kata kunci..." oninput="filterPkcsList()">
+                </div>
+                <div id="pkcsKeywordList" class="pkcs-keyword-list">
                   <div class="empty-state">Ketik kata kunci dulu...</div>
                 </div>
               </div>
 
               <div class="pkcs-box pkcs-box-right">
-                <div class="pkcs-box-title">Hasil / Isi</div>
+                <div class="pkcs-box-title">
+                  <span>Hasil / Isi</span>
+                  <span class="pkcs-mini-pill">READY TO COPY</span>
+                </div>
                 <div id="pkcsResultBox" class="pkcs-result-box"></div>
-                <button class="btn copy-live-btn" id="copyPkcsBtn" style="margin-top:14px;min-width:160px;" onclick="copyPkcsResult()">Copy</button>
+                <div class="pkcs-action-row">
+                  <div class="pkcs-helper-text">Pastikan isi sudah benar sebelum dicopy.</div>
+                  <button class="btn copy-live-btn" id="copyPkcsBtn" style="min-width:170px;" onclick="copyPkcsResult()">Copy Sekarang</button>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
         <section id="ewalletSection" class="section">
-          <div class="panel">
-            <h3>Cari Nomor Di Sini</h3>
-            <div class="rek-dual-layout">
-              <div class="rek-box">
-                <div class="rek-box-title">Search</div>
-                <input type="text" id="rekeningSearchInput" class="rek-search-input" placeholder="Ketik nomor / nama rekening..." oninput="filterRekeningList()">
+          <div class="panel rek-modern-panel">
+            <div class="rek-modern-header">
+              <div class="rek-title-wrap">
+                <div class="rek-icon-badge">💳</div>
+                <div>
+                  <div class="rek-kicker">REKENING FINDER</div>
+                  <h3>DATA REK</h3>
+                  <p class="panel-sub" style="margin-bottom:0;">Cari nomor, nama rekening, bank, atau e-wallet dengan tampilan card modern.</p>
+                </div>
               </div>
 
-              <div class="rek-box">
-                <div class="rek-box-title">Hasil</div>
-                <div id="rekeningList" class="rekening-list">
-                  <div class="empty-state">Ketik nomor atau nama rekening...</div>
+              <div class="rek-summary-pill">
+                <div class="rek-summary-label">Total Data Rek</div>
+                <div id="rekeningTotalCount" class="rek-summary-value">0</div>
+              </div>
+            </div>
+
+            <div class="rek-modern-layout">
+              <div class="rek-modern-box">
+                <div class="rek-modern-box-title">
+                  <span>Cari Data</span>
+                  <span class="rek-live-badge">LIVE SEARCH</span>
+                </div>
+
+                <div class="rek-search-card">
+                  <input type="text" id="rekeningSearchInput" class="rek-search-input" placeholder="Ketik nomor, nama, bank..." oninput="filterRekeningList()">
+                </div>
+
+                <div class="rek-search-hint">
+                  Tips: ketik sebagian nomor, nama pemilik, nama bank, atau e-wallet. Hasil akan muncul otomatis di sebelah kanan.
+                </div>
+              </div>
+
+              <div class="rek-modern-box">
+                <div class="rek-result-toolbar">
+                  <div class="rek-modern-box-title" style="margin-bottom:0;">Hasil Pencarian</div>
+                  <div id="rekeningResultCount" class="rek-result-count">0 hasil</div>
+                </div>
+
+                <div id="rekeningList" class="rekening-list rek-modern-list">
+                  <div class="rek-empty-modern">
+                    <div class="rek-empty-icon">⌕</div>
+                    <b>Ketik kata kunci dulu</b>
+                    <span>Data rekening akan tampil di sini.</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1206,23 +3857,148 @@
         </section>
 
         <section id="prediksiSection" class="section">
-          <div class="panel">
-            <h3>PREDIKSI</h3>
-            <p class="panel-sub">Pasaran dari kolom E dan isi prediksi dari kolom F.</p>
+          <div class="panel prediksi-modern-panel">
+            <div class="panel-header prediksi-header-modern">
+              <div>
+                <div class="prediksi-kicker">LIVE MARKET CONTROL</div>
+                <h3>PREDIKSI PASARAN</h3>
+                <p class="panel-sub">Tampilan modern dengan status <b>BUKA / TUTUP</b> otomatis sesuai jadwal pasaran.</p>
+              </div>
 
-            <div class="prediksi-dual-layout">
-              <div class="prediksi-box">
-                <div class="prediksi-box-title">Daftar Pasaran</div>
+              <div class="prediksi-live-card">
+                <div class="prediksi-live-label">JAM AKTIF</div>
+                <div id="prediksiLiveClock" class="prediksi-live-time">00:00</div>
+                <div id="prediksiOpenSummary" class="prediksi-live-summary">Memuat jadwal...</div>
+              </div>
+            </div>
+
+            <div class="prediksi-toolbar-modern">
+              <div class="prediksi-search-wrap">
+                <span class="prediksi-search-icon">⌕</span>
                 <input type="text" id="prediksiSearchInput" placeholder="Cari pasaran..." oninput="filterPrediksiList()">
-                <div id="prediksiList" class="prediksi-list" style="margin-top:14px;">
+              </div>
+
+              <select id="prediksiStatusFilter" onchange="filterPrediksiList()">
+                <option value="all">SEMUA STATUS</option>
+                <option value="open">YANG BUKA</option>
+                <option value="closed">YANG TUTUP</option>
+              </select>
+            </div>
+
+            <div class="prediksi-stat-grid">
+              <div class="prediksi-stat-card">
+                <span class="prediksi-stat-label">Total Pasaran</span>
+                <strong id="prediksiTotalCount">0</strong>
+              </div>
+              <div class="prediksi-stat-card open">
+                <span class="prediksi-stat-label">Sedang Buka</span>
+                <strong id="prediksiOpenCount">0</strong>
+              </div>
+              <div class="prediksi-stat-card closed">
+                <span class="prediksi-stat-label">Sedang Tutup</span>
+                <strong id="prediksiClosedCount">0</strong>
+              </div>
+            </div>
+
+            <div class="prediksi-modern-layout">
+              <div class="prediksi-market-panel">
+                <div class="prediksi-box-title">Daftar Pasaran</div>
+                <div id="prediksiList" class="prediksi-list prediksi-market-list">
                   <div class="empty-state">Memuat data prediksi...</div>
                 </div>
               </div>
 
-              <div class="prediksi-box prediksi-box-right">
-                <div class="prediksi-box-title">Hasil Prediksi</div>
-                <div id="prediksiResultCard" class="prediksi-result-card">Pilih pasaran di sebelah kiri.</div>
-                <button class="btn copy-live-btn" id="copyPrediksiBtn" style="margin-top:14px;min-width:160px;" onclick="copyPrediksiResult()">Copy</button>
+              <div class="prediksi-result-panel prediksi-box-right">
+                <div class="prediksi-result-top">
+                  <div>
+                    <div class="prediksi-box-title">Hasil Prediksi</div>
+                    <div id="prediksiSelectedMeta" class="prediksi-selected-meta">Pilih pasaran di sebelah kiri.</div>
+                  </div>
+                  <button class="btn copy-live-btn" id="copyPrediksiBtn" onclick="copyPrediksiResult()">Copy</button>
+                </div>
+                <div id="prediksiResultCard" class="prediksi-result-card prediksi-result-card-modern">Pilih pasaran di sebelah kiri.</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section id="adminManagerSection" class="section master-only admin-manager-section">
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>ADMIN MANAGER</h3>
+                <p class="panel-sub">Khusus akun master aseprahman. Tambah atau hapus admin dashboard dari tampilan ini.</p>
+                <div class="admin-master-badge">👑 MASTER ACCESS</div>
+              </div>
+            </div>
+
+            <div class="admin-manager-grid">
+              <div class="admin-manager-card">
+                <div class="admin-manager-title">Tambah Admin Baru</div>
+                <div class="admin-manager-sub">Admin tambahan bisa login ke dashboard dan bisa ubah password sendiri di menu Pengaturan.</div>
+                <div class="admin-form-stack">
+                  <div>
+                    <label>USERNAME ADMIN</label>
+                    <input type="text" id="newAdminUsername" placeholder="Contoh: cs01">
+                  </div>
+                  <div>
+                    <label>PASSWORD ADMIN</label>
+                    <input type="password" id="newAdminPassword" placeholder="Masukkan password admin">
+                  </div>
+                  <button class="btn copy-live-btn" onclick="addDashboardAdmin()">Tambah Admin</button>
+                </div>
+              </div>
+
+              <div class="admin-manager-card">
+                <div class="admin-manager-title">Daftar Admin</div>
+                <div class="admin-manager-sub">Akun master tidak bisa dihapus. Admin biasa bisa dihapus oleh master. Password admin bisa diubah sendiri dari menu Pengaturan.</div>
+                <div id="adminAccountList" class="admin-list"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="accountSettingsSection" class="section">
+          <div class="panel admin-manager-section">
+            <div class="panel-header">
+              <div>
+                <h3>PENGATURAN</h3>
+                <p class="panel-sub">Ubah password akun yang sedang login. Admin biasa hanya bisa mengubah password miliknya sendiri.</p>
+                <div id="currentAccountBadge" class="admin-master-badge">Akun aktif</div>
+              </div>
+            </div>
+
+            <div class="admin-manager-grid">
+              <div class="admin-manager-card">
+                <div class="admin-manager-title">Info Akun</div>
+                <div class="admin-manager-sub">Akun yang sedang aktif di dashboard ini.</div>
+                <div class="admin-user-card" style="grid-template-columns:1fr;">
+                  <div>
+                    <div id="accountSettingsUsername" class="admin-user-name">-</div>
+                    <div id="accountSettingsRole" class="admin-user-role">-</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="admin-manager-card">
+                <div class="admin-manager-title">Ubah Password</div>
+                <div class="admin-manager-sub">Masukkan password lama, lalu password baru.</div>
+                <div class="admin-form-stack">
+                  <div>
+                    <label>PASSWORD LAMA</label>
+                    <input type="password" id="currentAccountOldPassword" placeholder="Password lama">
+                  </div>
+                  <div>
+                    <label>PASSWORD BARU</label>
+                    <input type="password" id="currentAccountNewPassword" placeholder="Password baru">
+                  </div>
+                  <div>
+                    <label>ULANGI PASSWORD BARU</label>
+                    <input type="password" id="currentAccountConfirmPassword" placeholder="Ulangi password baru">
+                  </div>
+                  <button class="btn copy-live-btn" onclick="changeCurrentAccountPassword()">Simpan Password Baru</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1312,14 +4088,143 @@
             </div>
           </div>
         </section>
-
+        <!-- ===================================================== -->
+        <!-- ==================== IMAGE MANAGER PRO ============== -->
+        <!-- ===================================================== -->
         <section id="gambarSection" class="section">
           <div class="panel">
-            <h3>CARA GAMBAR APA?</h3>
-            <input type="text" id="gambarSearchInput" class="rek-search-input" placeholder="Cari judul gambar..." oninput="filterStaticImageCards()">
-            <div id="imageGallery" class="image-gallery-cards" style="margin-top:18px;"></div>
+            <div class="panel-header">
+              <div>
+                <h3>IMAGE MANAGER PRO</h3>
+                <p class="panel-sub">Tambah gambar lebih rapi • Upload • Drag Drop • Edit • Hapus • Export • Import</p>
+              </div>
+              <button class="btn copy-live-btn" onclick="openImageAddModal()">+ Tambah Gambar</button>
+            </div>
+
+            <div class="backup-mini-panel">
+              <div>
+                <div class="backup-mini-title">Backup Cepat</div>
+                <div class="backup-mini-desc">Export database gambar/custom ke JSON sebagai cadangan lokal.</div>
+              </div>
+              <button class="btn secondary" onclick="downloadFullDashboardBackup()">Backup Sekarang</button>
+            </div>
+
+            <div class="image-manager-hero">
+              <div class="image-manager-card image-manager-card-primary" onclick="openImageAddModal()">
+                <div class="image-manager-icon">＋</div>
+                <div>
+                  <div class="image-manager-card-title">Tambah dari URL</div>
+                  <div class="image-manager-card-desc">Masukkan judul, link gambar, kategori, lalu preview sebelum simpan.</div>
+                </div>
+              </div>
+
+              <div class="image-manager-card" onclick="document.getElementById('imageUploadInput').click()">
+                <div class="image-manager-icon">⇧</div>
+                <div>
+                  <div class="image-manager-card-title">Upload dari Device</div>
+                  <div class="image-manager-card-desc">Pilih satu atau banyak gambar. Nama file otomatis jadi judul.</div>
+                </div>
+              </div>
+
+              <div class="image-manager-card">
+                <div class="image-manager-icon">▦</div>
+                <div>
+                  <div class="image-manager-card-title">Kategori Upload</div>
+                  <select id="uploadImageCategory" onclick="event.stopPropagation()">
+                    <option value="QRIS">QRIS</option>
+                    <option value="TUTORIAL">TUTORIAL</option>
+                    <option value="EVENT">EVENT</option>
+                    <option value="PROMO">PROMO</option>
+                    <option value="BANK">BANK</option>
+                    <option value="LAINNYA">LAINNYA</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div id="dropZone" class="image-drop-zone">
+              <div class="image-drop-icon">🖼</div>
+              <div class="image-drop-title">Drop gambar di sini</div>
+              <div class="image-drop-sub">atau klik tombol upload di atas. Data gambar custom tetap tersimpan di localStorage.</div>
+              <input type="file" id="imageUploadInput" accept="image/*" multiple style="display:none">
+            </div>
+
+            <div class="image-manager-filterbar">
+              <input type="text" id="gambarSearchInput" class="rek-search-input" placeholder="Cari gambar..." oninput="filterImageManager()">
+              <select id="filterCategory" onchange="filterImageManager()">
+                <option value="">SEMUA KATEGORI</option>
+                <option value="QRIS">QRIS</option>
+                <option value="TUTORIAL">TUTORIAL</option>
+                <option value="EVENT">EVENT</option>
+                <option value="PROMO">PROMO</option>
+                <option value="BANK">BANK</option>
+                <option value="LAINNYA">LAINNYA</option>
+              </select>
+            </div>
+
+            <div class="image-manager-actions">
+              <button class="btn" onclick="exportImageDatabase()">Export Database</button>
+              <button class="btn secondary" onclick="document.getElementById('importJsonInput').click()">Import Database</button>
+              <button class="btn copy-live-btn" onclick="syncImagesToSheet()">Simpan ke Sheet</button>
+              <button class="btn secondary" onclick="loadImagesFromSheet(true)">Ambil dari Sheet</button>
+              <input type="file" id="importJsonInput" accept=".json,application/json" style="display:none">
+            </div>
+
+            <div id="imageGallery" class="image-gallery-cards"></div>
           </div>
         </section>
+
+        <div id="imageAddModal" class="image-edit-modal">
+          <div class="image-edit-backdrop" onclick="closeImageAddModal()"></div>
+          <div class="image-edit-content">
+            <div class="image-edit-header">
+              <div>
+                <h3>Tambah Gambar Baru</h3>
+                <p>Form tambah gambar sekarang pakai modal custom, bukan tampilan input biasa.</p>
+              </div>
+              <button class="image-edit-close" onclick="closeImageAddModal()">&times;</button>
+            </div>
+
+            <div class="image-edit-grid">
+              <div class="image-edit-form">
+                <div>
+                  <label class="image-edit-label">JUDUL GAMBAR</label>
+                  <input type="text" id="newImageTitle" placeholder="Contoh: QRIS BCA TERBARU">
+                </div>
+
+                <div>
+                  <label class="image-edit-label">URL GAMBAR</label>
+                  <textarea id="newImageUrl" rows="5" placeholder="Tempel URL gambar di sini..."></textarea>
+                </div>
+
+                <div>
+                  <label class="image-edit-label">KATEGORI</label>
+                  <select id="newImageCategory">
+                    <option value="QRIS">QRIS</option>
+                    <option value="TUTORIAL">TUTORIAL</option>
+                    <option value="EVENT">EVENT</option>
+                    <option value="PROMO">PROMO</option>
+                    <option value="BANK">BANK</option>
+                    <option value="LAINNYA">LAINNYA</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="image-edit-label">PREVIEW</label>
+                <div class="image-edit-preview image-add-preview">
+                  <img id="addImagePreview" src="" alt="Preview gambar baru">
+                  <div id="addImagePreviewEmpty" class="image-add-preview-empty">Preview akan muncul setelah URL diisi</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="image-edit-actions">
+              <button class="btn secondary" onclick="closeImageAddModal()">Batal</button>
+              <button class="btn copy-live-btn" onclick="addImageByUrl()">Simpan Gambar</button>
+            </div>
+          </div>
+        </div>
 
         <div id="imagePreviewModal" class="image-modal">
           <div class="image-modal-backdrop" onclick="closeImageModal()"></div>
@@ -1329,9 +4234,84 @@
             <img id="imageModalImg" class="image-modal-img" src="" alt="Preview Gambar">
           </div>
         </div>
+
+        <div id="imageEditModal" class="image-edit-modal">
+          <div class="image-edit-backdrop" onclick="closeImageEditModal()"></div>
+          <div class="image-edit-content">
+            <div class="image-edit-header">
+              <div>
+                <h3>Edit Gambar</h3>
+                <p>Ubah judul, URL gambar, dan kategori tanpa popup bawaan browser.</p>
+              </div>
+              <button class="image-edit-close" onclick="closeImageEditModal()">&times;</button>
+            </div>
+
+            <div class="image-edit-grid">
+              <div class="image-edit-form">
+                <div>
+                  <label class="image-edit-label">JUDUL GAMBAR</label>
+                  <input type="text" id="editImageTitle" placeholder="Masukkan judul gambar...">
+                </div>
+
+                <div>
+                  <label class="image-edit-label">URL / DATA GAMBAR</label>
+                  <textarea id="editImageUrl" rows="5" placeholder="Masukkan URL gambar..."></textarea>
+                </div>
+
+                <div>
+                  <label class="image-edit-label">KATEGORI</label>
+                  <select id="editImageCategory">
+                    <option value="QRIS">QRIS</option>
+                    <option value="TUTORIAL">TUTORIAL</option>
+                    <option value="EVENT">EVENT</option>
+                    <option value="PROMO">PROMO</option>
+                    <option value="BANK">BANK</option>
+                    <option value="LAINNYA">LAINNYA</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label class="image-edit-label">PREVIEW</label>
+                <div class="image-edit-preview">
+                  <img id="editImagePreview" src="" alt="Preview edit gambar">
+                </div>
+              </div>
+            </div>
+
+            <div class="image-edit-actions">
+              <button class="btn secondary" onclick="closeImageEditModal()">Batal</button>
+              <button class="btn copy-live-btn" onclick="saveImageEdit()">Simpan Perubahan</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="imageDeleteModal" class="image-edit-modal">
+          <div class="image-edit-backdrop" onclick="closeImageDeleteModal()"></div>
+          <div class="image-delete-content">
+            <div class="image-delete-icon">🗑</div>
+            <div class="image-delete-title">Hapus Gambar?</div>
+            <div class="image-delete-text">
+              Gambar custom ini akan dihapus dari database localStorage. Gambar bawaan script tetap aman dan tidak ikut terhapus.
+            </div>
+
+            <div class="image-delete-card">
+              <img id="deleteImagePreview" src="" alt="Preview gambar yang akan dihapus">
+              <div>
+                <div id="deleteImageTitle" class="image-delete-name">Nama gambar</div>
+                <div id="deleteImageCategory" class="image-delete-category">LAINNYA</div>
+              </div>
+            </div>
+
+            <div class="image-delete-actions">
+              <button class="btn secondary" onclick="closeImageDeleteModal()">Batal</button>
+              <button class="btn danger" onclick="confirmDeleteCustomImage()">Ya, Hapus</button>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
-
     <script>
       const dashboardData = {
         dropdown1: [],
@@ -1390,6 +4370,32 @@
         { title: "QRIS SEABANK 2", url: "https://i.imgur.com/QIjestM.jpeg" }
       ];
 
+
+/* =========================
+   CUSTOM IMAGE STORAGE
+========================= */
+
+let customImageData =
+  JSON.parse(localStorage.getItem("customImageData")) || [];
+
+/* =========================
+   GET ALL IMAGE DATA
+========================= */
+
+function getAllImages() {
+  return [...staticImageData, ...customImageData];
+}
+
+/* =========================
+   SAVE CUSTOM IMAGE
+========================= */
+
+function saveCustomImages() {
+  localStorage.setItem(
+    "customImageData",
+    JSON.stringify(customImageData)
+  );
+}
       const syairMarketConfig = {
         BANGKOK: { label: "SYAIR BANGKOK", logo: "https://i.imgur.com/YV1augF.png" },
         BRUNEI: { label: "SYAIR BRUNEI", logo: "https://i.imgur.com/vx7Pl2f.png" },
@@ -1418,10 +4424,92 @@
 
       let filteredPkcsData = [];
       let filteredPrediksiData = [];
+      let currentRekeningResults = [];
       let pkcsOriginalResultText = "";
       let selectedPkcsIndex = -1;
       let selectedPrediksiIndex = -1;
       let currentSyairNumbers = null;
+
+      const PREDIKSI_SCHEDULE = [
+        { id: 1, name: "TOTO MACAU PAGI", close: "00:00", open: "00:15" },
+        { id: 2, name: "KENTUCKY MIDDAY", close: "00:05", open: "00:20" },
+        { id: 3, name: "FLORIDA MIDDAY", close: "00:20", open: "00:30" },
+        { id: 4, name: "HUAHIN 0100", close: "00:45", open: "01:00" },
+        { id: 5, name: "BANGKOK 0130", close: "01:15", open: "01:30" },
+        { id: 6, name: "NEWYORK MIDDAY", close: "01:15", open: "01:25" },
+        { id: 7, name: "CAROLINA DAY", close: "01:45", open: "02:00" },
+        { id: 8, name: "BRUNEI 02", close: "02:30", open: "02:45" },
+        { id: 9, name: "OREGON 03", close: "02:50", open: "03:00" },
+        { id: 10, name: "OREGON 06", close: "05:50", open: "06:00" },
+        { id: 11, name: "CALIFORNIA", close: "08:25", open: "08:30" },
+        { id: 12, name: "FLORIDA EVENING", close: "08:35", open: "08:45" },
+        { id: 13, name: "OREGON 09", close: "08:50", open: "09:00" },
+        { id: 14, name: "BANGKOK 0930", close: "09:15", open: "09:30" },
+        { id: 15, name: "NEWYORK EVENING", close: "09:25", open: "09:35" },
+        { id: 16, name: "TOTOCAMBODIA", close: "10:45", open: "11:00" },
+        { id: 17, name: "KENTUCKY EVENING", close: "09:45", open: "10:00" },
+        { id: 18, name: "CAROLINA EVENING", close: "10:17", open: "10:22" },
+        { id: 19, name: "CHELSEA 11", close: "11:00", open: "11:15" },
+        { id: 20, name: "OREGON 12", close: "11:50", open: "12:00" },
+        { id: 21, name: "POIPET12", close: "12:15", open: "12:30" },
+        { id: 22, name: "BULLSEYE", close: "13:00", open: "13:15" },
+        { id: 23, name: "TOTOMACAU SIANG", close: "13:00", open: "13:15" },
+        { id: 24, name: "SYDNEY", close: "13:49", open: "14:05" },
+        { id: 25, name: "JAKARTA 1400", close: "13:55", open: "14:10" },
+        { id: 26, name: "BRUNEI 14", close: "14:30", open: "14:45" },
+        { id: 27, name: "CHELSEA 15", close: "15:00", open: "15:15" },
+        { id: 28, name: "TOTOMALI 1530", close: "15:15", open: "15:30" },
+        { id: 29, name: "TOTOMACAU 5D SORE", close: "15:15", open: "15:30" },
+        { id: 30, name: "POIPET15", close: "15:15", open: "15:30" },
+        { id: 31, name: "TOTOMACAU SORE", close: "16:00", open: "16:15" },
+        { id: 32, name: "HUAHIN 1630", close: "16:15", open: "16:30" },
+        { id: 33, name: "KING KONG4D I", close: "17:00", open: "17:15" },
+        { id: 34, name: "SINGAPORE", close: "17:30", open: "17:45", offDays: [2, 5], note: "Libur Selasa & Jumat" },
+        { id: 35, name: "MAGNUM4D", close: "18:10", open: "18:40", activeDays: [0, 3, 6], note: "Aktif Rabu, Sabtu & Minggu" },
+        { id: 36, name: "TOTOMACAU MALAM I", close: "19:00", open: "19:15" },
+        { id: 37, name: "CHELSEA 19", close: "19:00", open: "19:15" },
+        { id: 38, name: "POIPET19", close: "19:30", open: "19:45" },
+        { id: 39, name: "PCSO", close: "19:50", open: "20:10", offDays: [0], note: "Minggu libur" },
+        { id: 40, name: "TOTOMALI 2030", close: "20:15", open: "20:30", activeDays: [2, 3, 4, 5, 6, 0], note: "Aktif Selasa s/d Minggu" },
+        { id: 41, name: "HUAHIN 2100", close: "20:45", open: "21:00", activeDays: [2, 3, 4, 5, 6, 0], note: "Aktif Selasa s/d Minggu" },
+        { id: 42, name: "CHELSEA 21", close: "21:00", open: "21:15" },
+        { id: 43, name: "TOTOMACAU 5D MALAM", close: "21:15", open: "21:30" },
+        { id: 44, name: "NEVADA", close: "21:15", open: "21:30" },
+        { id: 45, name: "BRUNEI 21", close: "21:30", open: "21:45" },
+        { id: 46, name: "TOTOMACAU MALAM II", close: "22:00", open: "22:15" },
+        { id: 47, name: "POIPET22", close: "22:30", open: "22:45" },
+        { id: 48, name: "HONGKONG", close: "22:59", open: "23:15" },
+        { id: 49, name: "TOTOMACAU MALAM III", close: "23:00", open: "23:15" },
+        { id: 50, name: "TOTOMALI 2330", close: "23:15", open: "23:30" },
+        { id: 51, name: "JAKARTA 2330", close: "23:25", open: "23:40", activeDays: [1, 2, 3, 4, 5, 6], note: "Aktif Senin s/d Sabtu" },
+        { id: 52, name: "KING KONG4D II", close: "23:30", open: "23:45", activeDays: [1, 2, 3, 4, 5, 6], note: "Aktif Senin s/d Sabtu" },
+        { id: 53, name: "ALL PREDIKSI", close: "23:55", open: "00:00" },
+        { id: 54, name: "ALL PREDIKSI BESOK", close: "23:55", open: "00:00" },
+        { id: 55, name: "HOKIDRAW 00:00", close: "01:00", open: "00:00", mode: "window" },
+        { id: 56, name: "HOKIDRAW 01:00", close: "02:00", open: "01:00", mode: "window" },
+        { id: 57, name: "HOKIDRAW 02:00", close: "03:00", open: "02:00", mode: "window" },
+        { id: 58, name: "HOKIDRAW 03:00", close: "04:00", open: "03:00", mode: "window" },
+        { id: 59, name: "HOKIDRAW 04:00", close: "05:00", open: "04:00", mode: "window" },
+        { id: 60, name: "HOKIDRAW 05:00", close: "06:00", open: "05:00", mode: "window" },
+        { id: 61, name: "HOKIDRAW 06:00", close: "07:00", open: "06:00", mode: "window" },
+        { id: 62, name: "HOKIDRAW 07:00", close: "08:00", open: "07:00", mode: "window" },
+        { id: 63, name: "HOKIDRAW 08:00", close: "09:00", open: "08:00", mode: "window" },
+        { id: 64, name: "HOKIDRAW 09:00", close: "10:00", open: "09:00", mode: "window" },
+        { id: 65, name: "HOKIDRAW 10:00", close: "11:00", open: "10:00", mode: "window" },
+        { id: 66, name: "HOKIDRAW 11:00", close: "12:00", open: "11:00", mode: "window" },
+        { id: 67, name: "HOKIDRAW 12:00", close: "13:00", open: "12:00", mode: "window" },
+        { id: 68, name: "HOKIDRAW 13:00", close: "14:00", open: "13:00", mode: "window" },
+        { id: 69, name: "HOKIDRAW 14:00", close: "15:00", open: "14:00", mode: "window" },
+        { id: 70, name: "HOKIDRAW 15:00", close: "16:00", open: "15:00", mode: "window" },
+        { id: 71, name: "HOKIDRAW 16:00", close: "17:00", open: "16:00", mode: "window" },
+        { id: 72, name: "HOKIDRAW 17:00", close: "18:00", open: "17:00", mode: "window" },
+        { id: 73, name: "HOKIDRAW 18:00", close: "19:00", open: "18:00", mode: "window" },
+        { id: 74, name: "HOKIDRAW 19:00", close: "20:00", open: "19:00", mode: "window" },
+        { id: 75, name: "HOKIDRAW 20:00", close: "21:00", open: "20:00", mode: "window" },
+        { id: 76, name: "HOKIDRAW 21:00", close: "22:00", open: "21:00", mode: "window" },
+        { id: 77, name: "HOKIDRAW 22:00", close: "23:00", open: "22:00", mode: "window" },
+        { id: 78, name: "HOKIDRAW 23:00", close: "00:00", open: "23:00", mode: "window" },
+      ];
 
       function updateStatus(message) {
         const el = document.getElementById("statusText");
@@ -1459,6 +4547,18 @@
           onFail();
         }
         document.body.removeChild(temp);
+      }
+
+
+      function formatRekeningText(item) {
+        if (Array.isArray(item)) {
+          return item
+            .map(value => String(value || "").trim())
+            .filter(Boolean)
+            .join("\n");
+        }
+
+        return String(item || "").trim();
       }
 
       function startLiveClock() {
@@ -1605,7 +4705,7 @@
             }
             if (copyBtn) {
               copyBtn.classList.remove("success");
-              copyBtn.textContent = "Copy";
+              copyBtn.textContent = "Copy Sekarang";
             }
           }, 1800);
         };
@@ -1619,20 +4719,46 @@
         }
       }
 
+      function updateRekeningStats(total, result) {
+        const totalEl = document.getElementById("rekeningTotalCount");
+        const resultEl = document.getElementById("rekeningResultCount");
+        if (totalEl) totalEl.textContent = total || 0;
+        if (resultEl) resultEl.textContent = `${result || 0} hasil`;
+      }
+
+      function renderRekeningEmpty(title, message) {
+        const listEl = document.getElementById("rekeningList");
+        if (!listEl) return;
+        listEl.innerHTML = `
+          <div class="rek-empty-modern">
+            <div class="rek-empty-icon">⌕</div>
+            <b>${escapeHtml(title)}</b>
+            <span>${escapeHtml(message)}</span>
+          </div>
+        `;
+      }
+
       function renderRekeningList(data) {
         const listEl = document.getElementById("rekeningList");
         if (!listEl) return;
 
-        if (!data || !data.length) {
-          listEl.innerHTML = '<div class="empty-state">Tidak ada data rekening ditemukan.</div>';
+        currentRekeningResults = data || [];
+        updateRekeningStats((dashboardData.dropdown3 || []).length, currentRekeningResults.length);
+
+        if (!currentRekeningResults.length) {
+          renderRekeningEmpty("Tidak ada data ditemukan", "Coba kata kunci lain seperti nomor, nama, bank, atau e-wallet.");
           return;
         }
 
-        listEl.innerHTML = data.map(item => {
-          const val = Array.isArray(item) ? item[0] : item;
+        listEl.innerHTML = currentRekeningResults.map((item, index) => {
+          const val = formatRekeningText(item);
           return `
-            <div class="rekening-item">
-              <div class="rekening-title">${escapeHtml(val)}</div>
+            <div class="rekening-item rek-card-modern">
+              <div class="rek-card-main">
+                <div class="rek-card-label">Data Rekening</div>
+                <div class="rekening-title">${escapeHtml(val || "Data kosong")}</div>
+              </div>
+              <button class="rek-copy-mini" onclick="copyRekeningValue(${index}, this)">Copy</button>
             </div>
           `;
         }).join("");
@@ -1643,54 +4769,488 @@
         const keyword = String(input ? input.value : "").trim().toLowerCase();
         const source = dashboardData.dropdown3 || [];
 
+        updateRekeningStats(source.length, 0);
+
         if (!keyword) {
-          document.getElementById("rekeningList").innerHTML = '<div class="empty-state">Ketik nomor atau nama rekening...</div>';
+          currentRekeningResults = [];
+          renderRekeningEmpty("Ketik kata kunci dulu", "Data rekening akan tampil di sini.");
           return;
         }
 
         const filtered = source.filter(row => {
-          const text = String(Array.isArray(row) ? row[0] : row).toLowerCase();
+          const text = formatRekeningText(row).toLowerCase();
           return text.includes(keyword);
         });
 
         renderRekeningList(filtered);
       }
 
+      function copyRekeningValue(index, btn) {
+        const selected = currentRekeningResults[index];
+        const text = formatRekeningText(selected);
+        if (!text) {
+          updateStatus("Tidak ada data rekening yang bisa dicopy");
+          return;
+        }
+
+        const onSuccess = () => {
+          updateStatus("Data rekening berhasil dicopy");
+          if (btn) {
+            btn.classList.add("success");
+            const oldText = btn.textContent;
+            btn.textContent = "Copied";
+            setTimeout(() => {
+              btn.classList.remove("success");
+              btn.textContent = oldText || "Copy";
+            }, 1300);
+          }
+        };
+
+        const onFail = () => updateStatus("Gagal copy data rekening");
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(onSuccess).catch(() => fallbackCopy(text, onSuccess, onFail));
+        } else {
+          fallbackCopy(text, onSuccess, onFail);
+        }
+      }
+
+      function normalizePrediksiName(text) {
+        return String(text || "")
+          .toUpperCase()
+          .replace(/[^A-Z0-9]/g, "")
+          .trim();
+      }
+
+      const PREDIKSI_SCHEDULE_ALIAS = {
+        NEWYORKEVE: "NEWYORKEVENING",
+        NEWYORKEVEN: "NEWYORKEVENING",
+        NEWYORKMALAM: "NEWYORKEVENING",
+        KENTUCKYEVE: "KENTUCKYEVENING",
+        KENTUCKYMALAM: "KENTUCKYEVENING",
+        CAROLINAEVE: "CAROLINAEVENING",
+        CAROLINAMALAM: "CAROLINAEVENING",
+        TOTOCAMBODIA: "TOTOCAMBODIA",
+        TOTOMACAUPAGI: "TOTOMACAUPAGI",
+        TOTOMACAUSIANG: "TOTOMACAUSIANG",
+        TOTOMACAUMALAM1: "TOTOMACAUMALAMI",
+        TOTOMACAUMALAMONE: "TOTOMACAUMALAMI",
+        TOTOMACAUMALAMI: "TOTOMACAUMALAMI",
+        TOMACAUMALAMI: "TOTOMACAUMALAMI",
+        TOTOMACAUMALAM2: "TOTOMACAUMALAMII",
+        TOTOMACAUMALAMII: "TOTOMACAUMALAMII",
+        TOTOMACAUMALAM3: "TOTOMACAUMALAMIII",
+        TOTOMACAUMALAMIII: "TOTOMACAUMALAMIII",
+        TOTOMACAU5DSORE: "TOTOMACAU5DSORE",
+        TOTOMACAU5DMALAM: "TOTOMACAU5DMALAM",
+        TOTOMACAUSORE: "TOTOMACAUSORE",
+        TOTOMACAUMALAM01: "TOTOMACAUMALAMI",
+        TOTOMACAUMALAM02: "TOTOMACAUMALAMII",
+        TOTOMACAUMALAM03: "TOTOMACAUMALAMIII",
+        KINGKONG4D: "KINGKONG4DII",
+        KINGKONG4D1: "KINGKONG4DI",
+        KINGKONG4DI: "KINGKONG4DI",
+        KINGKONG4D2: "KINGKONG4DII",
+        KINGKONG4DII: "KINGKONG4DII",
+        KINGKONGI: "KINGKONG4DI",
+        KINGKONGII: "KINGKONG4DII",
+        POIPET12: "POIPET12",
+        POIPET15: "POIPET15",
+        POIPET19: "POIPET19",
+        POIPET22: "POIPET22",
+        BRUNEI02: "BRUNEI02",
+        BRUNEI2: "BRUNEI02",
+        BRUNEI14: "BRUNEI14",
+        BRUNEI21: "BRUNEI21",
+        CHELSEA11: "CHELSEA11",
+        CHELSEA15: "CHELSEA15",
+        CHELSEA19: "CHELSEA19",
+        CHELSEA21: "CHELSEA21",
+        HUAHIN0100: "HUAHIN0100",
+        HUAHIN100: "HUAHIN0100",
+        HUAHIN1630: "HUAHIN1630",
+        HUAHIN2100: "HUAHIN2100",
+        OREGON03: "OREGON03",
+        OREGON3: "OREGON03",
+        OREGON06: "OREGON06",
+        OREGON6: "OREGON06",
+        OREGON09: "OREGON09",
+        OREGON9: "OREGON09",
+        OREGON12: "OREGON12",
+        ALLPREDIKSI: "ALLPREDIKSI",
+        ALLPREDIKSIBESOK: "ALLPREDIKSIBESOK",
+        TOTOMALI1530: "TOTOMALI1530",
+        TOTOMALI2030: "TOTOMALI2030",
+        TOTOMALI2330: "TOTOMALI2330"
+      };
+
+      for (let h = 0; h < 24; h++) {
+        const hh = String(h).padStart(2, "0");
+        const key = `HOKIDRAW${hh}00`;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAW${hh}`] = key;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAW${h}`] = key;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAW${hh}JAM`] = key;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAWJAM${hh}`] = key;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAWJAM${h}`] = key;
+        PREDIKSI_SCHEDULE_ALIAS[`HOKIDRAW${hh}0000`] = key;
+      }
+
+      function getPrediksiSchedule(name) {
+        const normalized = normalizePrediksiName(name);
+        const aliasKey = PREDIKSI_SCHEDULE_ALIAS[normalized] || normalized;
+        const schedules = PREDIKSI_SCHEDULE || [];
+
+        return schedules.find(item => {
+          const itemKey = normalizePrediksiName(item.name);
+          const itemAlias = PREDIKSI_SCHEDULE_ALIAS[itemKey] || itemKey;
+
+          return (
+            itemKey === aliasKey ||
+            itemKey === normalized ||
+            itemAlias === aliasKey ||
+            itemAlias === normalized
+          );
+        }) || schedules.find(item => {
+          const itemKey = normalizePrediksiName(item.name);
+
+          return (
+            normalized.length >= 5 &&
+            itemKey.length >= 5 &&
+            (itemKey.includes(normalized) || normalized.includes(itemKey))
+          );
+        }) || null;
+      }
+
+      function timeToSeconds(time) {
+        const parts = String(time || "00:00").split(":");
+        const hour = parseInt(parts[0], 10) || 0;
+        const minute = parseInt(parts[1], 10) || 0;
+        const second = parseInt(parts[2], 10) || 0;
+        return (hour * 3600) + (minute * 60) + second;
+      }
+
+      function getWibNow() {
+        const parts = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Jakarta",
+          weekday: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).formatToParts(new Date());
+
+        const pick = type => {
+          const found = parts.find(part => part.type === type);
+          return found ? found.value : "";
+        };
+
+        const dayMap = {
+          Sun: 0,
+          Mon: 1,
+          Tue: 2,
+          Wed: 3,
+          Thu: 4,
+          Fri: 5,
+          Sat: 6
+        };
+
+        let hour = parseInt(pick("hour"), 10) || 0;
+        if (hour === 24) hour = 0;
+
+        return {
+          day: dayMap[pick("weekday")] ?? new Date().getDay(),
+          hour,
+          minute: parseInt(pick("minute"), 10) || 0,
+          second: parseInt(pick("second"), 10) || 0
+        };
+      }
+
+      function getCurrentSeconds() {
+        const now = getWibNow();
+        return (now.hour * 3600) + (now.minute * 60) + now.second;
+      }
+
+      function getCurrentWibDay() {
+        return getWibNow().day;
+      }
+
+      function isScheduleActiveToday(schedule, day = getCurrentWibDay()) {
+        if (Array.isArray(schedule.activeDays)) {
+          return schedule.activeDays.includes(day);
+        }
+
+        if (Array.isArray(schedule.offDays)) {
+          return !schedule.offDays.includes(day);
+        }
+
+        return true;
+      }
+
+      function getNextActiveDayOffset(schedule, currentDay = getCurrentWibDay()) {
+        for (let offset = 1; offset <= 7; offset++) {
+          const nextDay = (currentDay + offset) % 7;
+          if (isScheduleActiveToday(schedule, nextDay)) return offset;
+        }
+
+        return 1;
+      }
+
+      function isInClosedWindow(nowSec, closeSec, openSec) {
+        if (closeSec <= openSec) {
+          return nowSec >= closeSec && nowSec < openSec;
+        }
+
+        return nowSec >= closeSec || nowSec < openSec;
+      }
+
+      function formatPrediksiDuration(seconds) {
+        let value = Math.max(0, Number(seconds) || 0);
+        const days = Math.floor(value / 86400);
+        value = value % 86400;
+        const hours = Math.floor(value / 3600);
+        const mins = Math.floor((value % 3600) / 60);
+        const secs = value % 60;
+
+        if (days) return `${days}h ${hours}j ${String(mins).padStart(2, "0")}m ${String(secs).padStart(2, "0")}d`;
+        if (hours) return `${hours}j ${String(mins).padStart(2, "0")}m ${String(secs).padStart(2, "0")}d`;
+        if (mins) return `${mins}m ${String(secs).padStart(2, "0")}d`;
+        return `${secs}d`;
+      }
+
+      function secondsUntil(targetSec, nowSec) {
+        return targetSec >= nowSec ? targetSec - nowSec : (86400 - nowSec) + targetSec;
+      }
+
+      function getPrediksiStatus(name) {
+        const schedule = getPrediksiSchedule(name);
+        const nowSec = getCurrentSeconds();
+        const currentDay = getCurrentWibDay();
+
+        if (!schedule) {
+          return {
+            schedule: null,
+            isOpen: false,
+            statusText: "NO JADWAL",
+            statusClass: "unknown",
+            cardClass: "no-schedule",
+            rangeText: "Jadwal belum diatur",
+            countdownText: "-"
+          };
+        }
+
+        const closeSec = timeToSeconds(schedule.close || schedule.end);
+        const openSec = timeToSeconds(schedule.open || schedule.start || "00:00");
+        const activeToday = isScheduleActiveToday(schedule, currentDay);
+        const rangeText = schedule.mode === "window"
+          ? `Buka ${schedule.open || schedule.start} • Tutup ${schedule.close || schedule.end}`
+          : `Tutup ${schedule.close || schedule.end} • Buka ${schedule.open || schedule.start}`;
+
+        /*
+          ATURAN STATUS:
+          - Jadwal normal: setiap pergantian hari WIB reset BUKA, lalu TUTUP setelah jam Tutup.
+          - Jadwal mode window/HOKIDRAW: BUKA hanya di rentang jam Open sampai Close masing-masing.
+        */
+
+        if (!activeToday) {
+          const dayOffset = getNextActiveDayOffset(schedule, currentDay);
+          const left = (dayOffset * 86400) - nowSec + (schedule.mode === "window" ? openSec : 0);
+
+          return {
+            schedule,
+            isOpen: false,
+            statusText: "LIBUR",
+            statusClass: "closed",
+            cardClass: "is-closed",
+            rangeText: schedule.note ? `${rangeText} • ${schedule.note}` : rangeText,
+            countdownText: `Buka ${formatPrediksiDuration(left)} lagi`
+          };
+        }
+
+        if (schedule.mode === "window") {
+          const isCrossDay = closeSec <= openSec;
+          const isOpen = isCrossDay
+            ? (nowSec >= openSec || nowSec < closeSec)
+            : (nowSec >= openSec && nowSec < closeSec);
+
+          let left;
+          if (isOpen) {
+            left = isCrossDay && nowSec >= openSec
+              ? (86400 - nowSec) + closeSec
+              : closeSec - nowSec;
+          } else {
+            left = secondsUntil(openSec, nowSec);
+          }
+
+          return {
+            schedule,
+            isOpen,
+            statusText: isOpen ? "BUKA" : "TUTUP",
+            statusClass: isOpen ? "open" : "closed",
+            cardClass: isOpen ? "is-open" : "is-closed",
+            rangeText: schedule.note ? `${rangeText} • ${schedule.note}` : rangeText,
+            countdownText: isOpen
+              ? `Tutup ${formatPrediksiDuration(left)} lagi`
+              : `Buka ${formatPrediksiDuration(left)} lagi`
+          };
+        }
+
+        const isOpen = nowSec < closeSec;
+        const left = isOpen ? (closeSec - nowSec) : (86400 - nowSec);
+
+        return {
+          schedule,
+          isOpen,
+          statusText: isOpen ? "BUKA" : "TUTUP",
+          statusClass: isOpen ? "open" : "closed",
+          cardClass: isOpen ? "is-open" : "is-closed",
+          rangeText: schedule.note ? `${rangeText} • ${schedule.note}` : rangeText,
+          countdownText: isOpen
+            ? `Tutup ${formatPrediksiDuration(left)} lagi`
+            : `Buka ${formatPrediksiDuration(left)} lagi`
+        };
+      }
+
+      function getPrediksiGroupKey(title) {
+        const normalized = normalizePrediksiName(title);
+
+        // Semua HOKIDRAW 00:00 sampai 23:00 dihitung sebagai 1 pasaran saja.
+        if (normalized.includes("HOKIDRAW") || normalized.includes("HOKIDRAW")) {
+          return "HOKIDRAW";
+        }
+
+        return normalized || "TANPA_NAMA";
+      }
+
+      function calculatePrediksiGroupedStats(sourceData = dashboardData.dropdown2 || []) {
+        const rows = Array.isArray(sourceData) ? sourceData : [];
+        const groups = {};
+
+        rows.forEach((row, index) => {
+          const title = Array.isArray(row) ? row[0] : row;
+          const key = getPrediksiGroupKey(title) || `ROW_${index}`;
+          const status = getPrediksiStatus(title);
+
+          if (!groups[key]) {
+            groups[key] = {
+              isOpen: false,
+              hasClosed: false
+            };
+          }
+
+          if (status.isOpen) {
+            groups[key].isOpen = true;
+          } else {
+            groups[key].hasClosed = true;
+          }
+        });
+
+        const values = Object.values(groups);
+        const total = values.length;
+        const open = values.filter(item => item.isOpen).length;
+        const closed = total - open;
+
+        return { total, open, closed };
+      }
+
+      function updatePrediksiSummary(sourceData = dashboardData.dropdown2 || []) {
+        const stats = calculatePrediksiGroupedStats(sourceData);
+
+        const totalEl = document.getElementById("prediksiTotalCount");
+        const openEl = document.getElementById("prediksiOpenCount");
+        const closedEl = document.getElementById("prediksiClosedCount");
+        const summaryEl = document.getElementById("prediksiOpenSummary");
+        const clockEl = document.getElementById("prediksiLiveClock");
+
+        if (totalEl) totalEl.textContent = stats.total;
+        if (openEl) openEl.textContent = stats.open;
+        if (closedEl) closedEl.textContent = stats.closed;
+        if (summaryEl) summaryEl.textContent = `${stats.open} buka • ${stats.closed} tutup`;
+
+        if (clockEl) {
+          const now = getWibNow();
+          clockEl.textContent =
+            `${String(now.hour).padStart(2, "0")}:${String(now.minute).padStart(2, "0")}:${String(now.second).padStart(2, "0")} WIB`;
+        }
+      }
+
       function renderPrediksiList(data) {
         const listEl = document.getElementById("prediksiList");
         if (!listEl) return;
 
+        updatePrediksiSummary();
+
         if (!data || !data.length) {
           listEl.innerHTML = '<div class="empty-state">Tidak ada pasaran ditemukan.</div>';
-          document.getElementById("prediksiResultCard").textContent = "Tidak ada hasil prediksi.";
+          renderPrediksiResult(-1);
           return;
         }
 
-        listEl.innerHTML = data.map((row, index) => `
-          <div class="prediksi-item ${index === selectedPrediksiIndex ? "active" : ""}" onclick="selectPrediksiItem(${index})">
-            ${escapeHtml(row[0])}
-          </div>
-        `).join("");
+        listEl.innerHTML = data.map((row, index) => {
+          const title = row[0] || "Tanpa Nama";
+          const status = getPrediksiStatus(title);
+
+          return `
+            <div class="prediksi-market-card ${status.cardClass} ${index === selectedPrediksiIndex ? "active" : ""}" onclick="selectPrediksiItem(${index})">
+              <div class="prediksi-market-top">
+                <div class="prediksi-market-name">${escapeHtml(title)}</div>
+                <div class="prediksi-status-pill ${status.statusClass}">${status.statusText}</div>
+              </div>
+              <div class="prediksi-market-meta">
+                <span>🕒 ${escapeHtml(status.rangeText)}</span>
+                <span class="prediksi-countdown">${escapeHtml(status.countdownText)}</span>
+              </div>
+            </div>
+          `;
+        }).join("");
       }
 
       function filterPrediksiList() {
         const input = document.getElementById("prediksiSearchInput");
+        const statusInput = document.getElementById("prediksiStatusFilter");
         const keyword = String(input ? input.value : "").trim().toLowerCase();
+        const statusFilter = String(statusInput ? statusInput.value : "all");
         const source = dashboardData.dropdown2 || [];
 
-        if (!keyword) {
-          filteredPrediksiData = [...source];
-        } else {
-          filteredPrediksiData = source.filter(row => String(row[0] || "").toLowerCase().includes(keyword));
-        }
+        filteredPrediksiData = source.filter(row => {
+          const title = String(row[0] || "");
+          const matchKeyword = !keyword || title.toLowerCase().includes(keyword);
+          const status = getPrediksiStatus(title);
+          const matchStatus = statusFilter === "all" ||
+            (statusFilter === "open" && status.isOpen) ||
+            (statusFilter === "closed" && !status.isOpen);
+          return matchKeyword && matchStatus;
+        });
 
         selectedPrediksiIndex = filteredPrediksiData.length ? 0 : -1;
         renderPrediksiList(filteredPrediksiData);
+        renderPrediksiResult(selectedPrediksiIndex);
+      }
 
+      function renderPrediksiResult(index) {
         const resultEl = document.getElementById("prediksiResultCard");
-        if (resultEl) {
-          resultEl.textContent = filteredPrediksiData.length ? (filteredPrediksiData[0][1] || "-") : "Tidak ada hasil prediksi.";
+        const metaEl = document.getElementById("prediksiSelectedMeta");
+        if (!resultEl) return;
+
+        const selected = filteredPrediksiData[index];
+
+        if (!selected) {
+          resultEl.dataset.copyText = "";
+          resultEl.innerHTML = '<div class="prediksi-result-empty">Pilih pasaran di sebelah kiri untuk melihat isi prediksi.</div>';
+          if (metaEl) metaEl.textContent = "";
+          return;
         }
+
+        const title = selected[0] || "Tanpa Nama";
+        const content = selected[1] || "-";
+        resultEl.dataset.copyText = content;
+        resultEl.dataset.marketTitle = title;
+
+        if (metaEl) metaEl.textContent = "";
+
+        resultEl.innerHTML = `
+          <div class="prediksi-result-body">${escapeHtml(content)}</div>
+        `;
+        resultEl.scrollTop = 0;
       }
 
       function selectPrediksiItem(index) {
@@ -1698,12 +5258,11 @@
         if (!selected) return;
 
         selectedPrediksiIndex = index;
-        const resultEl = document.getElementById("prediksiResultCard");
         const rightBox = document.querySelector(".prediksi-box-right");
 
-        if (resultEl) resultEl.textContent = selected[1] || "-";
+        renderPrediksiResult(index);
 
-        document.querySelectorAll(".prediksi-item").forEach((item, i) => {
+        document.querySelectorAll(".prediksi-market-card").forEach((item, i) => {
           item.classList.toggle("active", i === index);
         });
 
@@ -1714,10 +5273,23 @@
         }
       }
 
+      function refreshPrediksiScheduleUI() {
+        if (!document.getElementById("prediksiSection")) return;
+
+        const listEl = document.getElementById("prediksiList");
+        const currentScroll = listEl ? listEl.scrollTop : 0;
+
+        updatePrediksiSummary();
+        renderPrediksiList(filteredPrediksiData || []);
+        renderPrediksiResult(selectedPrediksiIndex);
+
+        if (listEl) listEl.scrollTop = currentScroll;
+      }
+
       function copyPrediksiResult() {
         const resultEl = document.getElementById("prediksiResultCard");
         const copyBtn = document.getElementById("copyPrediksiBtn");
-        const text = resultEl ? resultEl.textContent : "";
+        const text = resultEl ? (resultEl.dataset.copyText || "") : "";
 
         if (!text || text === "-" || text === "Tidak ada hasil prediksi.") {
           updateStatus("Tidak ada prediksi yang bisa dicopy");
@@ -1733,7 +5305,7 @@
           setTimeout(() => {
             if (copyBtn) {
               copyBtn.classList.remove("success");
-              copyBtn.textContent = "Copy";
+              copyBtn.textContent = "Copy Sekarang";
             }
           }, 1800);
         };
@@ -1747,41 +5319,562 @@
         }
       }
 
-      function renderStaticImageCards(data = staticImageData) {
+function getImageCategory(item) {
+        const savedCategory = String(item.category || "").trim().toUpperCase();
+        if (savedCategory) return savedCategory;
+        const title = String(item.title || "").toUpperCase();
+        if (title.includes("QRIS")) return "QRIS";
+        if (title.includes("EVENT") || title.includes("SCATER") || title.includes("SCATTER")) return "EVENT";
+        if (title.includes("BANK") || title.includes("BCA") || title.includes("BRI") || title.includes("BNI") || title.includes("MANDIRI") || title.includes("CIMB")) return "BANK";
+        if (title.includes("CARA") || title.includes("TUTORIAL") || title.includes("PERATURAN")) return "TUTORIAL";
+        return "LAINNYA";
+      }
+
+      function getAllImages() {
+        const staticData = (staticImageData || []).map((item, index) => ({
+          ...item,
+          id: item.id || `static-${index}`,
+          category: getImageCategory(item),
+          custom: false
+        }));
+
+        const customData = (customImageData || []).map((item, index) => ({
+          ...item,
+          id: item.id || `custom-${index}-${Date.now()}`,
+          category: getImageCategory(item),
+          custom: true
+        }));
+
+        return [...staticData, ...customData];
+      }
+
+      function hasAppsScript() {
+        return typeof google !== "undefined" && google.script && google.script.run;
+      }
+
+      let imageSyncTimer = null;
+      let imageCloudLoading = false;
+
+      function cleanImageItem(item) {
+        return {
+          id: item.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          title: String(item.title || "").trim(),
+          url: String(item.url || "").trim(),
+          category: getImageCategory(item),
+          custom: true,
+          createdAt: item.createdAt || new Date().toISOString(),
+          updatedAt: item.updatedAt || new Date().toISOString()
+        };
+      }
+
+      function saveCustomImages(options = {}) {
+        localStorage.setItem("customImageData", JSON.stringify(customImageData));
+
+        if (!options.skipCloud) {
+          scheduleImageSheetSync();
+        }
+      }
+
+      function scheduleImageSheetSync() {
+        if (!hasAppsScript()) return;
+
+        clearTimeout(imageSyncTimer);
+        imageSyncTimer = setTimeout(() => {
+          syncImagesToSheet(false);
+        }, 900);
+      }
+
+      function syncImagesToSheet(showMessage = true) {
+        if (!hasAppsScript()) {
+          updateStatus("Sync Sheet hanya aktif saat dashboard dijalankan lewat Google Apps Script");
+          return;
+        }
+
+        const payload = (customImageData || [])
+          .filter(item => item && item.title && item.url)
+          .map(cleanImageItem);
+
+        if (showMessage) updateStatus("Menyimpan database gambar ke Google Sheet...");
+
+        google.script.run
+          .withSuccessHandler(res => {
+            const count = res && typeof res.count !== "undefined" ? res.count : payload.length;
+            updateStatus(`${count} gambar berhasil disimpan ke Google Sheet`);
+          })
+          .withFailureHandler(err => {
+            console.error(err);
+            updateStatus("Gagal menyimpan gambar ke Google Sheet");
+          })
+          .saveImageManagerData(payload);
+      }
+
+      function loadImagesFromSheet(manual = false) {
+        if (!hasAppsScript()) {
+          if (manual) updateStatus("Ambil dari Sheet hanya aktif saat dashboard dijalankan lewat Google Apps Script");
+          renderStaticImageCards();
+          return;
+        }
+
+        if (imageCloudLoading) return;
+        imageCloudLoading = true;
+        if (manual) updateStatus("Mengambil database gambar dari Google Sheet...");
+
+        google.script.run
+          .withSuccessHandler(data => {
+            imageCloudLoading = false;
+
+            const sheetData = Array.isArray(data) ? data.map(cleanImageItem) : [];
+
+            if (sheetData.length) {
+              customImageData = sheetData;
+              saveCustomImages({ skipCloud: true });
+              filterImageManager();
+              updateStatus(`${sheetData.length} gambar berhasil dimuat dari Google Sheet`);
+              return;
+            }
+
+            if ((customImageData || []).length) {
+              syncImagesToSheet(false);
+              filterImageManager();
+              updateStatus("Sheet masih kosong, data lokal sedang dikirim ke Google Sheet");
+              return;
+            }
+
+            filterImageManager();
+            updateStatus("Database gambar Sheet masih kosong");
+          })
+          .withFailureHandler(err => {
+            imageCloudLoading = false;
+            console.error(err);
+            filterImageManager();
+            updateStatus("Gagal mengambil gambar dari Google Sheet, memakai data lokal");
+          })
+          .getImageManagerData();
+      }
+
+      function renderStaticImageCards(data = null) {
         const gallery = document.getElementById("imageGallery");
         if (!gallery) return;
 
-        if (!data.length) {
+        const finalData = data || getAllImages();
+
+        if (!finalData.length) {
           gallery.innerHTML = '<div class="image-card-v2-empty">Tidak ada gambar ditemukan.</div>';
           return;
         }
 
-        gallery.innerHTML = data.map(item => `
-          <div class="image-card-v2" onclick="openImageModal('${escapeAttribute(item.title)}','${escapeAttribute(item.url)}')">
-            <div class="image-card-v2-title">${escapeHtml(item.title)}</div>
-            <div class="image-card-v2-media">
-              <img
-                src="${escapeAttribute(item.url)}"
-                alt="${escapeAttribute(item.title)}"
-                loading="lazy"
-                onerror="this.parentElement.innerHTML='<div class=&quot;image-card-v2-empty&quot;>Gambar gagal dimuat</div>'"
-              >
+        gallery.innerHTML = finalData.map(item => {
+          const id = escapeAttribute(item.id);
+          const title = escapeHtml(item.title);
+          const attrTitle = escapeAttribute(item.title);
+          const url = escapeAttribute(item.url);
+          const category = escapeHtml(getImageCategory(item));
+
+          return `
+            <div class="image-card-v2">
+              <div class="image-card-v2-title" onclick="openImageModal('${attrTitle}', '${url}')">
+                ${title}
+              </div>
+
+              <div class="image-card-v2-media" onclick="openImageModal('${attrTitle}', '${url}')">
+                <img
+                  src="${url}"
+                  alt="${attrTitle}"
+                  loading="lazy"
+                  onerror="this.parentElement.innerHTML='<div class=&quot;image-card-v2-empty&quot;>Gambar gagal dimuat</div>'"
+                >
+              </div>
+
+              <div style="margin-top:10px;text-align:center;font-size:12px;color:#dbeafe;font-weight:bold;">
+                ${category}
+              </div>
+
+              ${item.custom ? `
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;">
+                  <button class="btn secondary" onclick="editCustomImage('${id}')">Edit</button>
+                  <button class="btn secondary image-card-delete-btn" onclick="deleteCustomImage('${id}')">Hapus</button>
+                </div>
+              ` : ""}
             </div>
-          </div>
-        `).join("");
+          `;
+        }).join("");
       }
 
       function filterStaticImageCards() {
-        const input = document.getElementById("gambarSearchInput");
-        const keyword = String(input ? input.value : "").trim().toLowerCase();
+        filterImageManager();
+      }
 
-        if (!keyword) {
-          renderStaticImageCards(staticImageData);
+      function filterImageManager() {
+        const input = document.getElementById("gambarSearchInput");
+        const categoryInput = document.getElementById("filterCategory");
+        const keyword = String(input ? input.value : "").trim().toLowerCase();
+        const category = String(categoryInput ? categoryInput.value : "").trim().toUpperCase();
+
+        const filtered = getAllImages().filter(item => {
+          const itemTitle = String(item.title || "").toLowerCase();
+          const itemCategory = getImageCategory(item);
+          const matchKeyword = !keyword || itemTitle.includes(keyword);
+          const matchCategory = !category || itemCategory === category;
+          return matchKeyword && matchCategory;
+        });
+
+        renderStaticImageCards(filtered);
+      }
+
+      function resetImageInputs() {
+        const titleInput = document.getElementById("newImageTitle");
+        const urlInput = document.getElementById("newImageUrl");
+        if (titleInput) titleInput.value = "";
+        if (urlInput) urlInput.value = "";
+      }
+
+      function addImageByUrl() {
+        const titleInput = document.getElementById("newImageTitle");
+        const urlInput = document.getElementById("newImageUrl");
+        const categoryInput = document.getElementById("newImageCategory");
+
+        const title = String(titleInput ? titleInput.value : "").trim();
+        const url = String(urlInput ? urlInput.value : "").trim();
+        const category = String(categoryInput ? categoryInput.value : "LAINNYA").trim().toUpperCase();
+
+        if (!title || !url) {
+          updateStatus("Judul dan URL gambar wajib diisi");
           return;
         }
 
-        const filtered = staticImageData.filter(item => String(item.title).toLowerCase().includes(keyword));
-        renderStaticImageCards(filtered);
+        customImageData.unshift(cleanImageItem({
+          id: `custom-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          title,
+          url,
+          category,
+          custom: true
+        }));
+
+        saveCustomImages();
+        resetImageInputs();
+        filterImageManager();
+        closeImageAddModal();
+        updateStatus("Gambar URL berhasil ditambahkan");
+      }
+
+      function addNewImage() {
+        addImageByUrl();
+      }
+
+      function addUploadedFiles(files) {
+        const fileList = Array.from(files || []).filter(file => file.type && file.type.startsWith("image/"));
+        if (!fileList.length) {
+          updateStatus("File harus berupa gambar");
+          return;
+        }
+
+        const categoryInput = document.getElementById("uploadImageCategory") || document.getElementById("newImageCategory");
+        const category = String(categoryInput ? categoryInput.value : "LAINNYA").trim().toUpperCase();
+        let finished = 0;
+        let cloudSaved = 0;
+        let localSaved = 0;
+
+        function done() {
+          finished++;
+          if (finished === fileList.length) {
+            saveCustomImages();
+            filterImageManager();
+
+            if (cloudSaved && !localSaved) {
+              updateStatus(`${cloudSaved} gambar berhasil diupload ke Google Drive & Sheet`);
+            } else if (cloudSaved && localSaved) {
+              updateStatus(`${cloudSaved} gambar tersimpan cloud, ${localSaved} gambar tersimpan lokal`);
+            } else {
+              updateStatus(`${localSaved} gambar berhasil diupload lokal`);
+            }
+          }
+        }
+
+        fileList.forEach(file => {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            const title = file.name.replace(/\.[^/.]+$/, "").toUpperCase();
+            const localItem = cleanImageItem({
+              id: `custom-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+              title,
+              url: event.target.result,
+              category,
+              custom: true
+            });
+
+            if (hasAppsScript()) {
+              updateStatus(`Mengupload ${title} ke Google Drive...`);
+
+              google.script.run
+                .withSuccessHandler(item => {
+                  customImageData.unshift(cleanImageItem(item || localItem));
+                  cloudSaved++;
+                  done();
+                })
+                .withFailureHandler(err => {
+                  console.error(err);
+                  customImageData.unshift(localItem);
+                  localSaved++;
+                  done();
+                })
+                .uploadImageManagerFile({
+                  fileName: file.name,
+                  mimeType: file.type,
+                  dataUrl: event.target.result,
+                  title,
+                  category
+                });
+            } else {
+              customImageData.unshift(localItem);
+              localSaved++;
+              done();
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+
+      function openImageAddModal() {
+        const modal = document.getElementById("imageAddModal");
+        const titleInput = document.getElementById("newImageTitle");
+        const urlInput = document.getElementById("newImageUrl");
+        const categoryInput = document.getElementById("newImageCategory");
+        const previewImg = document.getElementById("addImagePreview");
+        const previewBox = document.querySelector(".image-add-preview");
+
+        if (titleInput) titleInput.value = "";
+        if (urlInput) urlInput.value = "";
+        if (categoryInput) categoryInput.value = "QRIS";
+        if (previewImg) previewImg.src = "";
+        if (previewBox) previewBox.classList.remove("has-image");
+        if (modal) modal.classList.add("show");
+      }
+
+      function closeImageAddModal() {
+        const modal = document.getElementById("imageAddModal");
+        if (modal) modal.classList.remove("show");
+      }
+
+      function updateAddImagePreview() {
+        const urlInput = document.getElementById("newImageUrl");
+        const previewImg = document.getElementById("addImagePreview");
+        const previewBox = document.querySelector(".image-add-preview");
+        const url = String(urlInput ? urlInput.value : "").trim();
+
+        if (previewImg) previewImg.src = url || "";
+        if (previewBox) {
+          if (url) previewBox.classList.add("has-image");
+          else previewBox.classList.remove("has-image");
+        }
+      }
+
+      let currentEditingImageId = null;
+      let currentDeletingImageId = null;
+
+      function editCustomImage(id) {
+        const item = customImageData.find(data => data.id === id);
+        if (!item) return;
+
+        currentEditingImageId = id;
+
+        const modal = document.getElementById("imageEditModal");
+        const titleInput = document.getElementById("editImageTitle");
+        const urlInput = document.getElementById("editImageUrl");
+        const categoryInput = document.getElementById("editImageCategory");
+        const previewImg = document.getElementById("editImagePreview");
+
+        if (titleInput) titleInput.value = item.title || "";
+        if (urlInput) urlInput.value = item.url || "";
+        if (categoryInput) categoryInput.value = getImageCategory(item);
+        if (previewImg) previewImg.src = item.url || "";
+
+        if (modal) modal.classList.add("show");
+      }
+
+      function closeImageEditModal() {
+        const modal = document.getElementById("imageEditModal");
+        if (modal) modal.classList.remove("show");
+        currentEditingImageId = null;
+      }
+
+      function updateEditImagePreview() {
+        const urlInput = document.getElementById("editImageUrl");
+        const previewImg = document.getElementById("editImagePreview");
+        if (previewImg && urlInput) previewImg.src = String(urlInput.value || "").trim();
+      }
+
+      function saveImageEdit() {
+        if (!currentEditingImageId) return;
+
+        const index = customImageData.findIndex(item => item.id === currentEditingImageId);
+        if (index === -1) return;
+
+        const titleInput = document.getElementById("editImageTitle");
+        const urlInput = document.getElementById("editImageUrl");
+        const categoryInput = document.getElementById("editImageCategory");
+
+        const old = customImageData[index];
+        const newTitle = String(titleInput ? titleInput.value : "").trim();
+        const newUrl = String(urlInput ? urlInput.value : "").trim();
+        const newCategory = String(categoryInput ? categoryInput.value : getImageCategory(old)).trim().toUpperCase();
+
+        if (!newTitle || !newUrl) {
+          updateStatus("Judul dan URL gambar tidak boleh kosong");
+          return;
+        }
+
+        customImageData[index] = {
+          ...old,
+          title: newTitle,
+          url: newUrl,
+          category: newCategory || getImageCategory(old),
+          custom: true
+        };
+
+        saveCustomImages();
+        filterImageManager();
+        closeImageEditModal();
+        updateStatus("Gambar berhasil diedit");
+      }
+
+      function deleteCustomImage(id) {
+        const selected = customImageData.find(item => item.id === id);
+        if (!selected) return;
+
+        currentDeletingImageId = id;
+
+        const modal = document.getElementById("imageDeleteModal");
+        const titleEl = document.getElementById("deleteImageTitle");
+        const categoryEl = document.getElementById("deleteImageCategory");
+        const previewImg = document.getElementById("deleteImagePreview");
+
+        if (titleEl) titleEl.textContent = selected.title || "Tanpa Judul";
+        if (categoryEl) categoryEl.textContent = getImageCategory(selected);
+        if (previewImg) previewImg.src = selected.url || "";
+        if (modal) modal.classList.add("show");
+      }
+
+      function closeImageDeleteModal() {
+        const modal = document.getElementById("imageDeleteModal");
+        if (modal) modal.classList.remove("show");
+        currentDeletingImageId = null;
+      }
+
+      function confirmDeleteCustomImage() {
+        if (!currentDeletingImageId) return;
+
+        const selected = customImageData.find(item => item.id === currentDeletingImageId);
+        if (!selected) {
+          closeImageDeleteModal();
+          return;
+        }
+
+        customImageData = customImageData.filter(item => item.id !== currentDeletingImageId);
+        saveCustomImages();
+        filterImageManager();
+        closeImageDeleteModal();
+        updateStatus("Gambar berhasil dihapus");
+      }
+
+      function exportImageDatabase() {
+        const payload = {
+          exportedAt: new Date().toISOString(),
+          data: customImageData
+        };
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `image-manager-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        updateStatus("Database gambar berhasil diexport");
+      }
+
+      function importImageDatabaseFile(file) {
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          try {
+            const parsed = JSON.parse(event.target.result);
+            const importedData = Array.isArray(parsed) ? parsed : parsed.data;
+            if (!Array.isArray(importedData)) throw new Error("Format JSON tidak valid");
+
+            const cleaned = importedData
+              .filter(item => item && item.title && item.url)
+              .map(item => ({
+                id: item.id || `custom-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+                title: String(item.title || "").trim(),
+                url: String(item.url || "").trim(),
+                category: getImageCategory(item),
+                custom: true
+              }));
+
+            customImageData = cleaned;
+            saveCustomImages();
+            filterImageManager();
+            updateStatus(`${cleaned.length} gambar berhasil diimport`);
+          } catch (err) {
+            console.error(err);
+            updateStatus("Gagal import database gambar");
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      function initImageManager() {
+        const uploadInput = document.getElementById("imageUploadInput");
+        const importInput = document.getElementById("importJsonInput");
+        const dropZone = document.getElementById("dropZone");
+
+        if (uploadInput) {
+          uploadInput.addEventListener("change", function(event) {
+            addUploadedFiles(event.target.files);
+            uploadInput.value = "";
+          });
+        }
+
+        const addUrlInput = document.getElementById("newImageUrl");
+        if (addUrlInput) {
+          addUrlInput.addEventListener("input", updateAddImagePreview);
+        }
+
+        const editUrlInput = document.getElementById("editImageUrl");
+        if (editUrlInput) {
+          editUrlInput.addEventListener("input", updateEditImagePreview);
+        }
+
+        if (importInput) {
+          importInput.addEventListener("change", function(event) {
+            importImageDatabaseFile(event.target.files[0]);
+            importInput.value = "";
+          });
+        }
+
+        if (dropZone) {
+          ["dragenter", "dragover"].forEach(eventName => {
+            dropZone.addEventListener(eventName, function(event) {
+              event.preventDefault();
+              dropZone.classList.add("drag-active");
+            });
+          });
+
+          ["dragleave", "drop"].forEach(eventName => {
+            dropZone.addEventListener(eventName, function(event) {
+              event.preventDefault();
+              dropZone.classList.remove("drag-active");
+            });
+          });
+
+          dropZone.addEventListener("drop", function(event) {
+            addUploadedFiles(event.dataTransfer.files);
+          });
+        }
       }
 
       function openImageModal(title, url) {
@@ -1869,13 +5962,104 @@
         }).join("");
       }
 
+      function wrapSyairWordsToLines(text, targetLen = 24, hardMax = 31) {
+        const words = String(text || "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .split(" ")
+          .filter(Boolean);
+
+        if (!words.length) return [];
+
+        const lines = [];
+        let current = "";
+
+        words.forEach((word) => {
+          const candidate = current ? `${current} ${word}` : word;
+          const endSentence = /[.,;:!?]$/.test(word);
+
+          if (candidate.length > hardMax && current) {
+            lines.push(current.trim());
+            current = word;
+            return;
+          }
+
+          current = candidate;
+
+          if (current.length >= targetLen && endSentence) {
+            lines.push(current.trim());
+            current = "";
+          }
+        });
+
+        if (current) lines.push(current.trim());
+        return lines;
+      }
+
+      function rebalanceSyairLines(lines, maxLines = 6, softMax = 33) {
+        let result = (lines || [])
+          .map(line => String(line || "").replace(/\s+/g, " ").trim())
+          .filter(Boolean);
+
+        // Gabungkan baris yang terlalu pendek dengan baris setelahnya.
+        for (let i = 0; i < result.length - 1; i++) {
+          if (result[i].length <= 9 && (result[i] + " " + result[i + 1]).length <= softMax) {
+            result[i + 1] = `${result[i]} ${result[i + 1]}`.replace(/\s+/g, " ").trim();
+            result.splice(i, 1);
+            i = -1;
+          }
+        }
+
+        // Jika masih terlalu banyak baris, gabungkan pasangan yang paling aman.
+        while (result.length > maxLines) {
+          let bestIndex = 0;
+          let bestScore = Number.POSITIVE_INFINITY;
+
+          for (let i = 0; i < result.length - 1; i++) {
+            const merged = `${result[i]} ${result[i + 1]}`.replace(/\s+/g, " ").trim();
+            const penalty = merged.length > softMax ? 1000 + (merged.length - softMax) : 0;
+            const score = Math.abs(merged.length - 25) + penalty;
+            if (score < bestScore) {
+              bestScore = score;
+              bestIndex = i;
+            }
+          }
+
+          result.splice(bestIndex, 2, `${result[bestIndex]} ${result[bestIndex + 1]}`.replace(/\s+/g, " ").trim());
+        }
+
+        return result;
+      }
+
       function formatSyairText(text) {
-        return String(text || "")
-          .replace(/\r/g, "")
+        const cleaned = String(text || "").replace(/\r/g, "").trim();
+        if (!cleaned) return { html: "", lineCount: 0 };
+
+        let rawLines = cleaned
           .split("\n")
           .map(line => line.replace(/\s+/g, " ").trim())
-          .filter(line => line !== "")
-          .join("<br>");
+          .filter(Boolean);
+
+        let lines = [];
+
+        if (rawLines.length === 1) {
+          lines = wrapSyairWordsToLines(rawLines[0], 24, 31);
+        } else {
+          rawLines.forEach((line) => {
+            if (line.length > 31) {
+              lines.push(...wrapSyairWordsToLines(line, 24, 31));
+            } else {
+              lines.push(line);
+            }
+          });
+        }
+
+        lines = rebalanceSyairLines(lines, 6, 33);
+
+        return {
+          html: lines.join("<br>"),
+          lineCount: lines.length
+        };
       }
 
       function renderSyairPreview() {
@@ -1892,13 +6076,18 @@
         const shio = getElValue("syairShioSelect", "NAGA");
         const dateValue = getElValue("syairDateInput", getTodayInputValue());
         const rawSyairText = getElValue("syairTextArea", "");
-        const syairText = rawSyairText.trim() ? formatSyairText(rawSyairText) : "Tulis syair di sini...";
+        const syairData = rawSyairText.trim()
+          ? formatSyairText(rawSyairText)
+          : { html: "Tulis syair di sini...", lineCount: 1 };
+        const syairText = syairData.html;
+        const syairLinesClass = `lines-${Math.min(Math.max(syairData.lineCount || 1, 1), 8)}`;
         const dateInfo = formatSyairDateParts(dateValue);
         const cfg = syairMarketConfig[marketKey] || syairMarketConfig.BANGKOK;
         const shioUrl = shioImageMap[shio] || "";
         const n = currentSyairNumbers;
 
         preview.innerHTML = `
+          <div class="syair-preview-stage" id="syairPreviewStage">
           <div class="syair-card" id="syairCardCapture">
             <img class="syair-bg" src="${escapeAttribute(SYAIR_TEMPLATE_URL)}" crossorigin="anonymous" alt="Template Syair">
 
@@ -1911,7 +6100,7 @@
               ${shioUrl ? `<img class="syair-shio-img" src="${escapeAttribute(shioUrl)}" crossorigin="anonymous" alt="${escapeAttribute(shio)}">` : ""}
             </div>
 
-            <div class="syair-poem-box">${syairText}</div>
+            <div class="syair-poem-box ${syairLinesClass}"><div class="syair-poem-inner">${syairText}</div></div>
 
             <div class="syair-market-logo">
               <img src="${escapeAttribute(cfg.logo)}" crossorigin="anonymous" alt="${escapeAttribute(cfg.label)}">
@@ -1930,10 +6119,17 @@
               ${buildNumCells(n.bb, "bb-cell")}
             </div>
 
-            <div class="syair-cross-top">${escapeHtml(n.arah[0])}</div>
-            <div class="syair-cross-left">${escapeHtml(n.arah[1])}</div>
-            <div class="syair-cross-right">${escapeHtml(n.arah[2])}</div>
-            <div class="syair-cross-bottom">${escapeHtml(n.arah[3])}</div>
+            <div class="syair-arah-group">
+              <div class="syair-arah-num arah-top">${escapeHtml(n.arah[0])}</div>
+              <div class="syair-arah-num arah-left">${escapeHtml(n.arah[1])}</div>
+              <div class="syair-arah-num arah-right">${escapeHtml(n.arah[2])}</div>
+              <div class="syair-arah-num arah-bottom">${escapeHtml(n.arah[3])}</div>
+              <svg class="syair-arah-star" viewBox="0 0 100 100" aria-hidden="true">
+                <polygon points="50,6 58,42 94,50 58,58 50,94 42,58 6,50 42,42" fill="#111"></polygon>
+                <polygon points="50,19 55,45 81,50 55,55 50,81 45,55 19,50 45,45" fill="#f4f4f4"></polygon>
+                <circle cx="50" cy="50" r="4" fill="#111"></circle>
+              </svg>
+            </div>
 
             <div class="num-grid syair-colok-grid">
               ${buildNumCells(n.colok, "colok-cell")}
@@ -1959,7 +6155,14 @@
               ${buildNumCells([...n.angkaMain, ...n.jitu], "mainl-cell")}
             </div>
           </div>
+          </div>
         `;
+
+        requestAnimationFrame(() => {
+          syncSyairPreviewScale();
+          setTimeout(syncSyairPreviewScale, 80);
+          setTimeout(syncSyairPreviewScale, 250);
+        });
       }
 
       function generateSyairPreview() {
@@ -1982,6 +6185,32 @@
         currentSyairNumbers = generateSyairNumbers();
         renderSyairPreview();
         updateStatus("Form syair direset");
+      }
+
+      function syncSyairPreviewScale() {
+        const frame = document.querySelector('.syair-preview-frame');
+        const stage = document.getElementById('syairPreviewStage');
+        const card = document.getElementById('syairCardCapture');
+        if (!frame || !stage || !card) return;
+
+        /*
+          Preview dibuat besar dan stabil:
+          - layout asli tetap 1500x1000
+          - yang diubah hanya scale preview di layar
+          - export/copy tetap memakai ukuran asli 1500x1000
+        */
+        const gap = 34;
+        const frameWidth = frame.clientWidth || frame.getBoundingClientRect().width || 1200;
+        const availableWidth = Math.max(720, frameWidth - (gap * 2));
+        const targetPreviewWidth = Math.min(920, availableWidth);
+        const scale = Math.max(0.48, Math.min(targetPreviewWidth / 1500, 1));
+        const previewHeight = Math.round(1000 * scale);
+
+        card.style.transform = `scale(${scale})`;
+        stage.style.height = `${previewHeight}px`;
+        stage.style.minHeight = `${previewHeight}px`;
+        stage.style.justifyContent = 'center';
+        stage.style.alignItems = 'flex-start';
       }
 
       function copySyairText() {
@@ -2019,32 +6248,74 @@
         const target = document.getElementById("syairCardCapture");
         if (!target) return;
 
+        let exportWrap = null;
+
         try {
           await waitForImagesLoaded(target);
+          if (document.fonts && document.fonts.ready) {
+            await document.fonts.ready;
+          }
 
-          const canvas = await html2canvas(target, {
+          exportWrap = document.createElement("div");
+          exportWrap.style.position = "fixed";
+          exportWrap.style.left = "-20000px";
+          exportWrap.style.top = "0";
+          exportWrap.style.width = "1500px";
+          exportWrap.style.height = "1000px";
+          exportWrap.style.overflow = "hidden";
+          exportWrap.style.background = "transparent";
+          exportWrap.style.zIndex = "-1";
+
+          const clone = target.cloneNode(true);
+          clone.classList.add("syair-copy-clone");
+          clone.style.width = "1500px";
+          clone.style.height = "1000px";
+          clone.style.transform = "none";
+          clone.style.maxWidth = "none";
+          clone.style.maxHeight = "none";
+          clone.style.margin = "0";
+          clone.style.aspectRatio = "auto";
+
+          exportWrap.appendChild(clone);
+          document.body.appendChild(exportWrap);
+
+          await waitForImagesLoaded(clone);
+          await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+          const canvas = await html2canvas(clone, {
             scale: 2,
+            width: 1500,
+            height: 1000,
             useCORS: true,
             allowTaint: false,
             backgroundColor: null,
-            logging: false
+            logging: false,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: 1500,
+            windowHeight: 1000
           });
 
-          const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+          const finalCanvas = document.createElement("canvas");
+          finalCanvas.width = 1500;
+          finalCanvas.height = 1000;
+          const ctx = finalCanvas.getContext("2d");
+          ctx.clearRect(0, 0, 1500, 1000);
+          ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 1500, 1000);
+
+          const blob = await new Promise(resolve => finalCanvas.toBlob(resolve, "image/png"));
           if (!blob) return;
 
           if (navigator.clipboard && window.ClipboardItem && window.isSecureContext) {
             await navigator.clipboard.write([
-              new ClipboardItem({
-                "image/png": blob
-              })
+              new ClipboardItem({ "image/png": blob })
             ]);
-            updateStatus("Gambar syair berhasil dicopy");
+            updateStatus("Gambar syair berhasil dicopy sesuai preview generator");
           } else {
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "syair-togel.png";
+            a.download = "syair-togel-1500x1000.png";
             document.body.appendChild(a);
             a.click();
             a.remove();
@@ -2054,10 +6325,23 @@
         } catch (err) {
           console.error(err);
           updateStatus("Gagal copy image syair");
+        } finally {
+          if (exportWrap && exportWrap.parentNode) {
+            exportWrap.parentNode.removeChild(exportWrap);
+          }
         }
       }
 
       function loadAllData() {
+        if (!hasAppsScript()) {
+          updateStatus("Dashboard dibuka di luar Google Apps Script. Data Sheet tidak tersedia.");
+          renderStaticImageCards();
+          initSyairGenerator();
+          showPkcsPrompt();
+          hideAppLoading();
+          return;
+        }
+
         let loaded = 0;
         const total = 4;
 
@@ -2066,10 +6350,12 @@
           updateStatus(`${msg} (${loaded}/${total})`);
           if (loaded === total) {
             initPrediksiData();
-            renderStaticImageCards(staticImageData);
+            renderStaticImageCards();
+            loadImagesFromSheet(false);
             initSyairGenerator();
             showPkcsPrompt();
             updateStatus("Semua data berhasil dimuat");
+            hideAppLoading();
           }
         }
 
@@ -2122,11 +6408,8 @@
         filteredPrediksiData = [...(dashboardData.dropdown2 || [])];
         selectedPrediksiIndex = filteredPrediksiData.length ? 0 : -1;
         renderPrediksiList(filteredPrediksiData);
-
-        const resultEl = document.getElementById("prediksiResultCard");
-        if (resultEl) {
-          resultEl.textContent = filteredPrediksiData.length ? (filteredPrediksiData[0][1] || "-") : "Tidak ada hasil prediksi.";
-        }
+        renderPrediksiResult(selectedPrediksiIndex);
+        updatePrediksiSummary();
       }
 
       function initSyairGenerator() {
@@ -2167,16 +6450,368 @@
             }
           }
 
-          if (isEscape) closeImageModal();
+          if (isEscape) {
+            closeImageModal();
+            closeImageAddModal();
+            closeImageEditModal();
+            closeImageDeleteModal();
+          }
         });
       }
 
+
+
+      /* =====================================================
+         ALL UPGRADE PACK FUNCTIONS
+      ===================================================== */
+      const ADMIN_STORAGE_KEY = "dashboardAdminAccountsV3";
+      const MASTER_PASSWORD_STORAGE_KEY = "dashboardMasterPasswordAsep";
+      const MASTER_ADMIN_DEFAULT = {
+        username: "aseprahman",
+        password: "1",
+        role: "master",
+        label: "Master Admin"
+      };
+
+      function getMasterAdmin() {
+        const savedPassword = localStorage.getItem(MASTER_PASSWORD_STORAGE_KEY);
+        return {
+          ...MASTER_ADMIN_DEFAULT,
+          password: savedPassword || MASTER_ADMIN_DEFAULT.password
+        };
+      }
+
+      function normalizeAdminUsername(username) {
+        return String(username || "").trim().toLowerCase();
+      }
+
+      function getStoredAdminAccounts() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(ADMIN_STORAGE_KEY) || "[]");
+          return Array.isArray(parsed) ? parsed.filter(item => item && item.username && item.password) : [];
+        } catch (err) {
+          return [];
+        }
+      }
+
+      function saveStoredAdminAccounts(accounts) {
+        localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(accounts || []));
+      }
+
+      function getAdminAccounts() {
+        const customAdmins = getStoredAdminAccounts().map(item => ({
+          username: String(item.username || "").trim(),
+          password: String(item.password || "").trim(),
+          role: "admin",
+          label: "Admin"
+        })).filter(item => item.username && item.password);
+
+        return [getMasterAdmin(), ...customAdmins];
+      }
+
+      function verifyAdminLogin(username, password) {
+        const cleanUser = normalizeAdminUsername(username);
+        const cleanPass = String(password || "").trim();
+        return getAdminAccounts().find(account =>
+          normalizeAdminUsername(account.username) === cleanUser &&
+          String(account.password) === cleanPass
+        ) || null;
+      }
+
+      function isMasterSession() {
+        return sessionStorage.getItem("dashboardAdminRole") === "master";
+      }
+
+      function updateAdminAccessUI() {
+        const isMaster = isMasterSession();
+        document.body.classList.toggle("master-mode", isMaster);
+        updateAccountSettingsUI();
+        if (isMaster) renderAdminAccountList();
+      }
+
+      function showAppLoading(message) {
+        const overlay = document.getElementById("appLoadingOverlay");
+        const textEl = document.getElementById("appLoadingText");
+        if (textEl && message) textEl.textContent = message;
+        if (overlay) overlay.classList.add("show");
+      }
+
+      function hideAppLoading() {
+        const overlay = document.getElementById("appLoadingOverlay");
+        if (overlay) overlay.classList.remove("show");
+      }
+
+      function initDashboardAuth() {
+        const loginScreen = document.getElementById("loginScreen");
+        const isLoggedIn = sessionStorage.getItem("dashboardAdminLoggedIn") === "yes";
+
+        if (!isLoggedIn) {
+          document.body.classList.add("dashboard-locked");
+          document.body.classList.remove("master-mode");
+          hideAppLoading();
+          if (loginScreen) loginScreen.classList.add("show");
+          return false;
+        }
+
+        document.body.classList.remove("dashboard-locked");
+        if (loginScreen) loginScreen.classList.remove("show");
+        updateAdminAccessUI();
+        return true;
+      }
+
+      function doAdminLogin() {
+        const userEl = document.getElementById("loginUsername");
+        const passEl = document.getElementById("loginPassword");
+        const errorEl = document.getElementById("loginError");
+
+        const username = String(userEl ? userEl.value : "").trim();
+        const password = String(passEl ? passEl.value : "").trim();
+        const account = verifyAdminLogin(username, password);
+
+        if (account) {
+          sessionStorage.setItem("dashboardAdminLoggedIn", "yes");
+          sessionStorage.setItem("dashboardAdminUsername", account.username);
+          sessionStorage.setItem("dashboardAdminRole", account.role || "admin");
+          if (errorEl) errorEl.classList.remove("show");
+          document.body.classList.remove("dashboard-locked");
+          updateAdminAccessUI();
+          const loginScreen = document.getElementById("loginScreen");
+          if (loginScreen) loginScreen.classList.remove("show");
+          showAppLoading("Mengambil data dari Google Sheet...");
+          const alreadyLoaded = (dashboardData.dropdown1 || []).length || (dashboardData.dropdown2 || []).length || (dashboardData.dropdown3 || []).length;
+          if (!alreadyLoaded) {
+            loadAllData();
+          } else {
+            setTimeout(() => hideAppLoading(), 700);
+          }
+          updateStatus(`Login berhasil sebagai ${account.role === "master" ? "Master Admin aseprahman" : "Admin"}`);
+          return;
+        }
+
+        if (errorEl) errorEl.classList.add("show");
+      }
+
+      function logoutAdmin() {
+        sessionStorage.removeItem("dashboardAdminLoggedIn");
+        sessionStorage.removeItem("dashboardAdminUsername");
+        sessionStorage.removeItem("dashboardAdminRole");
+        document.body.classList.remove("master-mode");
+        initDashboardAuth();
+      }
+
+      function renderAdminAccountList() {
+        const listEl = document.getElementById("adminAccountList");
+        if (!listEl) return;
+
+        const accounts = getAdminAccounts();
+        listEl.innerHTML = accounts.map(account => {
+          const isMaster = account.role === "master";
+          return `
+            <div class="admin-user-card">
+              <div>
+                <div class="admin-user-name">${escapeHtml(account.username)}</div>
+                <div class="admin-user-role">${isMaster ? "👑 Master Admin" : "Admin Dashboard"}</div>
+              </div>
+              <div class="admin-user-actions">
+                ${isMaster ? "" : `
+                  <button class="admin-mini-btn" onclick="resetDashboardAdminPassword('${escapeAttribute(account.username)}')">Ganti Password</button>
+                  <button class="admin-mini-btn danger" onclick="deleteDashboardAdmin('${escapeAttribute(account.username)}')">Hapus</button>
+                `}
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+
+      function addDashboardAdmin() {
+        if (!isMasterSession()) {
+          updateStatus("Akses ditolak. Hanya master admin yang bisa menambah admin.");
+          return;
+        }
+
+        const usernameEl = document.getElementById("newAdminUsername");
+        const passwordEl = document.getElementById("newAdminPassword");
+        const username = String(usernameEl ? usernameEl.value : "").trim();
+        const password = String(passwordEl ? passwordEl.value : "").trim();
+        const cleanUser = normalizeAdminUsername(username);
+
+        if (!username || !password) {
+          updateStatus("Username dan password admin wajib diisi.");
+          return;
+        }
+
+        if (password.length < 4) {
+          updateStatus("Password admin wajib diisi.");
+          return;
+        }
+
+        const exists = getAdminAccounts().some(account => normalizeAdminUsername(account.username) === cleanUser);
+        if (exists) {
+          updateStatus("Username admin sudah terdaftar.");
+          return;
+        }
+
+        const admins = getStoredAdminAccounts();
+        admins.push({ username, password });
+        saveStoredAdminAccounts(admins);
+
+        if (usernameEl) usernameEl.value = "";
+        if (passwordEl) passwordEl.value = "";
+        renderAdminAccountList();
+        updateStatus("Admin baru berhasil ditambahkan.");
+      }
+
+      function deleteDashboardAdmin(username) {
+        if (!isMasterSession()) {
+          updateStatus("Akses ditolak. Hanya master admin yang bisa menghapus admin.");
+          return;
+        }
+
+        const cleanUser = normalizeAdminUsername(username);
+        const admins = getStoredAdminAccounts().filter(account => normalizeAdminUsername(account.username) !== cleanUser);
+        saveStoredAdminAccounts(admins);
+        renderAdminAccountList();
+        updateStatus("Admin berhasil dihapus.");
+      }
+
+      function resetDashboardAdminPassword(username) {
+        if (!isMasterSession()) {
+          updateStatus("Akses ditolak. Hanya master admin yang bisa mengubah password admin.");
+          return;
+        }
+
+        const cleanUser = normalizeAdminUsername(username);
+        const newPassword = window.prompt(`Masukkan password baru untuk ${username}:`);
+        if (newPassword === null) return;
+        const password = String(newPassword || "").trim();
+        if (!password) {
+          updateStatus("Password baru wajib diisi.");
+          return;
+        }
+
+        const admins = getStoredAdminAccounts().map(account => {
+          if (normalizeAdminUsername(account.username) === cleanUser) {
+            return { ...account, password };
+          }
+          return account;
+        });
+
+        saveStoredAdminAccounts(admins);
+        renderAdminAccountList();
+        updateStatus("Password admin berhasil diubah.");
+      }
+
+      function updateAccountSettingsUI() {
+        const username = sessionStorage.getItem("dashboardAdminUsername") || "-";
+        const role = sessionStorage.getItem("dashboardAdminRole") || "admin";
+        const usernameEl = document.getElementById("accountSettingsUsername");
+        const roleEl = document.getElementById("accountSettingsRole");
+        const badgeEl = document.getElementById("currentAccountBadge");
+
+        if (usernameEl) usernameEl.textContent = username;
+        if (roleEl) roleEl.textContent = role === "master" ? "👑 Master Admin" : "Admin Dashboard";
+        if (badgeEl) badgeEl.textContent = role === "master" ? "👑 MASTER: aseprahman" : "👤 ADMIN AKTIF";
+      }
+
+      function changeCurrentAccountPassword() {
+        const username = sessionStorage.getItem("dashboardAdminUsername") || "";
+        const role = sessionStorage.getItem("dashboardAdminRole") || "admin";
+        const oldPassEl = document.getElementById("currentAccountOldPassword");
+        const newPassEl = document.getElementById("currentAccountNewPassword");
+        const confirmEl = document.getElementById("currentAccountConfirmPassword");
+
+        const oldPassword = String(oldPassEl ? oldPassEl.value : "").trim();
+        const newPassword = String(newPassEl ? newPassEl.value : "").trim();
+        const confirmPassword = String(confirmEl ? confirmEl.value : "").trim();
+
+        if (!username) {
+          updateStatus("Akun belum terbaca. Silakan login ulang.");
+          return;
+        }
+
+        const account = verifyAdminLogin(username, oldPassword);
+        if (!account) {
+          updateStatus("Password lama salah.");
+          return;
+        }
+
+        if (!newPassword) {
+          updateStatus("Password baru wajib diisi.");
+          return;
+        }
+
+        if (newPassword !== confirmPassword) {
+          updateStatus("Konfirmasi password baru tidak sama.");
+          return;
+        }
+
+        if (role === "master") {
+          localStorage.setItem(MASTER_PASSWORD_STORAGE_KEY, newPassword);
+        } else {
+          const cleanUser = normalizeAdminUsername(username);
+          const admins = getStoredAdminAccounts().map(account => {
+            if (normalizeAdminUsername(account.username) === cleanUser) {
+              return { ...account, password: newPassword };
+            }
+            return account;
+          });
+          saveStoredAdminAccounts(admins);
+        }
+
+        if (oldPassEl) oldPassEl.value = "";
+        if (newPassEl) newPassEl.value = "";
+        if (confirmEl) confirmEl.value = "";
+
+        updateStatus("Password akun berhasil diperbarui.");
+        if (isMasterSession()) renderAdminAccountList();
+      }
+
+      function downloadFullDashboardBackup() {
+        const backup = {
+          exportedAt: new Date().toISOString(),
+          app: "Dashboard Admin Backup",
+          customImageData: customImageData || [],
+          note: "Backup ini menyimpan data custom lokal seperti Image Manager. Data utama PK/REK/PREDIKSI tetap berasal dari Google Sheet."
+        };
+
+        const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `dashboard-backup-${new Date().toISOString().slice(0,10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        updateStatus("Backup dashboard berhasil dibuat");
+      }
+
+      document.addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+          const loginScreen = document.getElementById("loginScreen");
+          if (loginScreen && loginScreen.classList.contains("show")) {
+            doAdminLogin();
+          }
+        }
+      });
+
       window.onload = function() {
+        const authed = initDashboardAuth();
         initSidebar();
         initKeyboardShortcuts();
+        initImageManager();
         startLiveClock();
-        loadAllData();
+        setInterval(refreshPrediksiScheduleUI, 1000);
+        if (authed) {
+          showAppLoading("Mengambil data dari Google Sheet...");
+          loadAllData();
+        }
       };
+    
+      document.addEventListener("DOMContentLoaded", function() {
+        const editUrlInput = document.getElementById("editImageUrl");
+        if (editUrlInput) editUrlInput.addEventListener("input", updateEditImagePreview);
+      });
     </script>
   </body>
 </html>
